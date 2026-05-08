@@ -39,6 +39,24 @@ const gameState = {
         wisdom: 0
     },
     
+    freeBodyPerks: {
+        speed: 0,
+        strength: 0,
+        sense: 0,
+        dexterity: 0,
+        intelligence: 0,
+        wisdom: 0
+    },
+    
+    freeDeviceGen: null,
+    
+    freeDevicePerks: {
+        processing: 0,
+        weave: 0,
+        barrier: 0,
+        structural: 0
+    },
+    
     // Spell routines
     learnedSpells: [], // Array of spell objects with proficiency and tier
     
@@ -184,6 +202,16 @@ const saveSystem = {
                 const parsed = JSON.parse(saved);
                 Object.assign(gameState, parsed);
                 
+                if (!gameState.freeBodyPerks) {
+                    gameState.freeBodyPerks = { speed: 0, strength: 0, sense: 0, dexterity: 0, intelligence: 0, wisdom: 0 };
+                }
+                if (gameState.freeDeviceGen === undefined) {
+                    gameState.freeDeviceGen = null;
+                }
+                if (!gameState.freeDevicePerks) {
+                    gameState.freeDevicePerks = { processing: 0, weave: 0, barrier: 0, structural: 0 };
+                }
+                
                 if (gameState.learnedSpells) {
                     gameState.learnedSpells.forEach(function(spell) {
                         if (spell.cost && !spell.baseCost) {
@@ -288,12 +316,15 @@ const saveSystem = {
         // Body Enhancements
         report.push('BODY ENHANCEMENTS');
         report.push('───────────────────────────────────────────────────────────────');
-        report.push(`Speed Tier: ${gameState.bodyPerks.speed}`);
-        report.push(`Strength Tier: ${gameState.bodyPerks.strength}`);
-        report.push(`Sense Tier: ${gameState.bodyPerks.sense}`);
-        report.push(`Dexterity Tier: ${gameState.bodyPerks.dexterity}`);
-        report.push(`Intelligence Tier: ${gameState.bodyPerks.intelligence}`);
-        report.push(`Wisdom Tier: ${gameState.bodyPerks.wisdom}`);
+        var perkNames = { speed: 'Speed', strength: 'Strength', sense: 'Sense', dexterity: 'Dexterity', intelligence: 'Intelligence', wisdom: 'Wisdom' };
+        Object.keys(perkNames).forEach(function(key) {
+            var tier = gameState.bodyPerks[key];
+            var free = gameState.freeBodyPerks ? (gameState.freeBodyPerks[key] || 0) : 0;
+            var paid = Math.max(0, tier - free);
+            var label = `${perkNames[key]} Tier: ${tier}`;
+            if (free > 0) label += ` (${free} free, ${paid} paid)`;
+            report.push(label);
+        });
         report.push('');
         
         // Spell Routines
@@ -337,10 +368,15 @@ const saveSystem = {
         }
         
         report.push('Enhancements:');
-        report.push(`  Processing Tier: ${gameState.device.perks.processing}`);
-        report.push(`  Weave Tier: ${gameState.device.perks.weave}`);
-        report.push(`  Barrier Tier: ${gameState.device.perks.barrier}`);
-        report.push(`  Structural Tier: ${gameState.device.perks.structural}`);
+        var devPerkNames = { processing: 'Processing', weave: 'Weave', barrier: 'Barrier', structural: 'Structural' };
+        Object.keys(devPerkNames).forEach(function(key) {
+            var tier = gameState.device.perks[key];
+            var free = gameState.freeDevicePerks ? (gameState.freeDevicePerks[key] || 0) : 0;
+            var paid = Math.max(0, tier - free);
+            var label = `  ${devPerkNames[key]} Tier: ${tier}`;
+            if (free > 0) label += ` (${free} free, ${paid} paid)`;
+            report.push(label);
+        });
         report.push('');
         
         // Final Statistics

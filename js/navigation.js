@@ -273,6 +273,7 @@ const navigation = {
                 this.updateManaReactorDescription();
                 if (typeof updateCustomSelect === 'function') updateCustomSelect(manaReactorSelect);
             }
+            this.applyReactorRankFreebies();
         }
         
         if (gameState.deviceGeneration) {
@@ -399,6 +400,7 @@ const navigation = {
                         pointTracker.spendPoints(manaReactorRanks[newValue].cost, 'personalization');
                         gameState.manaReactorRank = newValue;
                         this.updateManaReactorDescription();
+                        this.applyReactorRankFreebies();
                     } else {
                         manaReactorSelect.value = oldValue;
                         if (typeof updateCustomSelect === 'function') updateCustomSelect(manaReactorSelect);
@@ -414,23 +416,23 @@ const navigation = {
             deviceGenSelect.addEventListener('change', () => {
                 const oldValue = gameState.deviceGeneration;
                 const newValue = deviceGenSelect.value;
+                const freeGen = gameState.freeDeviceGen;
                 
-                // Refund old cost
-                if (oldValue && deviceGenerations[oldValue]) {
-                    pointTracker.refundPoints(deviceGenerations[oldValue].cost, 'personalization');
-                }
+                const oldCost = (oldValue && deviceGenerations[oldValue] && oldValue != freeGen) ? deviceGenerations[oldValue].cost : 0;
+                const newCost = (newValue && deviceGenerations[newValue] && newValue != freeGen) ? deviceGenerations[newValue].cost : 0;
                 
-                // Apply new cost
-                if (newValue && deviceGenerations[newValue]) {
-                    if (pointTracker.canAfford(deviceGenerations[newValue].cost, 'personalization')) {
-                        pointTracker.spendPoints(deviceGenerations[newValue].cost, 'personalization');
-                        gameState.deviceGeneration = newValue;
-                        this.updateDeviceGenerationDescription();
-                    } else {
-                        deviceGenSelect.value = oldValue;
-                        if (typeof updateCustomSelect === 'function') updateCustomSelect(deviceGenSelect);
-                        alert('Not enough Personalization Points!');
-                    }
+                if (oldCost) pointTracker.refundPoints(oldCost, 'personalization');
+                
+                if (!newCost || pointTracker.canAfford(newCost, 'personalization')) {
+                    if (newCost) pointTracker.spendPoints(newCost, 'personalization');
+                    gameState.deviceGeneration = newValue;
+                    this.updateDeviceGenerationDescription();
+                    this.applyDeviceGenFreebies();
+                } else {
+                    deviceGenSelect.value = oldValue;
+                    if (typeof updateCustomSelect === 'function') updateCustomSelect(deviceGenSelect);
+                    if (oldCost) pointTracker.spendPoints(oldCost, 'personalization');
+                    alert('Not enough Personalization Points!');
                 }
             });
         }
@@ -443,6 +445,7 @@ const navigation = {
                 gameState.selectedClass = btn.dataset.value;
                 this.updateClassDescription();
                 if (typeof applyClassAdaptations === 'function') applyClassAdaptations();
+                this.applyReactorRankFreebies();
             });
         });
         
@@ -481,19 +484,28 @@ const navigation = {
                 tierSelect.addEventListener('change', () => {
                     const oldTier = gameState.bodyPerks[perk];
                     const newTier = parseInt(tierSelect.value);
-                    const tierCost = 5; // Each tier costs 5 points
+                    const freeTier = gameState.freeBodyPerks[perk] || 0;
+                    const tierCost = 5;
                     
-                    // Refund old cost
-                    pointTracker.refundPoints(oldTier * tierCost, 'personalization');
+                    const oldPaidTiers = Math.max(0, oldTier - freeTier);
+                    const newPaidTiers = Math.max(0, newTier - freeTier);
                     
-                    // Apply new cost
-                    if (pointTracker.canAfford(newTier * tierCost, 'personalization')) {
-                        pointTracker.spendPoints(newTier * tierCost, 'personalization');
+                    if (newTier < freeTier) {
+                        tierSelect.value = oldTier;
+                        if (typeof updateCustomSelect === 'function') updateCustomSelect(tierSelect);
+                        return;
+                    }
+                    
+                    pointTracker.refundPoints(oldPaidTiers * tierCost, 'personalization');
+                    
+                    if (pointTracker.canAfford(newPaidTiers * tierCost, 'personalization')) {
+                        pointTracker.spendPoints(newPaidTiers * tierCost, 'personalization');
                         gameState.bodyPerks[perk] = newTier;
                         this.updatePerkDescription(perk);
                     } else {
                         tierSelect.value = oldTier;
                         if (typeof updateCustomSelect === 'function') updateCustomSelect(tierSelect);
+                        pointTracker.spendPoints(oldPaidTiers * tierCost, 'personalization');
                         alert('Not enough Personalization Points!');
                     }
                 });
@@ -541,6 +553,123 @@ const navigation = {
         }
     },
     
+    applyReactorRankFreebies() {
+        if (!gameState.manaReactorRank) return;
+        
+        const oldFreePerks = { ...gameState.freeBodyPerks };
+        const oldFreeGen = gameState.freeDeviceGen;
+        const newFreePerks = getFreeBodyPerks(gameState.manaReactorRank, gameState.selectedClass);
+        const newFreeGen = getFreeDeviceGen(gameState.manaReactorRank);
+        
+        const perkKeys = ['speed', 'strength', 'sense', 'dexterity', 'intelligence', 'wisdom'];
+        const tierCost = 5;
+        
+        perkKeys.forEach(perk => {
+            const oldFree = oldFreePerks[perk] || 0;
+            const newFree = newFreePerks[perk] || 0;
+            const currentTier = gameState.bodyPerks[perk];
+            const oldPaid = Math.max(0, currentTier - oldFree);
+            const newMinTier = newFree;
+            const newTier = Math.max(currentTier, newMinTier);
+            const newPaid = Math.max(0, newTier - newFree);
+            
+            pointTracker.refundPoints(oldPaid * tierCost, 'personalization');
+            if (pointTracker.canAfford(newPaid * tierCost, 'personalization')) {
+                pointTracker.spendPoints(newPaid * tierCost, 'personalization');
+            }
+            
+            gameState.bodyPerks[perk] = newTier;
+            gameState.freeBodyPerks[perk] = newFree;
+            
+            const tierSelect = document.getElementById(`${perk}Tier`);
+            if (tierSelect) {
+                tierSelect.value = newTier;
+                if (typeof updateCustomSelect === 'function') updateCustomSelect(tierSelect);
+            }
+            this.updatePerkDescription(perk);
+        });
+        
+        // Device generation
+        if (oldFreeGen && oldFreeGen != newFreeGen && deviceGenerations[oldFreeGen]) {
+            if (gameState.deviceGeneration == oldFreeGen) {
+                pointTracker.refundPoints(0, 'personalization');
+            }
+        }
+        
+        if (newFreeGen) {
+            const genSelect = document.getElementById('deviceGeneration');
+            const oldGen = gameState.deviceGeneration;
+            const oldGenCost = (oldGen && oldGen != oldFreeGen && deviceGenerations[oldGen]) ? deviceGenerations[oldGen].cost : 0;
+            
+            if (oldGen && oldGen != newFreeGen && oldGenCost) {
+                pointTracker.refundPoints(oldGenCost, 'personalization');
+            }
+            
+            gameState.deviceGeneration = String(newFreeGen);
+            gameState.freeDeviceGen = String(newFreeGen);
+            
+            if (genSelect) {
+                genSelect.value = String(newFreeGen);
+                if (typeof updateCustomSelect === 'function') updateCustomSelect(genSelect);
+            }
+            this.updateDeviceGenerationDescription();
+        } else {
+            const oldGen = gameState.deviceGeneration;
+            if (oldGen && oldGen == oldFreeGen && deviceGenerations[oldGen]) {
+                pointTracker.refundPoints(deviceGenerations[oldGen].cost, 'personalization');
+                gameState.deviceGeneration = null;
+                const genSelect = document.getElementById('deviceGeneration');
+                if (genSelect) {
+                    genSelect.value = '';
+                    if (typeof updateCustomSelect === 'function') updateCustomSelect(genSelect);
+                }
+            }
+            gameState.freeDeviceGen = null;
+        }
+        
+        this.applyDeviceGenFreebies();
+    },
+    
+    applyDeviceGenFreebies() {
+        if (!gameState.deviceGeneration) {
+            const devPerkKeys = ['processing', 'weave', 'barrier', 'structural'];
+            devPerkKeys.forEach(perk => {
+                gameState.freeDevicePerks[perk] = 0;
+            });
+            return;
+        }
+        
+        const oldFreeDevPerks = { ...gameState.freeDevicePerks };
+        const newFreeDevPerks = getFreeDevicePerks(gameState.deviceGeneration);
+        const devPerkKeys = ['processing', 'weave', 'barrier', 'structural'];
+        const tierCost = 5;
+        
+        devPerkKeys.forEach(perk => {
+            const oldFree = oldFreeDevPerks[perk] || 0;
+            const newFree = newFreeDevPerks[perk] || 0;
+            const currentTier = gameState.device.perks[perk];
+            const oldPaid = Math.max(0, currentTier - oldFree);
+            const newMinTier = newFree;
+            const newTier = Math.max(currentTier, newMinTier);
+            const newPaid = Math.max(0, newTier - newFree);
+            
+            pointTracker.refundPoints(oldPaid * tierCost, 'personalization');
+            if (pointTracker.canAfford(newPaid * tierCost, 'personalization')) {
+                pointTracker.spendPoints(newPaid * tierCost, 'personalization');
+            }
+            
+            gameState.device.perks[perk] = newTier;
+            gameState.freeDevicePerks[perk] = newFree;
+            
+            const tierSelect = document.getElementById(`${perk}Tier`);
+            if (tierSelect) {
+                tierSelect.value = newTier;
+                if (typeof updateCustomSelect === 'function') updateCustomSelect(tierSelect);
+            }
+            this.updateDevicePerkDescription(perk);
+        });
+    },
+    
     updatePerkDescription(perk) {
         const descElement = document.getElementById(`${perk}Description`);
         if (descElement) {
@@ -549,12 +678,32 @@ const navigation = {
             descElement.innerHTML = `<p>${desc}</p>`;
         }
         this.updateTierProgress(perk);
+        this.updatePerkFreeLabel(perk);
+    },
+    
+    updatePerkFreeLabel(perk) {
+        const perkCard = document.getElementById(`${perk}Tier`)?.closest('.perk-card');
+        if (!perkCard) return;
+        const freeTier = gameState.freeBodyPerks ? (gameState.freeBodyPerks[perk] || 0) : 0;
+        let label = perkCard.querySelector('.free-tier-label');
+        if (freeTier > 0) {
+            if (!label) {
+                label = document.createElement('span');
+                label.className = 'free-tier-label';
+                var h3 = perkCard.querySelector('h3');
+                if (h3) h3.appendChild(label);
+            }
+            label.textContent = ` (T0–T${freeTier} free)`;
+        } else if (label) {
+            label.remove();
+        }
     },
     
     updateTierProgress(perk) {
         const perkCard = document.getElementById(`${perk}Tier`)?.closest('.perk-card');
         if (!perkCard) return;
         const tier = gameState.bodyPerks[perk];
+        const freeTier = gameState.freeBodyPerks ? (gameState.freeBodyPerks[perk] || 0) : 0;
         let progressEl = perkCard.querySelector('.tier-progress');
         if (!progressEl) {
             progressEl = document.createElement('div');
@@ -570,9 +719,10 @@ const navigation = {
         }
         progressEl.querySelectorAll('.tier-pip').forEach(function(pip) {
             var pipTier = parseInt(pip.dataset.tier);
-            pip.classList.remove('filled', 'high');
+            pip.classList.remove('filled', 'high', 'free');
             if (pipTier <= tier) {
                 pip.classList.add('filled');
+                if (pipTier <= freeTier) pip.classList.add('free');
                 if (pipTier >= 7) pip.classList.add('high');
             }
         });
@@ -752,6 +902,10 @@ const navigation = {
             }
         });
         
+        if (gameState.deviceGeneration) {
+            this.applyDeviceGenFreebies();
+        }
+        
         // Load device shapes based on class
         this.loadDeviceShapes();
     },
@@ -842,19 +996,28 @@ const navigation = {
                 tierSelect.addEventListener('change', () => {
                     const oldTier = gameState.device.perks[perk];
                     const newTier = parseInt(tierSelect.value);
-                    const tierCost = 5; // Each tier costs 5 points
+                    const freeTier = gameState.freeDevicePerks[perk] || 0;
+                    const tierCost = 5;
                     
-                    // Refund old cost
-                    pointTracker.refundPoints(oldTier * tierCost, 'personalization');
+                    if (newTier < freeTier) {
+                        tierSelect.value = oldTier;
+                        if (typeof updateCustomSelect === 'function') updateCustomSelect(tierSelect);
+                        return;
+                    }
                     
-                    // Apply new cost
-                    if (pointTracker.canAfford(newTier * tierCost, 'personalization')) {
-                        pointTracker.spendPoints(newTier * tierCost, 'personalization');
+                    const oldPaidTiers = Math.max(0, oldTier - freeTier);
+                    const newPaidTiers = Math.max(0, newTier - freeTier);
+                    
+                    pointTracker.refundPoints(oldPaidTiers * tierCost, 'personalization');
+                    
+                    if (pointTracker.canAfford(newPaidTiers * tierCost, 'personalization')) {
+                        pointTracker.spendPoints(newPaidTiers * tierCost, 'personalization');
                         gameState.device.perks[perk] = newTier;
                         this.updateDevicePerkDescription(perk);
                     } else {
                         tierSelect.value = oldTier;
                         if (typeof updateCustomSelect === 'function') updateCustomSelect(tierSelect);
+                        pointTracker.spendPoints(oldPaidTiers * tierCost, 'personalization');
                         alert('Not enough Personalization Points!');
                     }
                 });
@@ -896,12 +1059,32 @@ const navigation = {
             descElement.innerHTML = `<p>${desc}</p>`;
         }
         this.updateDeviceTierProgress(perk);
+        this.updateDevicePerkFreeLabel(perk);
+    },
+    
+    updateDevicePerkFreeLabel(perk) {
+        const perkCard = document.getElementById(`${perk}Tier`)?.closest('.perk-card');
+        if (!perkCard) return;
+        const freeTier = gameState.freeDevicePerks ? (gameState.freeDevicePerks[perk] || 0) : 0;
+        let label = perkCard.querySelector('.free-tier-label');
+        if (freeTier > 0) {
+            if (!label) {
+                label = document.createElement('span');
+                label.className = 'free-tier-label';
+                var h3 = perkCard.querySelector('h3');
+                if (h3) h3.appendChild(label);
+            }
+            label.textContent = ` (T0–T${freeTier} free)`;
+        } else if (label) {
+            label.remove();
+        }
     },
     
     updateDeviceTierProgress(perk) {
         const perkCard = document.getElementById(`${perk}Tier`)?.closest('.perk-card');
         if (!perkCard) return;
         const tier = gameState.device.perks[perk];
+        const freeTier = gameState.freeDevicePerks ? (gameState.freeDevicePerks[perk] || 0) : 0;
         let progressEl = perkCard.querySelector('.tier-progress');
         if (!progressEl) {
             progressEl = document.createElement('div');
@@ -917,9 +1100,10 @@ const navigation = {
         }
         progressEl.querySelectorAll('.tier-pip').forEach(function(pip) {
             var pipTier = parseInt(pip.dataset.tier);
-            pip.classList.remove('filled', 'high');
+            pip.classList.remove('filled', 'high', 'free');
             if (pipTier <= tier) {
                 pip.classList.add('filled');
+                if (pipTier <= freeTier) pip.classList.add('free');
                 if (pipTier >= 7) pip.classList.add('high');
             }
         });

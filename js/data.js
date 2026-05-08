@@ -27,93 +27,163 @@ const manaReactorRanks = {
     malkuth: {
         name: 'Malkuth (Foundation)',
         cost: 10,
-        description: `Malkuth represents the foundation of all magical power, being the lowest rank on the Kabbalistic Tree of Life yet still possessing significant potential for growth and development. Mages born with this rank have a modest mana capacity that allows them to learn basic spell routines and perform everyday magical tasks with relative ease. Their mana reactor absorbs ambient energy slowly but steadily, requiring patience and consistent practice to build up their reserves over time.
+        freeBodyPerks: { primary: 0, secondary: 0 },
+        freeBodyPerksByClass: {
+            knight: ['speed', 'strength', 'dexterity'],
+            bombardment: ['sense', 'intelligence', 'wisdom'],
+            thaumaturge: ['intelligence', 'wisdom', 'sense']
+        },
+        freeDeviceGen: null,
+        description: `A Malkuth-class reactor is the baseline mana generation unit issued to newly awakened mages under the Star Light Project. Its crystalline core holds a single mana lamination layer — enough to sustain basic spell routines and keep an Intelligent Device operational, but not enough for sustained combat casting. Ambient mana absorption is slow; a Malkuth mage who exhausts their reserves in a fight will wait minutes, not seconds, before they can cast again.
 
-Despite being the foundation rank, Malkuth mages should not be underestimated as they possess the raw potential to advance through training and dedication to their magical studies. The mana reactor in this stage is still developing and can be strengthened through rigorous exercise, meditation, and the consumption of mana-rich foods that accelerate the absorption process. Many great mages throughout history began at the Malkuth rank and through sheer determination rose to achieve remarkable feats of magic.
+In practical terms, this reactor tier limits the mage to one or two active spell effects at a time. Spell routines above Tier 3 strain the core's throughput, causing mana bleed that wastes roughly a third of each casting's energy as waste heat. Most Malkuth mages compensate by leaning heavily on their Device's processing to optimize what little mana they have, developing efficient habits that serve them well if they later rank up.
 
-The primary advantage of starting at Malkuth is the room for growth and the opportunity to build a solid foundation in magical theory and practice without being overwhelmed by excessive power. These mages tend to develop strong fundamentals and often excel in specialized areas of magic where their steady approach to learning serves them well. With proper guidance and training, a Malkuth mage can eventually advance to higher ranks, though the journey requires significant time investment and unwavering commitment to their magical development.`
+Despite its limitations, the Malkuth reactor is remarkably stable — its single-layer construction makes it virtually immune to mana feedback loops, a reliability that higher ranks sometimes sacrifice for raw output. Many field instructors consider Malkuth mages who have trained extensively at this tier to be among the most technically precise casters in the Project, precisely because they never had excess mana to waste.`
     },
     yesod: {
         name: 'Yesod (Foundation)',
         cost: 20,
-        description: `Yesod represents a stronger foundation of magical power, sitting above Malkuth on the Kabbalistic Tree of Life and offering enhanced mana capacity and absorption rates. Mages at this rank can learn intermediate spell routines and perform more complex magical tasks with greater efficiency and control over their mana. Their mana reactor has developed further, allowing for faster absorption of ambient energy and quicker recovery after casting spells.
+        freeBodyPerks: { primary: 1, secondary: 0 },
+        freeBodyPerksByClass: {
+            knight: ['speed', 'strength'],
+            bombardment: ['sense', 'intelligence'],
+            thaumaturge: ['intelligence', 'wisdom']
+        },
+        freeDeviceGen: null,
+        description: `The Yesod-class reactor adds a second mana lamination layer around the core, roughly doubling total capacity and halving recovery time compared to Malkuth. This seemingly small upgrade has outsized effects on battlefield viability — a Yesod mage can sustain two to three concurrent spell effects and recover from depletion in under a minute, making them the minimum rank recommended for field operations by the Project's safety board.
 
-The Yesod rank signifies a mage who has either been born with greater magical potential or has advanced through dedicated training and practice from the Malkuth level. These mages possess a deeper connection to the magical energies of the world and can sense mana fluctuations more acutely than their lower-ranked counterparts. Their increased mana capacity enables them to cast multiple spells in succession without exhausting their reserves as quickly as a Malkuth mage would.
+With the added throughput, spell routines up to Tier 5 can be cast without significant bleed. Yesod mages also begin to develop a passive sense for ambient mana density, an involuntary side effect of the second lamination's resonance with environmental mana flows. This nascent sensitivity isn't precise enough for tactical use, but it does provide a visceral warning when entering areas of high magical concentration or dimensional instability — enough to make a Yesod mage pause before walking into a trap.
 
-Mages at the Yesod level are often considered competent practitioners who can handle most everyday magical challenges without difficulty and are ready to take on more advanced magical studies. Their mana reactor has begun to show signs of specialization, often leaning toward particular types of magic or spell categories that align with the mage's natural affinities and interests. This rank serves as a stepping stone to the higher echelons of magical power, providing a solid platform from which to pursue mastery of the magical arts.`
+The Yesod reactor's dual-layer design also introduces a minor vulnerability: the interface between laminations can develop micro-fractures under extreme stress, requiring periodic recalibration at a certified maintenance facility. Most mages consider this a fair trade for the leap in capability, and the Project's logistics corps stocks replacement interlayer seals at every forward operating base.`
     },
     hod: {
         name: 'Hod (Splendor)',
         cost: 30,
-        description: `Hod represents splendor and glory in the magical arts, marking a significant leap in magical capability and mana capacity for those who attain this rank. Mages at the Hod level possess mana reactors that can store substantial amounts of energy and absorb ambient mana at an accelerated rate compared to lower ranks. They can learn advanced spell routines and perform complex magical feats that would be impossible or extremely difficult for mages of lesser rank.
+        freeBodyPerks: { primary: 1, secondary: 0 },
+        freeBodyPerksByClass: {
+            knight: ['speed', 'strength', 'dexterity'],
+            bombardment: ['sense', 'intelligence', 'wisdom'],
+            thaumaturge: ['intelligence', 'wisdom', 'sense']
+        },
+        freeDeviceGen: 1,
+        description: `The Hod-class reactor introduces a third lamination layer with a crystalline lattice structure that refracts mana internally before release, improving output efficiency by roughly forty percent over Yesod. This refraction effect is what gave the tier its colloquial nickname among Project engineers — the "splendor" of a Hod mage's spells comes from the tighter mana coherence, which produces visibly cleaner spell formations with sharper boundaries and less ambient bleed-off.
 
-The Hod rank is often associated with intellectual prowess and analytical thinking in magical applications, as mages at this level must develop sophisticated understanding of mana manipulation to fully utilize their enhanced capabilities. Their mana reactors have developed complex internal structures that allow for more efficient energy conversion and storage, enabling them to maintain their magical powers for extended periods. These mages can cast powerful spells with precision and control, demonstrating the splendor that their rank represents.
+Tactically, the Hod reactor enables sustained casting of Tier 6-7 spell routines and supports up to four concurrent effects. The refraction lattice also grants the mage a degree of output shaping that lower tiers lack: spell routines can be "tuned" to different parameters on the fly — wider area at lower intensity, or focused beam at full power — without requiring a separate casting. This makes Hod mages versatile in the field, able to adapt their output to the situation rather than being locked into a single mode per spell.
 
-Mages at the Hod level are recognized as accomplished practitioners who have mastered the fundamentals and are ready to explore the deeper mysteries of magic. Their enhanced mana capacity allows them to experiment with more advanced spell routines and develop unique magical techniques that reflect their individual strengths and preferences. The journey from Hod to higher ranks requires not just practice but also profound insights into the nature of magic itself, as the mages must expand their understanding to match their growing power.`
+The tradeoff is complexity. The refraction lattice requires precise mana harmonics to maintain, and a misaligned Hod reactor can produce erratic output — spells that fizzle, overshoot, or detonate prematurely. The Project mandates a qualification exam before mages are cleared for field deployment at this rank, and roughly one in eight candidates wash out on the harmonics calibration test. Those who pass, however, represent the backbone of the Project's operational mage complement.`
     },
     netzach: {
         name: 'Netzach (Eternity)',
         cost: 40,
-        description: `Netzach represents eternity and victory in the magical arts, signifying a mage who has achieved a level of power that approaches the truly exceptional. Mages at the Netzach rank possess mana reactors of extraordinary capacity that can store vast amounts of energy and absorb ambient mana with remarkable speed. They can learn master-level spell routines and perform magical feats that blur the line between what is considered possible and impossible within the magical community.
+        freeBodyPerks: { primary: 2, secondary: 1 },
+        freeBodyPerksByClass: {
+            knight: ['speed', 'strength', 'dexterity'],
+            bombardment: ['sense', 'intelligence', 'wisdom'],
+            thaumaturge: ['intelligence', 'wisdom', 'sense']
+        },
+        freeDeviceGen: 1,
+        description: `The Netzach-class reactor solves the endurance problem that limits every lower tier. Its fourth lamination layer incorporates a mana recirculation channel that captures and reabsorbs up to sixty percent of the waste energy that lower reactors vent as heat. In practice, this means a Netzach mage can maintain combat-output casting for roughly three times longer than a Hod mage before requiring recovery — a difference that turns sustained engagements from desperate sprints into manageable marathons.
 
-The Netzach rank is associated with endurance and persistence, as reaching this level typically requires decades of dedicated practice and unwavering commitment to magical development. These mages have mana reactors that have evolved to near-perfect efficiency, capable of maintaining high levels of magical output for extended periods without significant degradation. Their connection to the magical energies of the world is profound, allowing them to sense and manipulate mana in ways that lesser mages can barely comprehend.
+Field commanders consider Netzach the minimum rank for independent long-duration operations. A Netzach mage can sustain barrier routines, offensive casting, and Device processing simultaneously for hours rather than minutes, without the dangerous depletion curves that force lower-ranked mages to disengage or risk reactor damage. The recirculation channel also reduces the mage's thermal and mana signature, making them harder to detect through magical sensing at range — an incidental benefit that proves tactically useful more often than anyone expected.
 
-Mages at the Netzach level are considered masters of their craft, capable of teaching others and pushing the boundaries of what is known about magic. Their enhanced mana capacity and absorption rates make them formidable opponents in magical combat and invaluable allies in any magical endeavor. The Netzach rank represents a plateau of power that few mages ever reach, and those who do are often sought after by magical organizations and governments for their exceptional abilities.`
+The recirculation system does have a failure mode: if the channel's flow direction reverses under certain rare resonance conditions, the reactor enters a positive feedback loop that can overload the core within seconds. Project safety protocols require Netzach mages to carry an emergency dump valve that forcibly vents the channel, and the resulting mana discharge is violent enough to knock the mage unconscious. It beats the alternative.`
     },
     tiferet: {
         name: 'Tiferet (Beauty)',
         cost: 50,
-        description: `Tiferet represents beauty and harmony in the magical arts, marking a mage who has achieved perfect balance and integration of their magical abilities. Mages at the Tiferet rank possess mana reactors that operate with flawless efficiency, storing and utilizing mana in ways that seem almost effortless to observers. They can learn legendary spell routines and perform magical feats that demonstrate the perfect harmony between their will and the magical energies they command.
+        freeBodyPerks: { primary: 2, secondary: 1 },
+        freeBodyPerksByClass: {
+            knight: ['speed', 'strength', 'dexterity'],
+            bombardment: ['sense', 'intelligence', 'wisdom'],
+            thaumaturge: ['intelligence', 'wisdom', 'sense']
+        },
+        freeDeviceGen: 2,
+        description: `The Tiferet-class reactor is the median point of the Kabbalistic scale — the tier where quantitative improvements give way to qualitative ones. Its fifth lamination layer doesn't simply add capacity; it introduces a harmonic synchronization system that aligns all five layers into a unified resonance, eliminating the interlayer friction that plagues Hod and Netzach reactors. The result is a reactor that runs noticeably smoother, cooler, and quieter than any lower tier, with mana flow so consistent that spell output barely fluctuates between castings.
 
-The Tiferet rank is the central point of the Kabbalistic Tree of Life, representing balance and integration of all aspects of magical power. Mages at this level have developed their mana reactors to a state of perfect equilibrium, allowing them to seamlessly transition between different types of magic and spell routines without loss of efficiency or control. Their magical abilities flow naturally, as if they were an extension of their very being rather than a separate skill that must be consciously invoked.
+This harmonic synchronization is what gives Tiferet its reputation. Mages at this rank report that casting feels fundamentally different — less like forcing energy through a conduit and more like directing a current that already wants to flow the right way. Device compatibility improves dramatically as well; the clean mana signature reduces calibration overhead by half, allowing Tiferet mages to swap Device configurations or shift between spell categories with negligible transition lag. In combat, this manifests as a fluid, almost effortless casting style that observers often describe as "artistic."
 
-Mages at the Tiferet level are recognized as true masters who have achieved a level of magical proficiency that is both beautiful and awe-inspiring to witness. Their spells are cast with such grace and precision that they appear almost artful, demonstrating the beauty that their rank represents. The Tiferet mage has surpassed the limitations that bind lesser mages, operating on a level where magic and will are seamlessly unified, allowing them to achieve results that others can only dream of accomplishing.`
+The Tiferet reactor is also the first tier where ambient mana absorption outpaces passive expenditure during routine operations. A Tiferet mage walking through an area with typical mana density will slowly gain reserves rather than slowly lose them — a small change on paper that eliminates the logistical burden of mana rationing during extended deployments. It also means a Tiferet mage who is knocked unconscious in combat will wake up with their reactor already partially recharged, a survival margin that has saved lives.`
     },
     geburah: {
         name: 'Geburah (Severity)',
         cost: 60,
-        description: `Geburah represents severity and power in the magical arts, signifying a mage who has achieved overwhelming magical force and destructive capability. Mages at the Geburah rank possess mana reactors that can store immense amounts of energy and release it with devastating effect when necessary. They can learn cataclysmic spell routines and perform magical feats of raw power that can reshape landscapes and alter the course of battles single-handedly.
+        freeBodyPerks: { primary: 3, secondary: 2 },
+        freeBodyPerksByClass: {
+            knight: ['speed', 'strength', 'dexterity'],
+            bombardment: ['sense', 'intelligence', 'wisdom'],
+            thaumaturge: ['intelligence', 'wisdom', 'sense']
+        },
+        freeDeviceGen: 2,
+        description: `The Geburah-class reactor is the first tier optimized for offensive output rather than general capability. Its sixth lamination layer incorporates a compression matrix that can force mana into a denser state before release, multiplying the kinetic and magical impact of offensive spell routines by two to three times without additional mana expenditure. A Tier 5 combat spell cast through a Geburah reactor hits with the force of a Tier 7-8 cast through Tiferet — same input, dramatically more destructive output.
 
-The Geburah rank is associated with strength and force, as mages at this level have developed their mana reactors to prioritize power output and destructive potential above all other considerations. Their mana absorption rates are extraordinary, allowing them to quickly replenish their reserves even after expending vast amounts of energy in powerful spell routines. These mages excel in combat situations where raw power is more valuable than subtlety or finesse, their spells striking with the severity that their rank represents.
+This compression capability makes Geburah mages the Project's primary strike asset. A single Geburah mage with appropriate Device configuration can breach fortifications that would require a full squad of Tiferet-rank mages, and their anti-barrier effectiveness against enemy defensive routines is proportionally increased. The compression matrix also enables rapid discharge — the reactor can dump a significant fraction of its reserves in a single pulse, producing a brief but overwhelming spike in output that overwhelms most defensive spell routines before they can adapt.
 
-Mages at the Geburah level are feared and respected for their overwhelming magical might, capable of turning the tide of any conflict through sheer force of their magical abilities. Their mana reactors have evolved to maximize destructive output while maintaining sufficient control to prevent catastrophic accidents. The Geburah rank represents the pinnacle of offensive magical power, and mages who attain this level are often recruited by military organizations or serve as guardians of important magical sites.`
+The severity of the reactor's name reflects its constraints as much as its power. The compression matrix generates extreme internal stress during operation, and sustained high-output casting accelerates crystalline micro-fracture propagation throughout the core. A Geburah mage who fights at full intensity for too long risks permanent reactor degradation — the very compression that makes them devastating also slowly destroys their own power source. The Project's combat doctrine explicitly trains Geburah mages to pace themselves, reserving full compression for decisive moments rather than constant assault.`
     },
     chesed: {
         name: 'Chesed (Mercy)',
         cost: 70,
-        description: `Chesed represents mercy and benevolence in the magical arts, marking a mage who has achieved profound healing and protective capabilities alongside their offensive power. Mages at the Chesed rank possess mana reactors that excel at restoration and preservation, allowing them to heal wounds, cure diseases, and protect others from harm with remarkable effectiveness. They can learn miraculous spell routines focused on healing, protection, and enhancement of others.
+        freeBodyPerks: { primary: 3, secondary: 2 },
+        freeBodyPerksByClass: {
+            knight: ['speed', 'strength', 'dexterity'],
+            bombardment: ['sense', 'intelligence', 'wisdom'],
+            thaumaturge: ['intelligence', 'wisdom', 'sense']
+        },
+        freeDeviceGen: 3,
+        description: `The Chesed-class reactor takes the compression technology pioneered at Geburah and inverts it. Its seventh lamination layer introduces a dispersion matrix that expands mana into a finer, more distributed state before release — the mirror image of Geburah's compression. This dispersed mana penetrates biological and magical structures with minimal kinetic disruption, making it ideal for restorative and protective spell routines that need to affect their target at a deep structural level without causing collateral damage.
 
-The Chesed rank is associated with compassion and the desire to use magical power for the benefit of others rather than personal gain or destruction. Mages at this level have developed their mana reactors to specialize in restorative and protective magic, their energy flowing with a gentle yet powerful quality that promotes healing and preservation. Their mana absorption rates are exceptional, but more importantly, their mana has a natural affinity for life-giving and protective applications, making them invaluable in medical and defensive roles.
+A Chesed mage can close wounds by coaxing tissue back into alignment rather than forcing it, reinforce a barrier jacket's weave by threading mana between existing structural bonds rather than simply layering more on top, and purge hostile enchantments by dissolving their mana scaffolding rather than overpowering it. The dispersion matrix also makes Chesed reactors uniquely effective at mana sharing — they can transfer reserves to allied mages or Devices with minimal loss, a capability that makes them the linchpin of any squad-level operation.
 
-Mages at the Chesed level are revered as healers and protectors, their abilities sought after by those in need of healing or protection from magical threats. Their mana reactors have evolved to maximize restorative and protective capabilities while still maintaining sufficient offensive power for self-defense. The Chesed rank represents the pinnacle of benevolent magical power, and mages who attain this level often dedicate their lives to helping others and using their gifts for the greater good.`
+The dispersion matrix does not prevent offensive casting, but it offers no enhancement to it either. A Chesed mage casting a fireball delivers exactly the baseline output with none of Geburah's compression bonus. This asymmetry is by design — the Project's procurement board recognized that a reactor equally good at destruction and preservation would create strategic indecision, and that a specialist forced to choose between the two paths commits more fully to their role. Chesed mages who need offensive options rely on their Device, their spell selection, and their teammates.`
     },
     binah: {
         name: 'Binah (Understanding)',
         cost: 80,
-        description: `Binah represents understanding and wisdom in the magical arts, signifying a mage who has achieved profound insight into the fundamental nature of magic itself. Mages at the Binah rank possess mana reactors that have developed to a level of sophistication that allows them to comprehend and manipulate the very fabric of magical energy. They can learn advanced spell routines that operate on principles of magic that lesser mages cannot easily perceive or understand.
+        freeBodyPerks: { primary: 4, secondary: 3 },
+        freeBodyPerksByClass: {
+            knight: ['speed', 'strength', 'dexterity'],
+            bombardment: ['sense', 'intelligence', 'wisdom'],
+            thaumaturge: ['intelligence', 'wisdom', 'sense']
+        },
+        freeDeviceGen: 3,
+        description: `The Binah-class reactor introduces an analytical layer that no previous tier possesses: an eighth lamination composed of reactive crystalline circuits that can observe and model mana flow patterns in real time. Where lower-tier mages sense mana as vague pressure or temperature, a Binah mage perceives its structure — the weave patterns of active spell routines, the resonance signatures of different mana types, the micro-fluctuations that reveal whether a barrier is holding steady or about to fracture.
 
-The Binah rank is associated with deep understanding and the ability to perceive the underlying patterns and structures that govern magical phenomena. Mages at this level have developed their mana reactors to function as both storage vessels and analytical instruments, capable of processing complex magical information and deriving insights that advance the field of magic as a whole. Their connection to magical energy is so profound that they can often intuitively understand new spell routines simply by observing their effects and structure.
+This analytical capability transforms how a Binah mage approaches combat. Rather than responding to threats reactively, they can read an opponent's mana flow to predict which spell routine is being constructed before it finishes casting, identify the weak points in a defensive weave by observing its stress distribution, and exploit timing windows that lower-ranked mages can't even perceive. A Binah mage fighting a Geburah-rank opponent won't overpower their compression — they'll sidestep the compressed pulse and strike during the reactor's refill cycle, a window that lasts fractions of a second.
 
-Mages at the Binah level are recognized as sages and researchers who push the boundaries of magical knowledge and discover new principles that expand what is possible within the magical arts. Their mana reactors have evolved to maximize analytical and comprehension capabilities, allowing them to deconstruct and reconstruct spell routines with ease. The Binah rank represents the pinnacle of magical understanding, and mages who attain this level often become teachers, researchers, or advisors to magical organizations.`
+The reactive circuits also serve a peacetime role that the Project values as much as the combat application: Binah mages can reverse-engineer unfamiliar spell routines by observing their mana structure, making them the primary intelligence asset for analyzing enemy magical technology. Every known counter to dimensional-space spell routines was developed by Binah-rank analysts who observed the casting pattern and mapped its internal logic. The limitation is that the analytical layer draws processing power away from raw output — a Binah mage won't out-cast a Geburah on sheer force, but they'll know exactly where and when to apply what they have.`
     },
     chokhmah: {
         name: 'Chokhmah (Wisdom)',
         cost: 90,
-        description: `Chokhmah represents wisdom and creative power in the magical arts, marking a mage who has achieved the ability to create entirely new spell routines and magical phenomena through pure insight and intuition. Mages at the Chokhmah rank possess mana reactors that operate with such perfect efficiency and understanding that they can improvise new spells on the fly, adapting their magical abilities to any situation with remarkable creativity. They can learn and invent spell routines that push the boundaries of conventional magical theory.
+        freeBodyPerks: { primary: 5, secondary: 4 },
+        freeBodyPerksByClass: {
+            knight: ['speed', 'strength', 'dexterity'],
+            bombardment: ['sense', 'intelligence', 'wisdom'],
+            thaumaturge: ['intelligence', 'wisdom', 'sense']
+        },
+        freeDeviceGen: 4,
+        description: `The Chokhmah-class reactor represents a qualitative leap beyond analytical understanding. Its ninth lamination layer is a dynamic reconfiguration matrix — a lattice that can restructure its own crystalline geometry in response to the mage's intent, effectively rewriting the reactor's operational parameters on the fly. Where Binah perceives how a spell routine is structured, Chokhmah can restructure its own output to match, producing mana flows that adapt in real time to the demands of the situation.
 
-The Chokhmah rank is associated with creative power and the ability to innovate within the magical arts, going beyond what has been established to create something entirely new. Mages at this level have developed their mana reactors to the point where they can directly interface with the fundamental energies of magic, shaping and directing them with intuitive understanding rather than relying on pre-programmed spell routines. Their connection to magical energy is so direct that they can often achieve results that seem highly improbable according to established magical principles.
+This reconfiguration capability enables something no lower tier can replicate: improvised spell construction. A Chokhmah mage can modify a known spell routine mid-cast — widening its area, shifting its element, changing its targeting parameters — by consciously reshaping the reactor's output geometry rather than loading a pre-programmed routine from their Device. The Device still handles the mathematical heavy lifting, but the mage provides the structural blueprint through direct mana-shaping intuition rather than selecting from a list of pre-built options.
 
-Mages at the Chokhmah level are revered as innovators and pioneers who expand the boundaries of what is possible in magic through their creative insights and intuitive understanding. Their mana reactors have evolved to maximize creative and innovative capabilities, allowing them to develop entirely new approaches to magical problems. The Chokhmah rank represents the pinnacle of magical creativity, and mages who attain this level often become legends whose discoveries shape the future of magical practice for generations.`
+The cost of this flexibility is cognitive load. Reshaping reactor geometry while simultaneously maintaining situational awareness and executing combat decisions requires a degree of mental discipline that borders on the inhuman. The Project's Chokhmah qualification program has a higher washout rate than any other rank — not because the reactor is harder to operate, but because most mages literally cannot think fast enough to use it to its full potential. Those who can are the rarest strategic asset in the Project's inventory, capable of adapting to threats that no pre-planned spell library anticipated.`
     },
     keter: {
         name: 'Keter (Crown)',
         cost: 100,
-        description: `Keter represents the crown and the highest attainment in the magical arts, signifying a mage who has achieved exceptional mastery over all aspects of magic and stands at the practical pinnacle of magical power. Mages at the Keter rank possess mana reactors that have reached their maximum practical potential, capable of storing and manipulating vast amounts of magical energy with remarkable precision and control. They can learn and perform any known spell routine, no matter how complex or powerful, with practiced mastery.
+        freeBodyPerks: { primary: 6, secondary: 5 },
+        freeBodyPerksByClass: {
+            knight: ['speed', 'strength', 'dexterity'],
+            bombardment: ['sense', 'intelligence', 'wisdom'],
+            thaumaturge: ['intelligence', 'wisdom', 'sense']
+        },
+        freeDeviceGen: 5,
+        description: `The Keter-class reactor is the practical ceiling of current mana-reactor engineering. Its tenth lamination layer is a self-organizing crystalline matrix that integrates all nine lower layers into a unified system capable of operating in any mode — compression, dispersion, recirculation, analysis, reconfiguration — simultaneously and without conflict. A Keter mage doesn't choose between offensive power and defensive finesse, between endurance and insight. The reactor handles all of it at once, shifting resources between operational modes faster than the mage can consciously direct.
 
-The Keter rank is the highest point on the Kabbalistic Tree of Life, representing the ultimate achievement in magical development and the complete integration of all magical principles. Mages at this level have moved beyond the limitations that bind most mages, their mana reactors operating at the practical ceiling of current magitech understanding. Their connection to magical energy is exceptionally refined, allowing them to perceive, understand, and manipulate almost all aspects of magic with remarkable clarity and control.
+In operation, a Keter reactor behaves less like a power source and more like an extension of the mage's will. The integration layer reads autonomic signals from the mage's nervous system through their Device link, preemptively configuring output geometry before a conscious command is issued. Experienced Keter mages report that their reactors anticipate their intent — not through sentience, but through pattern recognition built on thousands of hours of shared casting history. The result is casting that feels instantaneous: the mage thinks, and the spell is already forming.
 
-Mages at the Keter level are the benchmark against whom all other mages are measured, their abilities so far beyond those of ordinary practitioners that they exist in a tier entirely their own. Their mana reactors have reached the practical ceiling of what current theory allows—nearly flawless in every regard and capable of feats that would be considered out of reach by any standard below Binah. The Keter rank represents the practical apex of magical power, and mages who attain this level are exceedingly rare, their existence often the subject of scholarly documentation, their capabilities bounded only by their dedication, creativity, and the hard limits of magitech engineering.`
-    }
+No Keter reactor has ever been manufactured. Every known unit emerged from a rank-up event — a poorly understood phenomenon where a Chokhmah-class reactor undergoing extreme operational stress spontaneously restructures its lamination layers into the Keter configuration. The conditions that trigger this transformation are not reproducible, and most candidates who attempt it simply destroy their reactor. The Project has documented fewer than a dozen Keter-rank mages in its entire history. Their capabilities are not classified because they are dangerous to know — they are classified because the gap between Keter and every other rank is large enough that public awareness would distort the entire strategic landscape.`
+    },
 };
 
 // Intelligent Device Generations
@@ -121,6 +191,7 @@ const deviceGenerations = {
     1: {
         name: '1st Generation (Civilian)',
         cost: 10,
+        freeDevicePerks: { processing: 1, weave: 1, barrier: 0, structural: 0 },
         description: `The 1st Generation Intelligent Devices represent the foundational technology that made practical magic accessible to the general population, featuring basic spell routine capabilities and simple AGI systems designed for everyday magical tasks. These devices are palm-sized cubes that can transform into simple tools and weapons, providing civilian mages with the ability to perform basic magical functions like lighting fires, creating small barriers, and executing simple utility spells. The processing power is modest but sufficient for the needs of everyday magical life, making these devices perfect for mages who primarily use magic for convenience rather than combat or complex applications.
 
 Despite being the oldest and most basic generation, 1st Generation Intelligent Devices are reliable and easy to use, requiring minimal training to operate effectively. The AGI systems are simple but responsive, providing clear guidance and feedback to help mages execute their spell routines correctly. These devices have limited memory and storage capacity, but what they lack in sophistication they make up for in durability and ease of maintenance, making them ideal for mages who value simplicity and reliability over advanced features.
@@ -130,6 +201,7 @@ The primary advantage of 1st Generation Intelligent Devices is their accessibili
     2: {
         name: '2nd Generation',
         cost: 20,
+        freeDevicePerks: { processing: 1, weave: 1, barrier: 1, structural: 1 },
         description: `The 2nd Generation Intelligent Devices represent a significant improvement over their predecessors, featuring enhanced processing power, expanded memory capacity, and more sophisticated AGI systems capable of handling intermediate spell routines. These devices maintain the palm-sized cube form factor but can transform into a wider variety of tools and weapons, providing mages with greater versatility in their magical applications. The improved processing capabilities allow for more complex spell construction and better mana efficiency, making these devices suitable for mages who need more than basic functionality.
 
 The 2nd Generation Intelligent Devices introduced advanced spell routine libraries and improved mana management systems that help mages optimize their magical output and conserve energy during casting. The AGI systems are more intelligent and can provide detailed analysis of spell performance, suggesting improvements and helping mages refine their techniques. These devices also feature better connectivity options, allowing for data transfer and synchronization with other magical systems and databases of spell routines.
@@ -139,6 +211,7 @@ Mages who use 2nd Generation Intelligent Devices benefit from significantly expa
     3: {
         name: '3rd Generation',
         cost: 30,
+        freeDevicePerks: { processing: 2, weave: 2, barrier: 1, structural: 1 },
         description: `The 3rd Generation Intelligent Devices represent a major leap forward in magical technology, featuring powerful AGI systems, advanced processing capabilities, and sophisticated spell routine construction tools that approach military-grade performance. These devices can transform into complex multi-functional tools and weapons, providing mages with exceptional versatility and the ability to adapt to virtually any magical situation. The processing power is substantial enough to handle advanced spell routines with multiple layers and complex mana manipulation, making these devices suitable for serious magical practitioners.
 
 The 3rd Generation Intelligent Devices introduced real-time spell optimization and predictive mana management systems that help mages achieve maximum efficiency in their magical output. The AGI systems are highly intelligent and capable of learning from the mage's usage patterns, adapting to their preferences and providing personalized assistance in spell construction and execution. These devices feature advanced sensory systems that can detect and analyze magical phenomena in the environment, providing mages with valuable tactical information.
@@ -148,6 +221,7 @@ Mages who use 3rd Generation Intelligent Devices have access to capabilities tha
     4: {
         name: '4th Generation',
         cost: 40,
+        freeDevicePerks: { processing: 2, weave: 2, barrier: 2, structural: 2 },
         description: `The 4th Generation Intelligent Devices represent cutting-edge magical technology, featuring state-of-the-art AGI systems, exceptional processing power, and advanced spell routine capabilities that rival the most sophisticated military equipment. These devices can transform into virtually any tool or weapon the mage can imagine, limited only by the mage's creativity and mana capacity. The processing capabilities are extraordinary, enabling real-time construction and modification of complex spell routines with multiple simultaneous effects and precise mana control.
 
 The 4th Generation Intelligent Devices introduced quantum-enhanced processing and neural interface capabilities that allow for direct mental communication between mage and device, dramatically improving response times and coordination. The AGI systems are nearly sentient in their sophistication, capable of independent analysis, strategic planning, and even autonomous operation in limited circumstances. These devices feature advanced sensory arrays that can detect and analyze all forms of energy, magical and technological, providing comprehensive situational awareness.
@@ -157,6 +231,7 @@ Mages who use 4th Generation Intelligent Devices possess capabilities that place
     5: {
         name: '5th Generation (Cutting Edge)',
         cost: 50,
+        freeDevicePerks: { processing: 3, weave: 3, barrier: 2, structural: 2 },
         description: `The 5th Generation Intelligent Devices represent the practical cutting edge of magical technology, featuring revolutionary AGI systems with advanced intelligence, processing capabilities that approach the theoretical limits of magical computation, and spell routine construction tools of unprecedented sophistication. These devices can transform into any form the mage desires, with nanoscale precision and materials that can change their physical properties on command. The processing power supports spell routines of exceptional complexity and power.
 
 The 5th Generation Intelligent Devices introduced breakthrough technologies including direct neural integration, quantum-entangled communication, and self-evolving spell routine systems that can learn and improve autonomously. The AGI systems are so advanced that they exhibit sophisticated independent reasoning, capable of independent analysis, creative problem-solving, and developing novel spell routine optimizations without direct mage input. These devices feature sensory systems that can perceive magical phenomena across multiple spectral bands simultaneously, providing comprehensive situational awareness of their magical environment.
@@ -560,3 +635,36 @@ const deviceShapes = {
         { id: 'ancient_relic_grimoire', name: 'Ancient Relic Grimoire', cost: 0 }
     ]
 };
+
+function getFreeBodyPerks(rankId, classId) {
+    const rank = manaReactorRanks[rankId];
+    if (!rank) return { speed: 0, strength: 0, sense: 0, dexterity: 0, intelligence: 0, wisdom: 0 };
+    
+    const base = rank.freeBodyPerks;
+    if (!base) return { speed: 0, strength: 0, sense: 0, dexterity: 0, intelligence: 0, wisdom: 0 };
+    
+    if (!classId || !rank.freeBodyPerksByClass || !rank.freeBodyPerksByClass[classId]) {
+        const result = {};
+        const perkKeys = ['speed', 'strength', 'sense', 'dexterity', 'intelligence', 'wisdom'];
+        perkKeys.forEach(key => { result[key] = 0; });
+        return result;
+    }
+    
+    const primary = rank.freeBodyPerksByClass[classId];
+    const result = {};
+    const perkKeys = ['speed', 'strength', 'sense', 'dexterity', 'intelligence', 'wisdom'];
+    perkKeys.forEach(key => {
+        result[key] = primary.includes(key) ? base.primary : base.secondary;
+    });
+    return result;
+}
+
+function getFreeDeviceGen(rankId) {
+    const rank = manaReactorRanks[rankId];
+    return (rank && rank.freeDeviceGen) ? rank.freeDeviceGen : null;
+}
+
+function getFreeDevicePerks(genId) {
+    if (!genId || !deviceGenerations[genId]) return { processing: 0, weave: 0, barrier: 0, structural: 0 };
+    return deviceGenerations[genId].freeDevicePerks || { processing: 0, weave: 0, barrier: 0, structural: 0 };
+}
