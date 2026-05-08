@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mages CYOA - Choose Your Own Adventure</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Starry Background -->
+    <div class="starfield"></div>
+    
+    <!-- Point Tracker (Bottom Right Hover) -->
+    <div id="pointTracker" class="point-tracker">
+        <div class="tracker-header">
+            <span class="tracker-title">Points</span>
+            <span class="tracker-toggle" id="trackerToggle">&#9650;</span>
+        </div>
+        <div class="tracker-content" id="trackerContent">
+            <div class="point-row">
+                <span class="point-label">Aether</span>
+                <span id="aetherPoints" class="point-value">0 / 0</span>
+                <div class="point-bar"><div id="aetherBar" class="point-bar-fill aether-bar"></div></div>
+            </div>
+            <div class="point-row">
+                <span class="point-label">Personalization</span>
+                <span id="personalizationPoints" class="point-value">0 / 0</span>
+                <div class="point-bar"><div id="personalizationBar" class="point-bar-fill personalization-bar"></div></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="main-nav">
+        <div class="nav-progress">
+            <div class="nav-step-wrapper">
+                <span class="nav-step active" data-page="1">1</span>
+                <span class="nav-step-label">Intro</span>
+            </div>
+            <div class="nav-step-wrapper">
+                <span class="nav-step" data-page="2">2</span>
+                <span class="nav-step-label">Character</span>
+            </div>
+            <div class="nav-step-wrapper">
+                <span class="nav-step" data-page="3">3</span>
+                <span class="nav-step-label">Spells</span>
+            </div>
+            <div class="nav-step-wrapper">
+                <span class="nav-step" data-page="4">4</span>
+                <span class="nav-step-label">Device</span>
+            </div>
+            <div class="nav-step-wrapper">
+                <span class="nav-step" data-page="5">5</span>
+                <span class="nav-step-label">Summary</span>
+            </div>
+        </div>
+        <div class="nav-buttons">
+            <button id="prevBtn" class="nav-btn" disabled>Previous</button>
+            <button id="nextBtn" class="nav-btn" disabled>Next</button>
+        </div>
+    </nav>
+
+    <!-- Main Content Container -->
+    <main class="main-container">
+        
+        <!-- Page 1: Introduction & Difficulty Selection -->
+        <section id="page1" class="page active">
+            <div class="page-content">
+                <header class="page-header">
+                    <h1>The Mages Association Bureau</h1>
+                    <p class="subtitle">A Magical Awakening Awaits</p>
+                </header>
+
+                <div class="lore-section">
+                    <p class="flavor-text"><em>In the shadows of governmental secrecy, humanity discovered the impossible. What began as desperation became revolution. What was meant to save a nation became the gateway to a new reality.</em></p>
+                    
+                    <div class="accordion">
+                        <div class="accordion-item open">
+                            <button class="accordion-header">
+                                <span>The Star Light Project</span>
+                                <span class="accordion-chevron"></span>
+                            </button>
+                            <div class="accordion-body">
+                                <div class="accordion-content">
+                                    <p style="text-align: justify;">
+                                        It has been twelve years since the Star Light Project began in the United States, forever changing the course of human history. What began as a secretive government initiative in 2012 was born from geopolitical necessity—China's rapid technological and economic ascension threatened American dominance on the world stage. The sitting President, recognizing the urgency of the situation, drafted Executive Directive SL-001, a classified order that allocated unprecedented resources toward developing revolutionary technologies that could maintain American supremacy. Congress, operating under strict non-disclosure protocols, approved the directive with minimal debate, understanding the existential nature of the threat.
+                                    </p>
+                                    <p style="text-align: justify;">
+                                        The project assembled the brightest minds in theoretical physics, quantum mechanics, and dimensional mathematics—a team that would come to be known simply as "The Numerals." Operating from a concealed facility deep beneath the Nevada desert, these scientists were tasked with the impossible: to find a technological edge that would render conventional military and economic competition obsolete. For three years, they pursued dead end after dead end, burning through billions in funding while producing nothing but theoretical models and mathematical abstractions.
+                                    </p>
+                                    <p style="text-align: justify;">
+                                        <em>Then, on October 31st, 2015, everything changed.</em> During what was supposed to be a routine experiment in higher-dimensional particle detection, Dr. Sarah Chen's equipment registered an anomaly that defied all known physics. The sensors detected energy signatures emanating from dimensions beyond the conventional four, energies that existed in spaces that conventional matter could not reach. This Higher Dimensional Energy, as they initially termed it, appeared to permeate all of reality, invisible to normal human perception yet fundamental to the structure of existence itself.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <button class="accordion-header">
+                                <span>The Discovery of Mana</span>
+                                <span class="accordion-chevron"></span>
+                            </button>
+                            <div class="accordion-body">
+                                <div class="accordion-content">
+                                    <p style="text-align: justify;">
+                                        The Numerals dedicated themselves to understanding this mysterious energy, eventually developing extraction and containment methods that allowed them to study it in laboratory conditions. What they discovered would revolutionize human understanding of reality itself. This energy—which they eventually termed "Mana," drawing from ancient mythological concepts—possessed properties that seemed to respond to human consciousness and intent. When they exposed volunteer subjects to controlled doses of concentrated Mana, something extraordinary occurred.
+                                    </p>
+                                    <p style="text-align: justify;">
+                                        <em>The human body, it seemed, was already adapted to handle this energy, possessing a dormant organ that awakened upon Mana exposure.</em> Located in the same spatial coordinates as the human heart but existing partially in higher dimensions beyond normal space-time, this organ—designated the Mana Reactor—became active when saturated with sufficient concentrations of Mana. The reactor existed in a superposition state, simultaneously present within the physical body and extending into dimensions that normal matter could not reach, serving as a bridge between conventional reality and the higher dimensions where Mana naturally flowed.
+                                    </p>
+                                    <p style="text-align: justify;">
+                                        Further research revealed that every human possessed this dimensional organ in a dormant state from birth, but its potential capacity varied dramatically between individuals. The Numerals developed a classification system based on the Kabbalistic Tree of Life, ranging from Malkuth (the foundation) to Keter (the crown). This ranking determined not only how much Mana a person's reactor could store but also the rate at which it could absorb ambient Mana from the environment and convert Mana-infused nutrients from food into usable magical energy.
+                                    </p>
+                                    <p style="text-align: justify;">
+                                        <em>A person's rank was immutable, determined at birth by unknown factors that resisted all attempts at artificial enhancement.</em> Training and dedication could optimize a Mana Reactor's efficiency and control, but the fundamental capacity remained fixed. Those born at Keter rank possessed reactors of almost godlike power, capable of storing and manipulating vast quantities of Mana with supernatural efficiency. Meanwhile, those at Malkuth rank, while still far beyond baseline humanity, possessed more modest capabilities that required careful management and strategic thinking to utilize effectively.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <button class="accordion-header">
+                                <span>Intelligent Devices</span>
+                                <span class="accordion-chevron"></span>
+                            </button>
+                            <div class="accordion-body">
+                                <div class="accordion-content">
+                                    <p style="text-align: justify;">
+                                        As the research progressed, the Numerals encountered a critical limitation that threatened to render their discovery useless for practical applications. While the Mana Reactor could store and generate magical energy, the human brain proved catastrophically inadequate for the task of manipulating that energy to produce desired effects in normal space. <em>The mental calculations required to shape raw Mana into functional phenomena exceeded human cognitive capacity by several orders of magnitude.</em> Early volunteers who attempted to manually direct their Mana suffered from severe neural degradation, experiencing seizures, brain hemorrhaging, and permanent cognitive damage from the strain.
+                                    </p>
+                                    <p style="text-align: justify;">
+                                        The solution came from an unexpected collaboration between the magical research team and the artificial intelligence division. They developed the Intelligent Device: a palm-sized magitech construct that served as an external processing unit for magical operations. Each Intelligent Device contained an advanced Artificial General Intelligence specifically designed to handle the complex calculations required for Mana manipulation. Through a bonding process that integrated the device with both the user's genetic signature and their Mana Reactor's unique energy pattern, the device became an extension of the mage themselves, responding to thought and intent with perfect synchronization.
+                                    </p>
+                                    <p style="text-align: justify;">
+                                        <em>Without an Intelligent Device, a mage was essentially powerless, capable only of sensing Mana but unable to shape it into practical effects.</em> The device translated the mage's intentions into precise mathematical formulas called "Spell Routines"—complex programs that manipulated Mana to achieve specific phenomena in real space. These Spell Routines were classified using a ten-tier system that ranked them by three primary factors: effective range, destructive potential, and "weave" (the complexity and sophistication of the spell's construction and effects).
+                                    </p>
+                                    <p style="text-align: justify;">
+                                        Tier 1 spells represented everyday conveniences—minor effects like creating small flames for lighting cigarettes, generating brief bursts of light, or cleaning small areas through magical manipulation. At the opposite end of the spectrum, Tier 10 spells represented weapons of mass destruction capable of leveling cities, manipulating weather systems on continental scales, or even warping the fabric of space-time itself. The tier system provided a universal standard for evaluating magical capabilities and establishing appropriate security protocols for different spell classifications.
+                                    </p>
+                                    <p style="text-align: justify;">
+                                        <em>The evolution of Intelligent Device technology has progressed through five distinct generations, each representing quantum leaps in capability.</em> First Generation devices, classified as Civilian-grade, provided basic spell routine execution suitable for everyday magical tasks but lacked the processing power or sophisticated materials for serious combat applications. These devices formed the backbone of civilian magical infrastructure, allowing ordinary awakened humans to incorporate magic into their daily lives without requiring extensive training or exceptional Mana Reactor capacity.
+                                    </p>
+                                    <p style="text-align: justify;">
+                                        Second and Third Generation devices marked the transition into professional-grade equipment, incorporating advanced materials, enhanced processing architectures, and more sophisticated AGI systems. These generations found widespread adoption among magical law enforcement, private security companies, and mid-tier military applications. Fourth Generation devices represented the cutting edge of mass-produced magical technology, featuring quantum-enhanced processing, neural interface capabilities, and AGI systems sophisticated enough to engage in complex strategic planning and autonomous operation in limited circumstances.
+                                    </p>
+                                    <p style="text-align: justify;">
+                                        <em>Fifth Generation devices, however, existed in a category beyond conventional understanding.</em> These experimental units incorporated technologies that seemed to border on science fiction: self-evolving AGI with near-sentient intelligence, materials with programmable physical properties at the molecular level, and processing capabilities that approached the theoretical limits of magical computation. Only a handful of Fifth Generation devices existed, reserved for the most elite mages or experimental research programs pushing the boundaries of what magical technology could achieve.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <button class="accordion-header">
+                                <span>Device Classes</span>
+                                <span class="accordion-chevron"></span>
+                            </button>
+                            <div class="accordion-body">
+                                <div class="accordion-content">
+                                    <p style="text-align: justify;">
+                                        <em>The revolution that changed everything came with the discovery that Intelligent Devices were not constrained to a single form.</em> Through advanced shape-shifting protocols, these devices could reconfigure their physical structure into virtually any form the mage required, limited only by mass-energy conservation principles and the device's generation level. This transformative capability gave rise to specialized fighting styles and, eventually, to the formal classification of mages into three primary Classes based on their combat methodology and device configuration preferences.
+                                    </p>
+                                    <p style="text-align: justify;">
+                                        The Knight class emerged as specialists in body reinforcement and melee combat, transforming their Intelligent Devices into bladed weapons that channeled and focused their magical power. Knights developed fighting techniques that combined traditional martial disciplines with supernatural enhancement, using Mana to strengthen their bodies to superhuman levels while wielding magically-enhanced weapons capable of cutting through reinforced steel like paper. <em>A skilled Knight could move faster than the human eye could track, strike with enough force to demolish buildings, and endure attacks that would instantly kill unenhanced humans.</em>
+                                    </p>
+                                    <p style="text-align: justify;">
+                                        Their combat style emphasized explosive close-quarters engagement, overwhelming opponents through superior speed and devastating physical power before enemies could leverage the range advantage typical of magical combat. Knights excelled at assassination, rapid strike operations, and scenarios where collateral damage needed to be minimized through precise, surgical violence. The most accomplished Knights could face entire squads of conventional soldiers single-handedly, their enhanced reflexes and durability making them virtually unstoppable in close combat.
+                                    </p>
+                                    <p style="text-align: justify;">
+                                        <em>In stark contrast, Bombardment mages specialized in long-range magical warfare, transforming their Intelligent Devices into staffs, cannons, or other focusing implements for devastating ranged attacks.</em> These mages represented the artillery of the magical world, capable of engaging targets from kilometers away with precision that made conventional weapons obsolete. Bombardment mages developed spell routines optimized for maximum destructive output, trading the Knight's mobility and resilience for overwhelming offensive power that could devastate entire battlefields.
+                                    </p>
+                                    <p style="text-align: justify;">
+                                        A skilled Bombardment mage operating from a secure position could rain down destruction that rivaled conventional artillery bombardments, but with far greater accuracy and the ability to adjust their attacks in real-time. They excelled at siege warfare, area denial, and eliminating high-value targets from beyond retaliation range. <em>The most accomplished Bombardment mages could level city blocks with single spell routines, create sustained barrages that overwhelmed defensive barriers through sheer volume, or execute precision strikes that eliminated specific targets without collateral damage.</em>
+                                    </p>
+                                    <p style="text-align: justify;">
+                                        The third class, Thaumaturges, specialized in support roles that proved absolutely essential to sustained magical operations. While Knights and Bombardment mages focused on direct combat, Thaumaturges excelled at force multiplication, healing, enhancement, and disruption of enemy systems. Their Intelligent Devices typically maintained the basic cube configuration or transformed into grimoires and books that served as repositories for vast spell routine libraries. <em>Thaumaturges were force multipliers par excellence, capable of transforming mediocre squads into elite units through strategic enhancement and support.</em>
+                                    </p>
+                                    <p style="text-align: justify;">
+                                        A skilled Thaumaturge could heal injuries that would be fatal to conventional medicine, enhance allies' physical and magical capabilities beyond their normal limits, restore depleted Mana Reactors to full capacity, and even hack into enemy Intelligent Devices or technological systems through invasive spell routines. In military operations, Thaumaturges often proved more valuable than entire platoons of conventional soldiers, their ability to sustain and enhance allied forces while disrupting enemy capabilities making them primary targets for elimination.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <button class="accordion-header">
+                                <span>Barrier Jackets</span>
+                                <span class="accordion-chevron"></span>
+                            </button>
+                            <div class="accordion-body">
+                                <div class="accordion-content">
+                                    <p style="text-align: justify;">
+                                        <em>Perhaps the most visible innovation in magical technology came with the development of Barrier Jackets—autonomous armor systems that provided both protection and personal expression.</em> A Barrier Jacket activated when a mage circulated their Mana through their Intelligent Device while engaging a pre-programmed defensive spell routine. Unlike traditional armor, Barrier Jackets existed partially in higher dimensions, providing comprehensive protection against both physical and magical attacks while weighing virtually nothing and restricting movement not at all.
+                                    </p>
+                                    <p style="text-align: justify;">
+                                        The appearance of a Barrier Jacket could be extensively customized, limited only by the mage's imagination and their Intelligent Device's processing capabilities. Some mages favored elegant ballroom gowns or Victorian formal wear that combined beauty with protection. Others preferred military uniforms that projected authority and discipline, or sleek tactical suits that prioritized functionality over aesthetics. The customization options were nearly limitless, allowing each mage to create a unique visual identity that reflected their personality, affiliations, and combat role.
+                                    </p>
+                                    <p style="text-align: justify;">
+                                        <em>Beyond mere aesthetics, Barrier Jackets provided substantial defensive capabilities and additional Mana storage.</em> The magical barriers layered within the jacket's structure could absorb tremendous damage before failing, automatically repairing themselves as long as the mage maintained the spell routine. More advanced Barrier Jackets incorporated additional utility functions: environmental protection for operations in hazardous conditions, integrated communication systems, enhanced sensory arrays, or even limited flight capabilities through magical thrust generation.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <button class="accordion-header">
+                                <span>The Mages Association Bureau</span>
+                                <span class="accordion-chevron"></span>
+                            </button>
+                            <div class="accordion-body">
+                                <div class="accordion-content">
+                                    <p style="text-align: justify;">
+                                        <em>The proliferation of magical capability among the general population created unprecedented challenges for law enforcement and national security.</em> Within five years of the Star Light Project's success, over fifty thousand Americans had undergone Mana Reactor activation, with that number growing exponentially as activation protocols became standardized and widely available. The potential for catastrophic abuse of magical power by criminals, terrorists, or simply reckless individuals became a primary concern for government officials who understood the destructive capability even a single rogue mage could unleash.
+                                    </p>
+                                    <p style="text-align: justify;">
+                                        In response, Congress authorized the creation of the Mages Association Bureau (MAB)—a federal agency operating with extraordinary powers and resources to regulate, monitor, and police the magical population. The MAB received federal jurisdiction that superseded state and local authority in magical matters, operating under classified directives that granted them latitude that would be unconstitutional for conventional law enforcement. <em>Their primary mission was twofold: prevent magical knowledge from reaching the general public, and ensure that those who possessed magical capabilities could be monitored and controlled.</em>
+                                    </p>
+                                    <p style="text-align: justify;">
+                                        The MAB maintained an extensive network of agents drawn from both military special forces and the civilian magical population itself. Every individual who underwent Mana Reactor activation was required by federal law to register with the Bureau, providing detailed information about their rank, capabilities, and intended uses of magic. Failure to register or attempts to conceal magical capability were felonies carrying severe penalties including permanent imprisonment in specialized containment facilities designed to suppress magical abilities.
+                                    </p>
+                                    <p style="text-align: justify;">
+                                        <em>In addition to law enforcement, the MAB controlled all legal access to Intelligent Devices.</em> Every device manufactured in the United States contained tracking systems and remote shutdown capabilities that the Bureau could activate if the registered user engaged in illegal magical activities. The Bureau maintained extensive databases tracking every registered mage, every Intelligent Device, and every legal spell routine, creating a comprehensive surveillance network that monitored the magical population with unprecedented thoroughness.
+                                    </p>
+                                    <p style="text-align: justify;">
+                                        Despite its authoritarian aspects, the MAB also provided essential services to the magical community. They funded magical research, maintained educational programs for newly awakened mages, offered employment opportunities for those seeking to use their abilities in public service, and investigated magical crimes with expertise that conventional law enforcement could never match. <em>The Bureau walked a fine line between protector and oppressor, maintaining order through a combination of overwhelming force, comprehensive surveillance, and strategic provision of resources that made cooperation more attractive than resistance.</em>
+                                    </p>
+                                    <p style="text-align: justify;">
+                                        All Intelligent Devices, regardless of generation, were produced under MAB oversight with features tailored to the mage's rank, role, and the resources available to them. Civilian mages typically received First or Second Generation devices suitable for everyday magical tasks. Professional mages in law enforcement, private security, or corporate research roles accessed Third Generation devices. Military personnel and MAB agents operated Fourth Generation equipment. <em>Fifth Generation devices remained exclusively under Bureau control, issued only to their most elite operatives or experimental research programs.</em>
+                                    </p>
+                                    <p style="text-align: justify;">
+                                        <em>You are about to enter this world as a newly awakened mage, your Mana Reactor activated and your potential unlocked.</em> The choices you make will determine your place in this hidden society, the power you wield, and the path you walk between the mundane world and the realm of magic. <em>Welcome to the Mages Association Bureau. Your story begins now.</em>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="difficulty-section">
+                    <h2>Select Your Difficulty</h2>
+                    <p>Choose your difficulty level to determine your starting points for character creation.</p>
+                    
+                    <div class="difficulty-options">
+                        <button class="difficulty-btn" data-difficulty="easy">
+                            <h3>Easy</h3>
+                            <div class="points-display">
+                                <span>400 Aether Points</span>
+                                <span>350 Personalization Points</span>
+                            </div>
+                            <p class="difficulty-desc">Perfect for newcomers to the magical world, providing ample resources to explore all aspects of mage creation without significant constraints.</p>
+                        </button>
+                        
+                        <button class="difficulty-btn" data-difficulty="medium">
+                            <h3>Medium</h3>
+                            <div class="points-display">
+                                <span>280 Aether Points</span>
+                                <span>230 Personalization Points</span>
+                            </div>
+                            <p class="difficulty-desc">A balanced challenge for those with some experience, offering a good mix of options while requiring strategic choices in character development.</p>
+                        </button>
+                        
+                        <button class="difficulty-btn" data-difficulty="hard">
+                            <h3>Hard</h3>
+                            <div class="points-display">
+                                <span>175 Aether Points</span>
+                                <span>140 Personalization Points</span>
+                            </div>
+                            <p class="difficulty-desc">Only for the most dedicated and skilled mages, providing limited resources that must be managed carefully to create a viable and powerful character.</p>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="page-actions">
+                    <button id="beginJourney" class="action-btn primary" disabled>Begin Journey</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Page 2: Character Creation -->
+        <section id="page2" class="page">
+            <div class="page-content">
+                <header class="page-header">
+                    <h1>Character Creation</h1>
+                    <p class="subtitle">Define Your Magical Identity</p>
+                </header>
+                
+                <p class="flavor-text"><em>Every mage's journey begins with awakening. Your choices here will shape not only your appearance and capabilities, but your very place in the hidden magical world.</em></p>
+
+                <!-- Basic Information -->
+                <div class="creation-section">
+                    <h2>Basic Information</h2>
+                    
+                    <div class="form-group">
+                        <label>Sex</label>
+                        <div class="option-buttons">
+                            <button class="option-btn" data-field="sex" data-value="male">Male</button>
+                            <button class="option-btn" data-field="sex" data-value="female">Female</button>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Age</label>
+                        <div class="option-buttons">
+                            <button class="option-btn" data-field="age" data-value="10">10 Years</button>
+                            <button class="option-btn" data-field="age" data-value="15">15 Years</button>
+                            <button class="option-btn" data-field="age" data-value="20">20 Years</button>
+                            <button class="option-btn" data-field="age" data-value="30">30 Years</button>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Height (cm)</label>
+                        <input type="range" id="height" min="140" max="200" value="170" class="slider">
+                        <span id="heightValue">170 cm</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Body Shape</label>
+                        <select id="bodyShape" class="select-input">
+                            <option value="">Select body shape...</option>
+                            <option value="slender">Slender</option>
+                            <option value="athletic">Athletic</option>
+                            <option value="muscular">Muscular</option>
+                            <option value="average">Average</option>
+                            <option value="heavy">Heavy</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Skin Color</label>
+                        <input type="color" id="skinColor" value="#f5d0c5" class="color-picker">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Eye Color</label>
+                        <input type="color" id="eyeColor" value="#4a90d9" class="color-picker">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Hair Color</label>
+                        <input type="color" id="hairColor" value="#2c1810" class="color-picker">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Time Known About Magic</label>
+                        <select id="timeKnownMagic" class="select-input">
+                            <option value="">Select duration...</option>
+                            <option value="recent">Recently discovered (less than 1 year)</option>
+                            <option value="short">Short time (1-3 years)</option>
+                            <option value="medium">Medium time (3-7 years)</option>
+                            <option value="long">Long time (7+ years)</option>
+                            <option value="lifetime">Born into magical family (lifetime)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Core Attributes -->
+                <div class="creation-section">
+                    <h2>Core Attributes <span class="point-cost">(Aether Points)</span></h2>
+                    <p class="flavor-text"><em>These attributes define your connection to the magical realm and the power you can wield.</em></p>
+
+                    <!-- Mana Reactor Rank -->
+                    <div class="form-group">
+                        <label>Mana Reactor Rank (Kabbalistic Tree of Life)</label>
+                        <select id="manaReactorRank" class="select-input">
+                            <option value="">Select rank...</option>
+                            <option value="malkuth">Malkuth (Foundation) - 10 points</option>
+                            <option value="yesod">Yesod (Foundation) - 20 points</option>
+                            <option value="hod">Hod (Splendor) - 30 points</option>
+                            <option value="netzach">Netzach (Eternity) - 40 points</option>
+                            <option value="tiferet">Tiferet (Beauty) - 50 points</option>
+                            <option value="geburah">Geburah (Severity) - 60 points</option>
+                            <option value="chesed">Chesed (Mercy) - 70 points</option>
+                            <option value="binah">Binah (Understanding) - 80 points</option>
+                            <option value="chokhmah">Chokhmah (Wisdom) - 90 points</option>
+                            <option value="keter">Keter (Crown) - 100 points</option>
+                        </select>
+                        <div id="manaReactorDescription" class="option-description"></div>
+                    </div>
+
+                    <!-- Intelligent Device Generation -->
+                    <div class="form-group">
+                        <label>Intelligent Device Generation</label>
+                        <select id="deviceGeneration" class="select-input">
+                            <option value="">Select generation...</option>
+                            <option value="1">1st Generation (Civilian) - 10 points</option>
+                            <option value="2">2nd Generation - 20 points</option>
+                            <option value="3">3rd Generation - 30 points</option>
+                            <option value="4">4th Generation - 40 points</option>
+                            <option value="5">5th Generation (Cutting Edge) - 50 points</option>
+                        </select>
+                        <div id="deviceGenerationDescription" class="option-description"></div>
+                    </div>
+
+                    <!-- Class Selection -->
+                    <div class="form-group">
+                        <label>Class Selection</label>
+                        <div class="option-buttons">
+                            <button class="option-btn" data-field="class" data-value="knight">Knight</button>
+                            <button class="option-btn" data-field="class" data-value="bombardment">Bombardment</button>
+                            <button class="option-btn" data-field="class" data-value="thaumaturge">Thaumaturge</button>
+                        </div>
+                        <div id="classDescription" class="option-description"></div>
+                    </div>
+
+                    <!-- Barrier Jacket Style -->
+                    <div class="form-group">
+                        <label>Barrier Jacket Style <span class="point-cost">(Personalization Points)</span></label>
+                        <select id="barrierJacketStyle" class="select-input">
+                            <option value="">Select style...</option>
+                            <option value="ballroom">Victorian Ballroom Gown - 5 points</option>
+                            <option value="military">Military Uniform - 5 points</option>
+                            <option value="tactical">Sleek Tactical Suit - 5 points</option>
+                            <option value="royal">Royal Court Dress - 5 points</option>
+                            <option value="scholar">Scholar's Robes - 5 points</option>
+                            <option value="aristocratic">Aristocratic Evening Wear - 5 points</option>
+                            <option value="combat">Combat-Ready Ensemble - 5 points</option>
+                            <option value="ceremonial">Mystical Ceremonial Attire - 5 points</option>
+                            <option value="street">Modern Street Style - 5 points</option>
+                            <option value="traditional">Ancient Traditional Garb - 5 points</option>
+                        </select>
+                        <div id="barrierJacketDescription" class="option-description"></div>
+                    </div>
+                </div>
+
+                <!-- General Perks (Body Enhancements) -->
+                <div class="creation-section">
+                    <h2>General Perks <span class="point-cost">(Personalization Points)</span></h2>
+                    <p class="flavor-text"><em>Through careful training and magical enhancement, your body can transcend human limitations. These perks represent the fusion of physical conditioning and magical power.</em></p>
+
+                    <div class="perks-grid">
+                        <!-- Speed Tier -->
+                        <div class="perk-card">
+                            <h3>Speed Tier</h3>
+                            <div class="tier-selector">
+                                <select id="speedTier" class="tier-select">
+                                    <option value="0">Tier 0 (0 points)</option>
+                                    <option value="1">Tier 1 (5 points)</option>
+                                    <option value="2">Tier 2 (10 points)</option>
+                                    <option value="3">Tier 3 (15 points)</option>
+                                    <option value="4">Tier 4 (20 points)</option>
+                                    <option value="5">Tier 5 (25 points)</option>
+                                    <option value="6">Tier 6 (30 points)</option>
+                                    <option value="7">Tier 7 (35 points)</option>
+                                    <option value="8">Tier 8 (40 points)</option>
+                                    <option value="9">Tier 9 (45 points)</option>
+                                    <option value="10">Tier 10 (50 points)</option>
+                                </select>
+                            </div>
+                            <div id="speedDescription" class="perk-description"></div>
+                        </div>
+
+                        <!-- Strength Tier -->
+                        <div class="perk-card">
+                            <h3>Strength Tier</h3>
+                            <div class="tier-selector">
+                                <select id="strengthTier" class="tier-select">
+                                    <option value="0">Tier 0 (0 points)</option>
+                                    <option value="1">Tier 1 (5 points)</option>
+                                    <option value="2">Tier 2 (10 points)</option>
+                                    <option value="3">Tier 3 (15 points)</option>
+                                    <option value="4">Tier 4 (20 points)</option>
+                                    <option value="5">Tier 5 (25 points)</option>
+                                    <option value="6">Tier 6 (30 points)</option>
+                                    <option value="7">Tier 7 (35 points)</option>
+                                    <option value="8">Tier 8 (40 points)</option>
+                                    <option value="9">Tier 9 (45 points)</option>
+                                    <option value="10">Tier 10 (50 points)</option>
+                                </select>
+                            </div>
+                            <div id="strengthDescription" class="perk-description"></div>
+                        </div>
+
+                        <!-- Sense Tier -->
+                        <div class="perk-card">
+                            <h3>Sense Tier</h3>
+                            <div class="tier-selector">
+                                <select id="senseTier" class="tier-select">
+                                    <option value="0">Tier 0 (0 points)</option>
+                                    <option value="1">Tier 1 (5 points)</option>
+                                    <option value="2">Tier 2 (10 points)</option>
+                                    <option value="3">Tier 3 (15 points)</option>
+                                    <option value="4">Tier 4 (20 points)</option>
+                                    <option value="5">Tier 5 (25 points)</option>
+                                    <option value="6">Tier 6 (30 points)</option>
+                                    <option value="7">Tier 7 (35 points)</option>
+                                    <option value="8">Tier 8 (40 points)</option>
+                                    <option value="9">Tier 9 (45 points)</option>
+                                    <option value="10">Tier 10 (50 points)</option>
+                                </select>
+                            </div>
+                            <div id="senseDescription" class="perk-description"></div>
+                        </div>
+
+                        <!-- Dexterity Tier -->
+                        <div class="perk-card">
+                            <h3>Dexterity Tier</h3>
+                            <div class="tier-selector">
+                                <select id="dexterityTier" class="tier-select">
+                                    <option value="0">Tier 0 (0 points)</option>
+                                    <option value="1">Tier 1 (5 points)</option>
+                                    <option value="2">Tier 2 (10 points)</option>
+                                    <option value="3">Tier 3 (15 points)</option>
+                                    <option value="4">Tier 4 (20 points)</option>
+                                    <option value="5">Tier 5 (25 points)</option>
+                                    <option value="6">Tier 6 (30 points)</option>
+                                    <option value="7">Tier 7 (35 points)</option>
+                                    <option value="8">Tier 8 (40 points)</option>
+                                    <option value="9">Tier 9 (45 points)</option>
+                                    <option value="10">Tier 10 (50 points)</option>
+                                </select>
+                            </div>
+                            <div id="dexterityDescription" class="perk-description"></div>
+                        </div>
+
+                        <!-- Intelligence Tier -->
+                        <div class="perk-card">
+                            <h3>Intelligence Tier</h3>
+                            <div class="tier-selector">
+                                <select id="intelligenceTier" class="tier-select">
+                                    <option value="0">Tier 0 (0 points)</option>
+                                    <option value="1">Tier 1 (5 points)</option>
+                                    <option value="2">Tier 2 (10 points)</option>
+                                    <option value="3">Tier 3 (15 points)</option>
+                                    <option value="4">Tier 4 (20 points)</option>
+                                    <option value="5">Tier 5 (25 points)</option>
+                                    <option value="6">Tier 6 (30 points)</option>
+                                    <option value="7">Tier 7 (35 points)</option>
+                                    <option value="8">Tier 8 (40 points)</option>
+                                    <option value="9">Tier 9 (45 points)</option>
+                                    <option value="10">Tier 10 (50 points)</option>
+                                </select>
+                            </div>
+                            <div id="intelligenceDescription" class="perk-description"></div>
+                        </div>
+
+                        <!-- Wisdom Tier -->
+                        <div class="perk-card">
+                            <h3>Wisdom Tier</h3>
+                            <div class="tier-selector">
+                                <select id="wisdomTier" class="tier-select">
+                                    <option value="0">Tier 0 (0 points)</option>
+                                    <option value="1">Tier 1 (5 points)</option>
+                                    <option value="2">Tier 2 (10 points)</option>
+                                    <option value="3">Tier 3 (15 points)</option>
+                                    <option value="4">Tier 4 (20 points)</option>
+                                    <option value="5">Tier 5 (25 points)</option>
+                                    <option value="6">Tier 6 (30 points)</option>
+                                    <option value="7">Tier 7 (35 points)</option>
+                                    <option value="8">Tier 8 (40 points)</option>
+                                    <option value="9">Tier 9 (45 points)</option>
+                                    <option value="10">Tier 10 (50 points)</option>
+                                </select>
+                            </div>
+                            <div id="wisdomDescription" class="perk-description"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="page-actions">
+                    <button id="page2Next" class="action-btn primary">Proceed to Spell Routines</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Page 3: Spell Routines -->
+        <section id="page3" class="page">
+            <div class="page-content">
+                <header class="page-header">
+                    <h1>Spell Routines</h1>
+                    <p class="subtitle">Master the Art of Magic</p>
+                </header>
+                
+                <p class="flavor-text"><em>The spells you master will define your combat style and magical capabilities. Choose wisely, for these routines will be your weapons, shields, and tools in the world of magic.</em></p>
+                
+                <div class="creation-section">
+                    <h2>Available Spell Routines <span class="point-cost">(Aether Points)</span></h2>
+                </div>
+
+                <div class="spell-categories">
+                    <div class="category-tabs">
+                        <button class="tab-btn active" data-category="physical">Physical</button>
+                        <button class="tab-btn" data-category="elemental">Elemental</button>
+                        <button class="tab-btn" data-category="esoteric">Esoteric</button>
+                    </div>
+
+                    <div class="category-content" id="spellContent">
+                        <!-- Spells will be dynamically loaded here -->
+                    </div>
+                </div>
+
+                <div class="page-actions">
+                    <button id="page3Next" class="action-btn primary">Proceed to Device Customization</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Page 4: Intelligent Device Customization -->
+        <section id="page4" class="page">
+            <div class="page-content">
+                <header class="page-header">
+                    <h1>Intelligent Device Customization</h1>
+                    <p class="subtitle">Forge Your Magical Tool</p>
+                </header>
+                
+                <p class="flavor-text"><em>Your Intelligent Device is more than a tool—it is the bridge between your will and the fundamental forces of magic. Its capabilities will determine the limits of your power and the sophistication of your spell routines.</em></p>
+
+                <!-- Material Selection -->
+                <div class="creation-section">
+                    <h2>Device Material <span class="point-cost">(Personalization Points)</span></h2>
+                    <select id="deviceMaterial" class="select-input">
+                        <option value="">Select material...</option>
+                        <option value="basic">Basic Materials - 10 points</option>
+                        <option value="advanced">Advanced Materials - 20 points</option>
+                        <option value="rare">Rare Materials - 30 points</option>
+                        <option value="exotic">Exotic Materials - 40 points</option>
+                        <option value="legendary">Legendary Materials - 50 points</option>
+                    </select>
+                    <div id="materialDescription" class="option-description"></div>
+                </div>
+
+                <!-- Device General Perks -->
+                <div class="creation-section">
+                    <h2>Device Enhancements <span class="point-cost">(Personalization Points)</span></h2>
+
+                    <div class="perks-grid">
+                        <!-- Processing Tier -->
+                        <div class="perk-card">
+                            <h3>Processing Tier</h3>
+                            <div class="tier-selector">
+                                <select id="processingTier" class="tier-select">
+                                    <option value="0">Tier 0 (0 points)</option>
+                                    <option value="1">Tier 1 (5 points)</option>
+                                    <option value="2">Tier 2 (10 points)</option>
+                                    <option value="3">Tier 3 (15 points)</option>
+                                    <option value="4">Tier 4 (20 points)</option>
+                                    <option value="5">Tier 5 (25 points)</option>
+                                    <option value="6">Tier 6 (30 points)</option>
+                                    <option value="7">Tier 7 (35 points)</option>
+                                    <option value="8">Tier 8 (40 points)</option>
+                                    <option value="9">Tier 9 (45 points)</option>
+                                    <option value="10">Tier 10 (50 points)</option>
+                                </select>
+                            </div>
+                            <div id="processingDescription" class="perk-description"></div>
+                        </div>
+
+                        <!-- Weave Tier -->
+                        <div class="perk-card">
+                            <h3>Weave Tier</h3>
+                            <div class="tier-selector">
+                                <select id="weaveTier" class="tier-select">
+                                    <option value="0">Tier 0 (0 points)</option>
+                                    <option value="1">Tier 1 (5 points)</option>
+                                    <option value="2">Tier 2 (10 points)</option>
+                                    <option value="3">Tier 3 (15 points)</option>
+                                    <option value="4">Tier 4 (20 points)</option>
+                                    <option value="5">Tier 5 (25 points)</option>
+                                    <option value="6">Tier 6 (30 points)</option>
+                                    <option value="7">Tier 7 (35 points)</option>
+                                    <option value="8">Tier 8 (40 points)</option>
+                                    <option value="9">Tier 9 (45 points)</option>
+                                    <option value="10">Tier 10 (50 points)</option>
+                                </select>
+                            </div>
+                            <div id="weaveDescription" class="perk-description"></div>
+                        </div>
+
+                        <!-- Barrier Tier -->
+                        <div class="perk-card">
+                            <h3>Barrier Tier</h3>
+                            <div class="tier-selector">
+                                <select id="barrierTier" class="tier-select">
+                                    <option value="0">Tier 0 (0 points)</option>
+                                    <option value="1">Tier 1 (5 points)</option>
+                                    <option value="2">Tier 2 (10 points)</option>
+                                    <option value="3">Tier 3 (15 points)</option>
+                                    <option value="4">Tier 4 (20 points)</option>
+                                    <option value="5">Tier 5 (25 points)</option>
+                                    <option value="6">Tier 6 (30 points)</option>
+                                    <option value="7">Tier 7 (35 points)</option>
+                                    <option value="8">Tier 8 (40 points)</option>
+                                    <option value="9">Tier 9 (45 points)</option>
+                                    <option value="10">Tier 10 (50 points)</option>
+                                </select>
+                            </div>
+                            <div id="barrierDescription" class="perk-description"></div>
+                        </div>
+
+                        <!-- Structural Tier -->
+                        <div class="perk-card">
+                            <h3>Structural Tier</h3>
+                            <div class="tier-selector">
+                                <select id="structuralTier" class="tier-select">
+                                    <option value="0">Tier 0 (0 points)</option>
+                                    <option value="1">Tier 1 (5 points)</option>
+                                    <option value="2">Tier 2 (10 points)</option>
+                                    <option value="3">Tier 3 (15 points)</option>
+                                    <option value="4">Tier 4 (20 points)</option>
+                                    <option value="5">Tier 5 (25 points)</option>
+                                    <option value="6">Tier 6 (30 points)</option>
+                                    <option value="7">Tier 7 (35 points)</option>
+                                    <option value="8">Tier 8 (40 points)</option>
+                                    <option value="9">Tier 9 (45 points)</option>
+                                    <option value="10">Tier 10 (50 points)</option>
+                                </select>
+                            </div>
+                            <div id="structuralDescription" class="perk-description"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Device Shape -->
+                <div class="creation-section">
+                    <h2>Device Shape</h2>
+                    <div id="deviceShapeOptions" class="shape-options">
+                        <p class="info-text">Please select a class on Page 2 to see available device shapes.</p>
+                    </div>
+                </div>
+
+                <div class="page-actions">
+                    <button id="page4Next" class="action-btn primary">View Build Summary</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Page 5: Build Summary -->
+        <section id="page5" class="page">
+            <div class="page-content">
+                <header class="page-header">
+                    <h1>Build Summary</h1>
+                    <p class="subtitle">Your Magical Identity</p>
+                </header>
+
+                <div class="summary-sections">
+                    <!-- Character Overview -->
+                    <div class="summary-section">
+                        <h2>Character Overview</h2>
+                        <div id="characterOverview" class="summary-content">
+                            <!-- Dynamic content -->
+                        </div>
+                    </div>
+
+                    <!-- Core Attributes -->
+                    <div class="summary-section">
+                        <h2>Core Attributes</h2>
+                        <div id="coreAttributes" class="summary-content">
+                            <!-- Dynamic content -->
+                        </div>
+                    </div>
+
+                    <!-- Body Enhancements -->
+                    <div class="summary-section">
+                        <h2>Body Enhancements</h2>
+                        <div id="bodyEnhancements" class="summary-content">
+                            <!-- Dynamic content -->
+                        </div>
+                    </div>
+
+                    <!-- Spell Routines -->
+                    <div class="summary-section">
+                        <h2>Spell Routines</h2>
+                        <div id="spellRoutines" class="summary-content">
+                            <!-- Dynamic content -->
+                        </div>
+                    </div>
+
+                    <!-- Intelligent Device -->
+                    <div class="summary-section">
+                        <h2>Intelligent Device</h2>
+                        <div id="intelligentDevice" class="summary-content">
+                            <!-- Dynamic content -->
+                        </div>
+                    </div>
+
+                    <!-- Final Statistics -->
+                    <div class="summary-section">
+                        <h2>Final Statistics</h2>
+                        <div id="finalStatistics" class="summary-content">
+                            <!-- Dynamic content -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="page-actions">
+                    <button id="exportBuild" class="action-btn">Export to Text</button>
+                    <button id="saveBuild" class="action-btn">Save Build</button>
+                    <button id="loadBuild" class="action-btn">Load Build</button>
+                    <button id="modifyBuild" class="action-btn">Modify Build</button>
+                    <button id="startOver" class="action-btn danger">Start Over</button>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Modal for spell details -->
+    <div id="spellModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2 id="modalSpellName"></h2>
+            <div id="modalSpellDetails"></div>
+        </div>
+    </div>
+
+    <script src="js/data.js"></script>
+    <script src="js/device-shapes.js"></script>
+    <script src="js/state.js"></script>
+    <script src="js/utils.js"></script>
+    <!-- Spell Data - All spells organized by category -->
+    <script src="js/spells-physical.js"></script>
+    <script src="js/spells-elemental.js"></script>
+    <script src="js/spells-esoteric.js"></script>
+    <script src="js/class-adaptations.js"></script>
+    <script src="js/navigation.js"></script>
+    <script src="js/custom-selects.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
