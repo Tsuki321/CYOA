@@ -737,7 +737,7 @@ const navigation = {
     },
     
     updateTabCounts() {
-        var categories = ['physical', 'elemental', 'esoteric'];
+        var categories = ['physical', 'elemental', 'abstract'];
         categories.forEach(function(cat) {
             var tab = document.querySelector('.tab-btn[data-category="' + cat + '"]');
             if (tab && spellData && spellData[cat]) {

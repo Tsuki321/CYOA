@@ -7,14 +7,14 @@ if (typeof spellData === 'undefined') {
     var spellData = {
         physical: [],
         elemental: [],
-        abstract: []
+        esoteric: []
     };
 }
 
 const baseElementalSpells = [
     {
-        id: 'thermal_lance',
-        name: 'Thermal Lance',
+        id: 'fireball',
+        name: 'Fireball',
         tier: 1,
         cost: 5,
         proficiency: {
@@ -22,36 +22,36 @@ const baseElementalSpells = [
 
 Range is limited to roughly 15 meters. Beyond that distance, the containment field degrades and the plasma sphere loses cohesion, dispersing harmlessly. A mage with a low-rank Mana Reactor can manage three to four casts per mana cycle before reserves dip to unsafe levels. Each cast requires roughly two seconds of concentration—the device needs that window to finish its compression calculations and spin up the magnetic bottle.
 
-At Beginner, Thermal Lance is a short-range skirmishing tool. It will ignite flammable materials, cause second-degree burns on direct impact, and stagger an unarmored opponent. It will not punch through reinforced barriers, incinerate a target instantly, or function reliably in environments with extreme ambient cold that starve the device of thermal energy to compress. The spell lays the groundwork for thermal manipulation, nothing more.`,
+At Beginner, Fireball is a short-range skirmishing tool. It will ignite flammable materials, cause second-degree burns on direct impact, and stagger an unarmored opponent. It will not punch through reinforced barriers, incinerate a target instantly, or function reliably in environments with extreme ambient cold that starve the device of thermal energy to compress. The spell lays the groundwork for thermal manipulation, nothing more.`,
 
-            apprentice: `The plasma sphere grows to roughly basketball size, with the containment field strengthening proportionally to hold a denser, hotter core of approximately 1200 degrees Celsius. The device now models the thermal expansion rate of the target environment, adjusting compression ratios on the fly so that plasma spheres maintain cohesion out to 30 meters. A mid-rank reactor can sustain six to eight casts per cycle.
+            apprentice: `The plasma sphere grows to roughly basketball size, with the containment field strengthening proportionally to hold a denser, hotter core of approximately 1200 degrees Celsius. The device now models the thermal expansion rate of the target environment, adjusting compression ratios on the fly so that Fireballs maintain cohesion out to 30 meters. A mid-rank reactor can sustain six to eight casts per cycle.
 
 Concussive force accompanies the thermal payload. The rapid expansion of superheated gases on impact creates a shockwave that can knock a person off their feet or buckle a wooden door. The device staggers the collapse of the magnetic bottle to optimize this effect—too fast and the plasma dissipates before transferring heat; too slow and the blast is underwhelming. The computation is non-trivial, and the device's processor runs near its limit during sustained volleys.
 
-At Apprentice, Thermal Lance becomes a legitimate battlefield tool. It can clear rooms, suppress groups of unarmored targets, and create zones of denied space through persistent thermal bloom. The spell still struggles against magically reinforced defenses and does not discriminate between friend and foe—anything in the blast radius takes the full effect.`,
+At Apprentice, Fireball becomes a legitimate battlefield tool. It can clear rooms, suppress groups of unarmored targets, and create zones of denied space through persistent thermal bloom. The spell still struggles against magically reinforced defenses and does not discriminate between friend and foe—anything in the blast radius takes the full effect.`,
 
             adept: `The device achieves near-instantaneous thermal compression and magnetic bottle formation, reducing cast time to a fraction of a second. Range extends to 60 meters with a core temperature of roughly 2000 degrees Celsius, hot enough to melt common metals and flash-boil water on contact. A high-rank reactor can sustain twenty or more casts per cycle.
 
-Remote detonation becomes available. The device can calculate a delayed containment collapse, allowing the mage to fire a plasma sphere that hangs in the air or travels to a designated coordinate before detonating on command. This introduces tactical flexibility—trap-setting, area denial, and timed simultaneous strikes against multiple points. The device tracks and manages up to three delayed spheres simultaneously, each with independent detonation timers.
+Remote detonation becomes available. The device can calculate a delayed containment collapse, allowing the mage to fire a Fireball that hangs in the air or travels to a designated coordinate before detonating on command. This introduces tactical flexibility—trap-setting, area denial, and timed simultaneous strikes against multiple points. The device tracks and manages up to three delayed spheres simultaneously, each with independent detonation timers.
 
-At Adept, Thermal Lance is professional combat-grade. It can breach light fortifications, disable armored vehicles through thermal shock, and serve as artillery support in squad-level engagements. The spell's primary limitation remains environmental—extreme cold, vacuum, and magically warded areas all degrade compression efficiency and reduce effective temperature.`,
+At Adept, Fireball is professional combat-grade. It can breach light fortifications, disable armored vehicles through thermal shock, and serve as artillery support in squad-level engagements. The spell's primary limitation remains environmental—extreme cold, vacuum, and magically warded areas all degrade compression efficiency and reduce effective temperature.`,
 
-            expert: `Cast time drops to effectively instant. The device pre-computes thermal compression parameters for likely combat scenarios and holds them in a cache, allowing the mage to deploy Thermal Lance as fast as they can form intent. Range pushes to 100 meters with core temperatures reaching 3000 degrees Celsius, sufficient to melt structural steel given direct and sustained exposure.
+            expert: `Cast time drops to effectively instant. The device pre-computes thermal compression parameters for likely combat scenarios and holds them in a cache, allowing the mage to deploy Fireball as fast as they can form intent. Range pushes to 100 meters with core temperatures reaching 3000 degrees Celsius, sufficient to melt structural steel given direct and sustained exposure.
 
-Sub-munition splitting becomes standard. The device can fragment a single plasma sphere into three to five smaller projectiles mid-flight, each independently tracked and guided to separate targets or spread across an area for saturation bombardment. Sustained bombardment mode allows the mage to maintain a continuous stream of plasma spheres—one every 0.3 seconds—for as long as mana reserves hold. The device handles all trajectory calculations and thermal modeling autonomously.
+Sub-munition splitting becomes standard. The device can fragment a single plasma sphere into three to five smaller projectiles mid-flight, each independently tracked and guided to separate targets or spread across an area for saturation bombardment. Sustained bombardment mode allows the mage to maintain a continuous stream of Fireballs—one every 0.3 seconds—for as long as mana reserves hold. The device handles all trajectory calculations and thermal modeling autonomously.
 
-At Expert, Thermal Lance is a primary weapon system. A single mage can match the area-denial output of a mortar team, breach hardened structures, and engage multiple dispersed targets simultaneously. The mana cost per cast has been optimized, but sustained bombardment will still drain even a Keter-rank reactor within minutes of continuous fire.`,
+At Expert, Fireball is a primary weapon system. A single mage can match the area-denial output of a mortar team, breach hardened structures, and engage multiple dispersed targets simultaneously. The mana cost per cast has been optimized, but sustained bombardment will still drain even a Keter-rank reactor within minutes of continuous fire.`,
 
             master: `The device achieves the theoretical optimum of thermal compression for a Tier 1 spell. The plasma sphere is modeled with near-perfect efficiency—every joule of ambient heat is captured, compressed, and delivered with minimal waste. Core temperature plateaus at approximately 3500 degrees Celsius, the maximum that the containment field can sustain before the plasma's own radiation pressure begins to destabilize the magnetic bottle. Cast time is reflexive; the mage no longer consciously activates the spell, merely wills it and the device executes.
 
 Sustained bombardment efficiency is maximized. The device recycles waste heat from its own processor into the compression cycle, reducing net mana cost per cast to the lowest possible value. A Keter-rank mage can maintain continuous fire for extended engagements, and the sub-munition system can now split a sphere into up to eight guided fragments with independent targeting.
 
-This is the ceiling of Thermal Lance as a Tier 1 spell. A mage at this level can demolish a small building with sustained, concentrated fire over several minutes. They cannot level a city block, cannot produce temperatures exceeding what a Tier 1 containment field can hold, and cannot bypass magical barriers of equal or higher tier through raw thermal output alone.`
+This is the ceiling of Fireball as a Tier 1 spell. A mage at this level can demolish a small building with sustained, concentrated fire over several minutes. They cannot level a city block, cannot produce temperatures exceeding what a Tier 1 containment field can hold, and cannot bypass magical barriers of equal or higher tier through raw thermal output alone.`
         }
     },
     {
-        id: 'cryo_needle',
-        name: 'Cryo Needle',
+        id: 'ice_shard',
+        name: 'Ice Shard',
         tier: 1,
         cost: 5,
         proficiency: {
@@ -59,36 +59,36 @@ This is the ceiling of Thermal Lance as a Tier 1 spell. A mage at this level can
 
 Range is limited to approximately 15 meters. Beyond that, the magnetic impulse loses coherence and the shard's trajectory becomes unreliable. A mage with a low-rank Mana Reactor can produce four to five shards per cycle before the device's thermal-extraction systems need a rest. Each shard hits with roughly the force of a thrown knife and causes localized numbness on impact as residual cold leaches into the surrounding tissue.
 
-At Beginner, Cryo Needle is a precision harassment tool. It is nearly silent in flight and leaves no flash or smoke signature, making it useful for discreet engagement. It will not penetrate body armor, shatter on hardened surfaces, or function in arid environments where atmospheric moisture is scarce. The spell requires an atmosphere to work—it cannot conjure ice from vacuum.`,
+At Beginner, Ice Shard is a precision harassment tool. It is nearly silent in flight and leaves no flash or smoke signature, making it useful for discreet engagement. It will not penetrate body armor, shatter on hardened surfaces, or function in arid environments where atmospheric moisture is scarce. The spell requires an atmosphere to work—it cannot conjure ice from vacuum.`,
 
             apprentice: `The shards grow to short-sword dimensions with a denser crystal structure. The device now layers the freezing process, building the shard from the core outward in concentric rings that interlock molecularly—the result is ice with roughly the compressive strength of pine wood rather than the brittleness of common frost. Range extends to 30 meters, and a mid-rank reactor can sustain eight to ten casts per cycle.
 
 Spiraling magnetic acceleration is introduced. The device imparts a controlled rotation to each shard, gyroscopically stabilizing it in flight and significantly improving accuracy at range. The shard also carries a cold pulse on impact—a brief but intense thermal drain that flash-freezes a palm-sized area of the target, causing tissue damage beyond the physical penetration.
 
-At Apprentice, Cryo Needle transitions from nuisance to threat. It can penetrate light leather armor and embed itself two to three centimeters into exposed wood. The silence and flashlessness remain tactical assets, but the spell still depends on sufficient atmospheric humidity. A desert or an artificially dehumidified environment cuts effective output by more than half.`,
+At Apprentice, Ice Shard transitions from nuisance to threat. It can penetrate light leather armor and embed itself two to three centimeters into exposed wood. The silence and flashlessness remain tactical assets, but the spell still depends on sufficient atmospheric humidity. A desert or an artificially dehumidified environment cuts effective output by more than half.`,
 
             adept: `Shards accelerate to crossbow-bolt velocities—roughly 100 meters per second—and the device can now form and fire them in under a second. Range pushes to 60 meters with maintained accuracy thanks to improved gyroscopic modeling. A high-rank reactor can sustain twenty or more casts per cycle. The cold pulse on impact expands to a significant freezing burst: a shard striking a target's center mass can drop the temperature of the surrounding tissue by 30 degrees Celsius in a fraction of a second, causing immediate muscular paralysis in the affected area.
 
 The crystalline structure is further refined. The device now grows shards in a hexagonal columnar pattern—the same molecular architecture that gives natural ice its structural integrity at glacial scales, compressed into a weaponized form. Each shard is hard enough to chip stone and embed itself in soft metals like copper or aluminum.
 
-At Adept, Cryo Needle is a lethal weapon. A single well-placed shard can disable a limb, and sustained volleys can dismantle light cover. The freezing pulse also has utility applications—sealing a coolant leak, reinforcing a failing structural joint, or creating an improvised cold patch on overheating equipment. The spell remains bounded by the moisture content of the local atmosphere.`,
+At Adept, Ice Shard is a lethal weapon. A single well-placed shard can disable a limb, and sustained volleys can dismantle light cover. The freezing pulse also has utility applications—sealing a coolant leak, reinforcing a failing structural joint, or creating an improvised cold patch on overheating equipment. The spell remains bounded by the moisture content of the local atmosphere.`,
 
             expert: `Shards achieve supersonic velocities—the magnetic accelerator has been optimized to the point where each projectile breaks the sound barrier with a sharp crack that is the spell's only audible signature. Range extends to 100 meters with maintained lethality. The device can now fire rapid volleys: up to five shards per second, each independently targeted, as the freezing and acceleration pipelines operate in parallel rather than sequentially.
 
 Core temperature drops to approximately negative 80 degrees Celsius. On impact, the shard detonates in a freezing burst that drops a 2-meter radius to sub-zero temperatures for several seconds, flash-freezing standing water, shattering brittle materials, and causing severe frostbite to any organic tissue in the zone. A direct hit on an unarmored human is almost certainly fatal from thermal shock alone.
 
-At Expert, Cryo Needle is a suppression weapon. Sustained fire can freeze an area solid, create improvised barriers of ice from ambient moisture, and lock down chokepoints. The spell's primary limitation is no longer casting speed or accuracy—it is the total available water vapor in the engagement zone. The device cannot manufacture water; it can only freeze what is already present.`,
+At Expert, Ice Shard is a suppression weapon. Sustained fire can freeze an area solid, create improvised barriers of ice from ambient moisture, and lock down chokepoints. The spell's primary limitation is no longer casting speed or accuracy—it is the total available water vapor in the engagement zone. The device cannot manufacture water; it can only freeze what is already present.`,
 
             master: `The device achieves the theoretical optimum of crystallization and magnetic acceleration for a Tier 1 spell. Each shard is grown with a flawless crystal lattice—no internal fractures, no weak planes—resulting in a projectile harder than tempered steel and sharp enough to score diamond. The freezing burst on impact drops to negative 100 degrees Celsius at the core, flash-freezing a 1.5-meter sphere solid within a tenth of a second.
 
 Volley fire is fully reflexive. The device's thermal-extraction and acceleration pipelines run continuously, drawing moisture from a steadily expanding radius as local vapor is depleted. The mage no longer thinks about individual shards—they designate targets or areas and the device handles all formation and firing calculations. The mana cost per shard is the lowest theoretically achievable for a Tier 1 thermal-extraction routine.
 
-This is the ceiling of Cryo Needle as a Tier 1 spell. The mage can sustain fire long enough to freeze a small building's exterior solid or create a localized ice field covering a few hundred square meters—provided sufficient atmospheric moisture. They cannot flash-freeze a lake, cannot produce ice in a true vacuum, and cannot overcome magical thermal barriers of equal or higher tier.`
+This is the ceiling of Ice Shard as a Tier 1 spell. The mage can sustain fire long enough to freeze a small building's exterior solid or create a localized ice field covering a few hundred square meters—provided sufficient atmospheric moisture. They cannot flash-freeze a lake, cannot produce ice in a true vacuum, and cannot overcome magical thermal barriers of equal or higher tier.`
         }
     },
     {
-        id: 'arc_discharge',
-        name: 'Arc Discharge',
+        id: 'lightning_bolt',
+        name: 'Lightning Bolt',
         tier: 1,
         cost: 5,
         proficiency: {
@@ -96,36 +96,36 @@ This is the ceiling of Cryo Needle as a Tier 1 spell. The mage can sustain fire 
 
 Range is limited to roughly 10 meters. Beyond that, the ionization laser loses coherence and the plasma channel fails before the discharge can complete. The stored charge is equivalent to a high-powered stun gun—sufficient to cause full-body neuromuscular disruption lasting 10 to 15 seconds, but not lethal to a healthy adult unless pre-existing cardiac conditions are present. A low-rank reactor can manage three to four casts per cycle.
 
-At Beginner, Arc Discharge is a non-lethal incapacitation tool. It is reliable against unarmored targets within its short range, but conductive armor, electrical grounding, and magically insulated barriers can all negate or redirect the arc. The spell also produces a loud thunderclap as superheated air expands along the discharge path, making it useless for stealth.`,
+At Beginner, Lightning Bolt is a non-lethal incapacitation tool. It is reliable against unarmored targets within its short range, but conductive armor, electrical grounding, and magically insulated barriers can all negate or redirect the arc. The spell also produces a loud thunderclap as superheated air expands along the discharge path, making it useless for stealth.`,
 
             apprentice: `Voltage increases by roughly an order of magnitude, bringing the discharge to lethal levels against unarmored human targets. The device now ionizes a wider, more stable plasma channel that holds coherence out to 25 meters, and the laser's targeting is refined to track moving targets in real time. A mid-rank reactor can produce six to eight casts per cycle.
 
 Full neuromuscular disruption becomes the standard effect—every muscle group along the discharge path seizes simultaneously, causing a target to collapse regardless of pain tolerance or combat conditioning. The electrical pulse also generates an electromagnetic disruption: electronics within a 10-meter radius of the impact point experience transient failure, and unshielded devices may suffer permanent damage.
 
-At Apprentice, Arc Discharge transitions from less-lethal to weapon. It can disable an armored vehicle's electronics, fry unshielded communication gear, and kill a human target outright with a center-mass hit. Grounded targets and Faraday-cage environments still offer significant protection, and the spell remains useless against targets that the ionization laser cannot reach—behind thick walls, in sealed containers, or in vacuum where no atmosphere exists to ionize.`,
+At Apprentice, Lightning Bolt transitions from less-lethal to weapon. It can disable an armored vehicle's electronics, fry unshielded communication gear, and kill a human target outright with a center-mass hit. Grounded targets and Faraday-cage environments still offer significant protection, and the spell remains useless against targets that the ionization laser cannot reach—behind thick walls, in sealed containers, or in vacuum where no atmosphere exists to ionize.`,
 
-            adept: `The ionization laser incorporates real-time atmospheric modeling, compensating for humidity, air pressure, and particulate density to optimize the plasma channel's conductivity. Range extends to 50 meters, and the device can now sustain the arc for up to 15 seconds in a continuous-mode discharge—the arc discharge does not strike and end; it persists, chaining damage over time to a single target or sweeping across multiple targets in sequence.
+            adept: `The ionization laser incorporates real-time atmospheric modeling, compensating for humidity, air pressure, and particulate density to optimize the plasma channel's conductivity. Range extends to 50 meters, and the device can now sustain the arc for up to 15 seconds in a continuous-mode discharge—the lightning bolt does not strike and end; it persists, chaining damage over time to a single target or sweeping across multiple targets in sequence.
 
 Voltage reaches levels that are reliably lethal against any organic target short of those with active magical shielding. A sustained-arc hit will carbonize tissue along the discharge path within seconds. The electromagnetic pulse radius expands to 20 meters, enough to disable vehicles and squad-level communications gear. Bioelectric tracking is added: the device detects the faint electromagnetic signature of living nervous systems and adjusts the ionization laser to ensure the arc seeks the target's core rather than dissipating into a nearby conductor.
 
-At Adept, Arc Discharge is a heavy weapon. It can down aircraft via avionics disruption, destroy drone swarms through chain-arcing, and neutralize hardened targets through sustained electrical delivery. The spell's signature—visible arc, thunderclap, EMP spike—makes it highly detectable, and the continuous-mode discharge drains mana rapidly.`,
+At Adept, Lightning Bolt is a heavy weapon. It can down aircraft via avionics disruption, destroy drone swarms through chain-arcing, and neutralize hardened targets through sustained electrical delivery. The spell's signature—visible arc, thunderclap, EMP spike—makes it highly detectable, and the continuous-mode discharge drains mana rapidly.`,
 
             expert: `Cast time drops to effectively instant. The device pre-ionizes multiple potential paths before the mage commits to a discharge, so the arc fires the moment intent is formed. Range extends to 100 meters, and the EMP radius expands to 50 meters—sufficient to black out a city block's electronics for the duration of the discharge. Multiple simultaneous bolts can be fired at independent targets, each tracked and sustained by a parallel ionization thread.
 
 Sustained-arc mode can run for up to 30 seconds continuously, during which the device dynamically adjusts the ionization path to account for target movement, atmospheric changes, and energy bleed. The arc can also be modulated in frequency to optimize penetration—high-frequency pulses bypass surface conductivity and deliver damage deeper into a target's internal structure.
 
-At Expert, Arc Discharge is an area-denial and anti-materiel weapon. A single cast can disable an armored convoy's electronics, and sustained fire can destroy hardened electrical infrastructure. The mage remains vulnerable during the discharge—the arc is a direct line to their position, and anyone who can trace it knows exactly where the fire is coming from.`,
+At Expert, Lightning Bolt is an area-denial and anti-materiel weapon. A single cast can disable an armored convoy's electronics, and sustained fire can destroy hardened electrical infrastructure. The mage remains vulnerable during the discharge—the arc is a direct line to their position, and anyone who can trace it knows exactly where the fire is coming from.`,
 
             master: `The device achieves the theoretical optimum of atmospheric ionization and electrical discharge for a Tier 1 spell. The plasma channel is modeled with perfect precision—minimal energy bleed, maximum conductivity, exact atmospheric compensation in real time. The arc fires with zero conscious delay; the mage wills and the lightning strikes. EMP radius reaches 75 meters, affecting even hardened military electronics within that zone. Sustained-arc mode can run for up to 60 seconds without degradation.
 
 Multiple simultaneous bolts are managed with the same ease as a single discharge. The device can track and engage up to eight independent targets across the full 100-meter range, each with its own dedicated ionization thread and discharge modulation. Bioelectric tracking is refined to the point where the arc can distinguish between friendlies and hostiles based on pre-registered bioelectric signatures.
 
-This is the ceiling of Arc Discharge as a Tier 1 spell. The mage can neutralize an infantry platoon and its electronic support within seconds. They cannot produce an EMP at city scale, cannot "control all electricity" within a zone, and cannot discharge through barriers that the ionization laser cannot physically penetrate.`
+This is the ceiling of Lightning Bolt as a Tier 1 spell. The mage can neutralize an infantry platoon and its electronic support within seconds. They cannot produce an EMP at city scale, cannot "control all electricity" within a zone, and cannot discharge through barriers that the ionization laser cannot physically penetrate.`
         }
     },
     {
-        id: 'pressure_edge',
-        name: 'Pressure Edge',
+        id: 'wind_blade',
+        name: 'Wind Blade',
         tier: 1,
         cost: 5,
         proficiency: {
@@ -133,36 +133,36 @@ This is the ceiling of Arc Discharge as a Tier 1 spell. The mage can neutralize 
 
 Range is limited to roughly 15 meters. The compression wavefront begins to disperse beyond that distance, losing its cutting edge and dissolving into a harmless breeze. A low-rank Mana Reactor can produce four to five blades per cycle. Each blade cuts with roughly the force of a sharpened kitchen knife—enough to slice through heavy fabric, score wood to a depth of a few millimeters, and cause shallow but painful lacerations on exposed skin.
 
-At Beginner, Pressure Edge is a stealth engagement tool. It produces no flash, no sound beyond a faint hiss, and no projectile that can be visually tracked without enhancement. It will not penetrate body armor, cut through structural materials, or remain coherent in turbulent air conditions. The spell requires an atmosphere—in vacuum, there is nothing to compress.`,
+At Beginner, Wind Blade is a stealth engagement tool. It produces no flash, no sound beyond a faint hiss, and no projectile that can be visually tracked without enhancement. It will not penetrate body armor, cut through structural materials, or remain coherent in turbulent air conditions. The spell requires an atmosphere—in vacuum, there is nothing to compress.`,
 
             apprentice: `The device introduces helical vortex stabilization. Each blade is wrapped in a counter-rotating air jacket that maintains the cutting edge's coherence over longer distances and through mild air turbulence. Range extends to 30 meters, and the edge sharpens as the device compresses the wavefront to approximately a tenth of a millimeter in thickness. A mid-rank reactor can sustain eight to ten casts per cycle.
 
 Cutting power increases proportionally. The blade can now shear through light leather as if it were paper, embed itself two to three centimeters into solid wood, and cause deep lacerations that require immediate medical attention. The near-invisibility is preserved—the vortex jacket actually smooths out the shimmer that the Beginner-level blade produced, making the projectile even harder to spot.
 
-At Apprentice, Pressure Edge becomes a lethal precision weapon. A single well-placed blade to the throat or femoral artery can kill. The spell's weakness remains its dependence on air density—at high altitude or in thin atmospheres, the compression wavefront is weaker and the blade loses cutting force proportionally.`,
+At Apprentice, Wind Blade becomes a lethal precision weapon. A single well-placed blade to the throat or femoral artery can kill. The spell's weakness remains its dependence on air density—at high altitude or in thin atmospheres, the compression wavefront is weaker and the blade loses cutting force proportionally.`,
 
             adept: `The blade becomes functionally invisible. The device eliminates all optical distortion by precisely matching the air density gradient around the projectile to the surrounding atmosphere—there is no shimmer, no haze, no visual signature of any kind. The only way to detect an incoming blade is through air-pressure sensors, enhanced hearing capable of registering the faint hiss, or magical detection. Range extends to 60 meters with maintained lethality, and a high-rank reactor can sustain twenty or more casts per cycle.
 
 Cutting power reaches the threshold where sheet metal is sheared cleanly. A blade will pass through a car door, sever a tree branch as thick as a human arm, or bisect an unarmored target without losing velocity. A room-clearing vortex storm becomes available: the device fires a cluster of five to eight blades in a fan pattern that covers a cone roughly four meters wide at its terminal point, shredding everything in its path.
 
-At Adept, Pressure Edge is a squad-level threat. It can clear entrenched positions, disable light vehicles by severing critical components, and create zones where moving without cover is effectively suicidal. The spell's invisibility makes it ideal for ambush tactics, but the blade's path can be predicted by anyone who can perceive the air-pressure wake it leaves behind.`,
+At Adept, Wind Blade is a squad-level threat. It can clear entrenched positions, disable light vehicles by severing critical components, and create zones where moving without cover is effectively suicidal. The spell's invisibility makes it ideal for ambush tactics, but the blade's path can be predicted by anyone who can perceive the air-pressure wake it leaves behind.`,
 
             expert: `Range extends to 100 meters, and cutting power reaches the point where structural steel is severed. The device can now sustain barrages—a continuous stream of blades fired at a rate of up to three per second, each independently tracked and guided. The acoustic signature is actively suppressed; the device generates a counter-phase sound wave that cancels the blade's hiss, making the projectile both invisible and completely silent.
 
 The compression wavefront has been refined to the thickness of a few molecules. At this scale, the blade cuts by physically separating atomic bonds along its edge rather than by brute force. The result is a projectile that passes through most materials with almost no resistance—it does not smash or tear; it cleaves at the molecular level.
 
-At Expert, Pressure Edge is an assassination-grade weapon. A single silent, invisible blade can take a target from 100 meters with no warning. Sustained barrages can dismantle a reinforced structure piece by piece, each blade slicing through steel, concrete, and composite materials with equal ease. The spell is still bounded by air density—in thin atmospheres, cutting power and range both degrade proportionally.`,
+At Expert, Wind Blade is an assassination-grade weapon. A single silent, invisible blade can take a target from 100 meters with no warning. Sustained barrages can dismantle a reinforced structure piece by piece, each blade slicing through steel, concrete, and composite materials with equal ease. The spell is still bounded by air density—in thin atmospheres, cutting power and range both degrade proportionally.`,
 
             master: `The device achieves the theoretical optimum of air compression and projectile guidance for a Tier 1 spell. Each blade is compressed to the absolute minimum thickness that the atmosphere can support—a wavefront just a few atoms wide, capable of cleaving through reinforced concrete to a depth of 10 centimeters before dissipating. The projectile is silent, invisible, and leaves no detectable wake in still air. Reflexive casting is achieved: the mage designates targets through intent alone, and the device handles all compression, acceleration, and guidance calculations autonomously.
 
 Sustained barrages are maintained with negligible conscious overhead. The device can engage a room full of targets, track moving vehicles, and intercept incoming projectiles mid-flight. The mana cost per blade is optimized to the lowest value compatible with Tier 1 computational limits—the spell is a model of efficiency within its design tier.
 
-This is the ceiling of Pressure Edge as a Tier 1 spell. A mage at this level can dismantle a small building or a vehicle column through sustained, precise fire. They cannot cut through magical barriers of equal or higher tier, cannot project blades through vacuum, and cannot overcome targets that are fully sealed in airtight, magically reinforced enclosures.`
+This is the ceiling of Wind Blade as a Tier 1 spell. A mage at this level can dismantle a small building or a vehicle column through sustained, precise fire. They cannot cut through magical barriers of equal or higher tier, cannot project blades through vacuum, and cannot overcome targets that are fully sealed in airtight, magically reinforced enclosures.`
         }
     },
     {
-        id: 'seismic_lance',
-        name: 'Seismic Lance',
+        id: 'earth_spike',
+        name: 'Earth Spike',
         tier: 1,
         cost: 5,
         proficiency: {
@@ -170,31 +170,31 @@ This is the ceiling of Pressure Edge as a Tier 1 spell. A mage at this level can
 
 Range is limited to roughly 10 meters. Beyond that, the seismic pulse attenuates too much to maintain the resonance needed for channel liquefaction. A low-rank Mana Reactor can manage three to four casts per cycle. The stone spire is crude—roughly the consistency of common building stone—and serves more as a trip hazard, barricade, or stagger-inducing obstacle than a direct weapon.
 
-At Beginner, Seismic Lance is a battlefield-shaping tool. It can create improvised cover, block a doorway, trip an advancing opponent, or provide a step to reach higher ground. It will not pierce armor, stop a charging target, or function on surfaces that lack an earthen substrate—concrete slabs, metal decking, and magically warded ground are immune.`, 
+At Beginner, Earth Spike is a battlefield-shaping tool. It can create improvised cover, block a doorway, trip an advancing opponent, or provide a step to reach higher ground. It will not pierce armor, stop a charging target, or function on surfaces that lack an earthen substrate—concrete slabs, metal decking, and magically warded ground are immune.`, 
 
             apprentice: `The spire grows to two meters in height with significantly denser stone. The device now selects the optimal mineral composition from the available substrate—quartz-rich soil produces harder spikes; clay-heavy ground yields wider, blunter formations. The seismic pulse is tuned to propagate deeper, creating a more stable base, and the extrusion process compresses the stone under higher pressure to eliminate internal fractures. Range extends to 20 meters, and a mid-rank reactor can sustain six to eight casts per cycle.
 
 The spike can now pierce light body armor. A direct hit to an unarmored torso will penetrate, and the sudden eruption from below is difficult to anticipate or dodge without enhanced reflexes. The utility applications expand—the mage can create a line of spikes as a temporary barricade, breach a ground-floor wall by undermining its foundation, or collapse a shallow tunnel by disrupting the substrate.
 
-At Apprentice, Seismic Lance becomes a weapon and a tool in equal measure. It can shape engagements by altering terrain and pose a genuine threat to lightly armored opponents. The spell still cannot function on artificial surfaces or in environments where the ground is frozen solid beyond the depth the seismic pulse can reach.`,
+At Apprentice, Earth Spike becomes a weapon and a tool in equal measure. It can shape engagements by altering terrain and pose a genuine threat to lightly armored opponents. The spell still cannot function on artificial surfaces or in environments where the ground is frozen solid beyond the depth the seismic pulse can reach.`,
 
             adept: `The spire reaches three meters in height with granite-grade hardness. The device models the local geology in real time—soil composition, water table depth, bedrock proximity—and optimizes the liquefaction channel for maximum structural integrity of the resulting spike. Range extends to 50 meters, and a high-rank reactor can sustain 15 or more casts per cycle.
 
 Formation patterns become available. The device can erupt multiple spikes simultaneously in geometric configurations—a ring to trap a target, a line to create a wall, a grid to deny an area to vehicles. Stone sonar sensing is added: by pulsing the ground and analyzing the reflected vibrations, the device builds a crude 3D map of subsurface structures, useful for detecting tunnels, buried objects, or approaching subterranean threats.
 
-At Adept, Seismic Lance is a tactical engineering tool. The mage can reshape a battlefield in seconds—raising cover, creating chokepoints, disabling vehicles by erupting spikes through their undercarriages. The spell remains entirely dependent on available substrate. Bedrock at depth produces the strongest spikes; loose sand produces barely coherent formations that collapse under their own weight.`,
+At Adept, Earth Spike is a tactical engineering tool. The mage can reshape a battlefield in seconds—raising cover, creating chokepoints, disabling vehicles by erupting spikes through their undercarriages. The spell remains entirely dependent on available substrate. Bedrock at depth produces the strongest spikes; loose sand produces barely coherent formations that collapse under their own weight.`,
 
             expert: `The spire reaches three to four meters with near-instantaneous eruption—the seismic pulse, liquefaction, and extrusion occur in a single, seamless computational cycle that takes less than a tenth of a second. Range extends to 100 meters. The stone is compressed to maximum density, approaching the hardness of industrial-grade concrete, and the spike's tip is sharpened to a razor point by the device's extrusion modeling.
 
 The spikes can stop small-arms fire. A line of them serves as legitimate cover against rifles and fragmentation grenades. Complex terrain mazes become possible—the mage can raise a network of walls, barriers, and obstacles across a wide area in seconds, creating a labyrinth that channels enemy movement into kill zones. The stone sonar system is refined to provide meter-resolution subsurface imaging out to 50 meters in all directions.
 
-At Expert, Seismic Lance is a fortification spell. The mage can create defensive positions from nothing, trap vehicles, collapse terrain under enemy formations, and maintain full subsurface awareness. The spell's ceiling is geological—it cannot affect substrates deeper than roughly 5 meters, and the quality of the spike is always determined by the quality of the available stone.`,
+At Expert, Earth Spike is a fortification spell. The mage can create defensive positions from nothing, trap vehicles, collapse terrain under enemy formations, and maintain full subsurface awareness. The spell's ceiling is geological—it cannot affect substrates deeper than roughly 5 meters, and the quality of the spike is always determined by the quality of the available stone.`,
 
             master: `The device achieves the theoretical optimum of geological modeling and resonant extrusion for a Tier 1 spell. Each spike erupts with perfect density, shape, and placement—no wasted stone, no structural flaws, no computation lag. The mage deploys them reflexively: intent triggers the seismic pulse, and the device handles everything from geological analysis to final formation. Fortified positions with interlocking cover, elevated firing platforms, and anti-vehicle barriers can be raised in under five seconds across a wide area.
 
 The stone sonar provides continuous, real-time subsurface mapping with centimeter-level resolution. The mage is aware of every buried object, every tunnel, every approaching subterranean threat within the spell's 50-meter sensing radius. This awareness is maintained passively, a background process that requires no conscious attention.
 
-This is the ceiling of Seismic Lance as a Tier 1 spell. The mage can reshape natural terrain into a fortified position in seconds and maintain complete geological awareness of the engagement zone. They cannot erupt spikes from metal surfaces, magically warded ground, or locations where no earth or stone substrate exists within the spell's 5-meter depth penetration. The spell cannot create stone from nothing—it only compresses and extrudes what is already present.`
+This is the ceiling of Earth Spike as a Tier 1 spell. The mage can reshape natural terrain into a fortified position in seconds and maintain complete geological awareness of the engagement zone. They cannot erupt spikes from metal surfaces, magically warded ground, or locations where no earth or stone substrate exists within the spell's 5-meter depth penetration. The spell cannot create stone from nothing—it only compresses and extrudes what is already present.`
         }
 }
 ];
@@ -205,8 +205,8 @@ if (typeof spellData !== "undefined" && spellData.elemental) {
 
 const elementalSpellsBatch1 = [
     {
-        id: 'hydro_whip',
-        name: 'Hydro Whip',
+        id: 'water_whip',
+        name: 'Water Whip',
         tier: 1,
         cost: 5,
         proficiency: {
@@ -214,32 +214,32 @@ const elementalSpellsBatch1 = [
 
 Range is limited to approximately two meters from the mage's hand. Beyond that, the mana tether loses integrity and the water collapses into an harmless splash. The whip can trip, sting, and disarm but lacks the mass to cause serious blunt trauma. A low-rank Mana Reactor can sustain the whip for roughly five minutes of active combat before the device's moisture-extraction cycle needs to recalibrate.
 
-At Beginner, Hydro Whip is a utility and harassment tool. It provides a mage with a reach advantage in close quarters, can retrieve small objects from a short distance, and serves as a non-lethal compliance tool. It will not cut, pierce, or injure a determined opponent through armor of any kind.`,
+At Beginner, Water Whip is a utility and harassment tool. It provides a mage with a reach advantage in close quarters, can retrieve small objects from a short distance, and serves as a non-lethal compliance tool. It will not cut, pierce, or injure a determined opponent through armor of any kind.`,
             apprentice: `The whip extends to roughly four meters and gains the ability to change its cross-sectional density on command. The device can thin the stream to a razor-fine filament for cutting, or swell it into a heavy blunt rope for concussive impact. Cutting capability is modest—light leather and fabric can be sliced, but the water lacks the pressure to penetrate armor or dense materials. Blunt strikes land with roughly the force of a weighted sap.
 
 The moisture-extraction range expands, allowing the device to pull water from damp soil, plant matter, or nearby containers within ten meters. The whip can be split into two shorter lashes operating independently, though the device's processing load doubles and a mid-rank reactor is recommended for sustained dual-whip combat.
 
-At Apprentice, Hydro Whip transitions from utility tool to flexible combat option. The mage can switch between cutting and bludgeoning modes mid-swing, and the extended reach makes the spell effective at controlling distance against melee opponents.`,
+At Apprentice, Water Whip transitions from utility tool to flexible combat option. The mage can switch between cutting and bludgeoning modes mid-swing, and the extended reach makes the spell effective at controlling distance against melee opponents.`,
             adept: `The whip reaches eight meters with maintained structural integrity, and the device achieves water pressures sufficient to cut through sheet metal and shatter bone on impact. The lash can be reshaped mid-strike—the device calculates the optimal form for each phase of an attack, transitioning from a thin cutting edge to a broad sweeping surface to a coiling snare in a single fluid motion. The mana tether is robust enough to lift and throw objects up to roughly fifty kilograms.
 
 Ambient moisture extraction becomes the default. The device continuously siphons water vapor from the air, maintaining the whip indefinitely without requiring the mage to stand near a water source. In humid environments, the whip actually grows stronger as excess moisture is absorbed and compressed into the stream. The whip can be projected as a high-pressure jet—effectively a short-range water cutter that slices through most conventional materials given sustained contact.
 
-At Adept, Hydro Whip is a versatile combat tool and precision instrument. It cuts, crushes, grapples, and lifts with equal facility. The spell demands a mid-rank reactor for sustained pressure output, but the mana cost per strike is well within the budget of any combat-rated mage.`,
+At Adept, Water Whip is a versatile combat tool and precision instrument. It cuts, crushes, grapples, and lifts with equal facility. The spell demands a mid-rank reactor for sustained pressure output, but the mana cost per strike is well within the budget of any combat-rated mage.`,
             expert: `The whip extends to fifteen meters with no loss of pressure or responsiveness, and the device can maintain up to four independent lashes simultaneously—each tracking separate targets with dedicated processing threads. Cutting pressure reaches industrial water-jet levels, slicing through reinforced concrete and inch-thick steel plate. The mage can reshape any lash into a spray, a barrier, a net, or a concentrated jet without conscious input—the device reads intent and reconfigures the water instantly.
 
 Molecular-level compression allows the water to achieve densities far beyond natural limits. A whip-strike from this density carries the kinetic impact of a sledgehammer focused into a contact area the size of a fingernail. The device can freeze sections of the whip into ice for rigidity, or superheat them into steam for concussive expansion on contact, blending thermal manipulation with hydrostatic control.
 
-At Expert, Hydro Whip is a weapon system in its own right. A single mage wielding four high-pressure lashes can engage multiple opponents at range, cut through fortified positions, and manipulate the battlefield with a fluidity that unenhanced fighters simply cannot counter.`,
+At Expert, Water Whip is a weapon system in its own right. A single mage wielding four high-pressure lashes can engage multiple opponents at range, cut through fortified positions, and manipulate the battlefield with a fluidity that unenhanced fighters simply cannot counter.`,
             master: `The spell operates at the theoretical optimum of hydrostatic manipulation for a Tier 1 spell. The whip can extend up to twenty meters, split into any number of independent lashes the device can process, and achieve pressures that cut through any known conventional material given brief sustained contact. The mana tether is effectively unbreakable within its operational range—the device maintains the molecular bond between mage and water with near-perfect computational efficiency.
 
 The device extracts moisture from any available source within a thirty-meter radius, including the water content of organic tissue—a capability that borders on unsettling but is primarily useful for maintaining the whip in arid environments where atmospheric moisture is scarce. The transition between solid ice, liquid water, and pressurized steam is seamless and instantaneous, allowing the mage to adapt the whip's properties to any tactical requirement without conscious direction.
 
-This is the ceiling of Hydro Whip as a Tier 1 spell. The mage cannot control vast bodies of water, cannot generate water from nothing in a true vacuum, and cannot manipulate water inside a living creature's body to harmful effect—the device's moisture-extraction from organic tissue is limited to surface-level condensation. What Master offers is the most refined, most versatile hydrostatic weapon that Tier 1 computation can sustain—nothing more, nothing less.`
+This is the ceiling of Water Whip as a Tier 1 spell. The mage cannot control vast bodies of water, cannot generate water from nothing in a true vacuum, and cannot manipulate water inside a living creature's body to harmful effect—the device's moisture-extraction from organic tissue is limited to surface-level condensation. What Master offers is the most refined, most versatile hydrostatic weapon that Tier 1 computation can sustain—nothing more, nothing less.`
         }
     },
     {
-        id: 'vapor_screen',
-        name: 'Vapor Screen',
+        id: 'mist_veil',
+        name: 'Mist Veil',
         tier: 1,
         cost: 5,
         proficiency: {
@@ -247,98 +247,98 @@ This is the ceiling of Hydro Whip as a Tier 1 spell. The mage cannot control vas
 
 The spell provides no physical protection. The mist is simply water vapor—arrows, bullets, and spells pass through it unimpeded. Its value is purely tactical: breaking line of sight, concealing movement, and forcing opponents to close distance or rely on non-visual targeting. The mage's own vision is equally impaired unless they close their eyes and rely on the device's spatial sonar, which provides a crude but functional awareness of movement within the mist.
 
-At Beginner, Vapor Screen is a disengagement and repositioning tool. It buys seconds rather than minutes, and a determined opponent can simply push through the mist and close to melee range. The spell is ineffective in extremely dry or hot environments where the device cannot extract sufficient moisture.`,
+At Beginner, Mist Veil is a disengagement and repositioning tool. It buys seconds rather than minutes, and a determined opponent can simply push through the mist and close to melee range. The spell is ineffective in extremely dry or hot environments where the device cannot extract sufficient moisture.`,
             apprentice: `The mist expands to a ten-meter radius and can be shaped—the device allows the mage to create corridors of clear air within the mist for allied firing lanes, or concentrate the fog into dense patches that block even enhanced vision. Duration extends to roughly five minutes. The mage's own vision is now compensated: the device renders a wireframe overlay of movement and shapes within the mist, allowing the mage to see what others cannot.
 
 Thermal insulation becomes a secondary effect. The mist absorbs and diffuses infrared radiation, degrading thermal imaging and heat-based targeting within its radius. This makes the spell effective against opponents who rely on thermal scopes or infrared sensors, though the effect is moderate—a sufficiently powerful thermal array can still detect the heat differential of a living body through the fog.
 
-At Apprentice, Vapor Screen becomes a genuine tactical asset. The mage controls the battlefield's visibility, creating firing lanes and concealment zones that favor their own side. The spell still depends on atmospheric moisture and cannot function in extremely arid conditions.`,
+At Apprentice, Mist Veil becomes a genuine tactical asset. The mage controls the battlefield's visibility, creating firing lanes and concealment zones that favor their own side. The spell still depends on atmospheric moisture and cannot function in extremely arid conditions.`,
             adept: `The mist expands to twenty meters and persists indefinitely while the device maintains the condensation cycle. The device now extracts moisture from the ground, nearby plant life, and even the exhaled breath of creatures within range—effectively guaranteeing that the mist can be sustained in any environment that contains biological or geological water, which is virtually all terrestrial environments.
 
 The mage gains full environmental awareness within the mist. Every droplet functions as a distributed sensor: movement disturbs the fog, and the device maps those disturbances into a real-time three-dimensional awareness overlay. Nothing moves within the mist without the mage knowing its position, velocity, and approximate mass. Invisible opponents, concealed threats, and hidden passages all become perceptible through this droplet-based sonar network.
 
-At Adept, Vapor Screen is both a concealment system and a sensory network. The mage operates with perfect awareness in a space where opponents are functionally blind. The spell requires a mid-rank reactor to maintain the distributed sensor processing alongside the condensation cycle.`,
+At Adept, Mist Veil is both a concealment system and a sensory network. The mage operates with perfect awareness in a space where opponents are functionally blind. The spell requires a mid-rank reactor to maintain the distributed sensor processing alongside the condensation cycle.`,
             expert: `The mist covers a fifty-meter radius and can be layered with mana-infused particles that scatter active sensor emissions—lidar, radar, and magical detection spells are all significantly degraded within the fog. The device can selectively clear or thicken sections of the mist in real time, creating a dynamic environment where allies always have clear firing lanes and enemies always face dense, disorienting fog.
 
 The droplet sensor network achieves millimeter resolution. The device tracks not just movement but the specific outlines of objects and creatures within the mist, providing the mage with detailed spatial awareness that rivals direct visual observation. The mist can be flash-densified into a momentary wall of water vapor thick enough to deflect lightweight projectiles and disrupt energy-based attacks for a fraction of a second.
 
-At Expert, Vapor Screen turns any engagement into a battle fought on the mage's terms. Opponents cannot see, cannot target effectively, and cannot move without broadcasting their position. The mage, by contrast, perceives everything within the fog with clarity that makes the mist feel like an extension of their own body.`,
+At Expert, Mist Veil turns any engagement into a battle fought on the mage's terms. Opponents cannot see, cannot target effectively, and cannot move without broadcasting their position. The mage, by contrast, perceives everything within the fog with clarity that makes the mist feel like an extension of their own body.`,
             master: `The spell operates at the theoretical optimum of atmospheric moisture manipulation for a Tier 1 spell. The mist can extend to a hundred-meter radius, with every droplet functioning as a sensor node in a distributed awareness network that provides the mage with real-time, three-dimensional mapping of the entire volume at centimeter resolution. The device manages the condensation cycle with negligible mana overhead, making the mist effectively permanent until the mage dismisses it.
 
 Selective transparency allows the mage to grant allies perfect visibility while enemies see only impenetrable fog. The device differentiates between registered and unregistered bioelectric signatures, adjusting mist density around each individual in real time. Flash-densification can produce momentary water barriers strong enough to deflect small-arms fire.
 
-This is the ceiling of Vapor Screen as a Tier 1 spell. The mage cannot create fog from nothing in a true vacuum, cannot condense the mist into solid ice or liquid water weapons, and cannot extend the sensor network beyond the physical range of the dispersed droplets. What Master offers is the most comprehensive tactical concealment and awareness system that Tier 1 atmospheric manipulation can deliver—turning any environment into the mage's domain.`
+This is the ceiling of Mist Veil as a Tier 1 spell. The mage cannot create fog from nothing in a true vacuum, cannot condense the mist into solid ice or liquid water weapons, and cannot extend the sensor network beyond the physical range of the dispersed droplets. What Master offers is the most comprehensive tactical concealment and awareness system that Tier 1 atmospheric manipulation can deliver—turning any environment into the mage's domain.`
         }
     },
     {
-        id: 'cryogenic_field',
-        name: 'Cryogenic Field',
+        id: 'frost_nova',
+        name: 'Frost Nova',
         tier: 2,
         cost: 10,
         proficiency: {
             beginner: `The device rapidly extracts thermal energy from the air in a spherical radius of roughly five meters around the mage, dropping the temperature by approximately forty degrees Celsius in under two seconds. The sudden cold snap freezes standing moisture—dew, puddles, sweat—into a thin layer of ice on every surface within range. Exposed skin suffers immediate frostnip; wet clothing freezes stiff; condensation on equipment becomes a slick, hazardous glaze.
 
-The effect is a single burst rather than a sustained field. Once the thermal energy has been extracted and vented through the device's heat sinks, the environment begins warming immediately. In normal conditions, the ice begins melting within thirty seconds. The device requires a brief recalibration period—roughly ten seconds—before it can extract thermal energy again, making Cryogenic Field a one-shot engagement opener rather than a sustained defensive tool.
+The effect is a single burst rather than a sustained field. Once the thermal energy has been extracted and vented through the device's heat sinks, the environment begins warming immediately. In normal conditions, the ice begins melting within thirty seconds. The device requires a brief recalibration period—roughly ten seconds—before it can extract thermal energy again, making Frost Nova a one-shot engagement opener rather than a sustained defensive tool.
 
-At Beginner, Cryogenic Field is an area-denial and disengagement tool. It creates a momentary zone of extreme cold that punishes anyone within melee range, buying the mage time to reposition. It will not kill a healthy adult outright, but the sudden temperature shock is deeply disorienting and the ice underfoot makes pursuit treacherous.`,
+At Beginner, Frost Nova is an area-denial and disengagement tool. It creates a momentary zone of extreme cold that punishes anyone within melee range, buying the mage time to reposition. It will not kill a healthy adult outright, but the sudden temperature shock is deeply disorienting and the ice underfoot makes pursuit treacherous.`,
             apprentice: `The thermal extraction radius expands to eight meters, and the temperature drop reaches sixty degrees Celsius—sufficient to freeze standing water solid and cause immediate frostbite on exposed skin within seconds. The device can now sustain the cold zone for up to thirty seconds by continuously extracting heat and venting it as waste energy, creating a persistent area of frozen ground and chilled air rather than a single burst.
 
 The ice layer thickens enough to impede movement—surfaces become dangerously slick, and the frozen ground can crack and buckle as moisture expands, creating uneven terrain that punishes careless footwork. The device can direct the thermal extraction asymmetrically, freezing one side of the radius more aggressively to channel opponents toward a desired direction.
 
-At Apprentice, Cryogenic Field becomes a battlefield-shaping tool. The mage can create zones of frozen ground that slow and destabilize opponents, channel movement toward prepared positions, and persist long enough to influence an entire skirmish rather than a single exchange.`,
+At Apprentice, Frost Nova becomes a battlefield-shaping tool. The mage can create zones of frozen ground that slow and destabilize opponents, channel movement toward prepared positions, and persist long enough to influence an entire skirmish rather than a single exchange.`,
             adept: `The cold zone extends to fifteen meters, and the temperature drops by over a hundred degrees Celsius—sufficient to freeze human tissue through to the bone within seconds of exposure. The device maintains the field indefinitely by converting extracted thermal energy directly into mana, partially offsetting the spell's own cost. Frost crystals form on every surface, growing into elaborate fractal structures that further degrade footing and visibility.
 
 The device can now shape the cold field. Rather than a simple sphere, the mage can project cones, walls, or rings of extreme cold, creating barriers of frozen air that are painful and damaging to cross. Living creatures within the sustained field suffer cumulative cold damage—initial shock gives way to frostbite, then hypothermia, then tissue death as exposure continues. A mage with a high-rank reactor can maintain the field through extended combat.
 
-At Adept, Cryogenic Field is a lethal area-denial weapon. Opponents must either exit the zone immediately or accept progressively worse cold injuries. The field can be shaped to protect allies, creating corridors of normal temperature within the frozen perimeter.`,
+At Adept, Frost Nova is a lethal area-denial weapon. Opponents must either exit the zone immediately or accept progressively worse cold injuries. The field can be shaped to protect allies, creating corridors of normal temperature within the frozen perimeter.`,
             expert: `The cold zone reaches twenty-five meters with temperature drops exceeding a hundred and fifty degrees Celsius—cold enough to embrittle metals, shatter conventional plastics, and cause near-instantaneous tissue destruction in unprotected organic matter. The device extracts heat so efficiently that materials within the zone undergo thermal shock: glass cracks, metal warps, and stone fractures as differential contraction rips through structures.
 
 The frost field becomes adaptive. The device monitors the positions of registered allies and maintains safe corridors for them while maximizing cold output everywhere else. Sustained exposure within the expert-level field is lethal within minutes for any unprotected human. Even heavily insulated opponents suffer from the sheer thermal gradient as the device leaches heat faster than protective gear can retain it.
 
-At Expert, Cryogenic Field is a weapon of environmental domination. The mage creates a killing field where only they and their allies can operate effectively. The mana cost is significant, but the tactical advantage of rendering a large area hostile to all unprepared life is immense.`,
+At Expert, Frost Nova is a weapon of environmental domination. The mage creates a killing field where only they and their allies can operate effectively. The mana cost is significant, but the tactical advantage of rendering a large area hostile to all unprepared life is immense.`,
             master: `The spell operates at the theoretical optimum of localized thermal extraction for a Tier 2 spell. The cold zone reaches thirty meters with temperature drops approaching two hundred degrees Celsius—the hard limit of what the device's thermal-compression architecture can achieve before the extracted energy destabilizes the containment cycle. Every surface within the zone freezes instantly; the air itself becomes a hazard as moisture crystallizes into a dense suspension of ice particles that obscure vision and abrade lungs.
 
 The device manages the field autonomously, maintaining safe zones for allies and concentrating cold output against detected threats. The mana cost is optimized to the theoretical minimum for the thermal energy being extracted, making sustained operation practical for a high-rank reactor through extended engagements.
 
-This is the ceiling of Cryogenic Field as a Tier 2 spell. The mage cannot freeze an entire city block, cannot reduce temperatures to absolute zero, and cannot extract thermal energy from targets shielded by thermal barriers of equal or higher tier. What Master provides is the most lethal, most efficient localized cold-field that Tier 2 thermal manipulation can sustain—a weapon that turns the immediate environment itself into a hostile, freezing trap.`
+This is the ceiling of Frost Nova as a Tier 2 spell. The mage cannot freeze an entire city block, cannot reduce temperatures to absolute zero, and cannot extract thermal energy from targets shielded by thermal barriers of equal or higher tier. What Master provides is the most lethal, most efficient localized cold-field that Tier 2 thermal manipulation can sustain—a weapon that turns the immediate environment itself into a hostile, freezing trap.`
         }
     },
     {
-        id: 'cascade_arc',
-        name: 'Cascade Arc',
+        id: 'chain_lightning',
+        name: 'Chain Lightning',
         tier: 2,
         cost: 10,
         proficiency: {
             beginner: `The device ionizes a conductive channel to the nearest target within ten meters, then on impact releases an electrical discharge that seeks the next nearest conductive body within three meters. The arc chains between up to three targets total, each successive strike carrying roughly two-thirds the voltage of the previous one as energy dissipates across the chain. The first target receives a stun-grade shock; the second and third receive diminishing shocks that are painful but rarely incapacitating.
 
-The device must calculate the ionization path for each link in the chain before releasing the discharge, which adds roughly half a second to the cast time compared to a standard Arc Discharge. The chain follows the path of least electrical resistance, which means it arcs through conductive materials—metal armor, wet surfaces, and grounded opponents chain more reliably than dry, insulated ones. This can be a liability if the arc chooses an unintended target.
+The device must calculate the ionization path for each link in the chain before releasing the discharge, which adds roughly half a second to the cast time compared to a standard Lightning Bolt. The chain follows the path of least electrical resistance, which means it arcs through conductive materials—metal armor, wet surfaces, and grounded opponents chain more reliably than dry, insulated ones. This can be a liability if the arc chooses an unintended target.
 
-At Beginner, Cascade Arc is a crowd-control tool for closely grouped opponents. It will not reliably kill any of its targets, but it can stagger multiple enemies simultaneously, creating openings for follow-up attacks or retreats. The spell requires line of sight to the primary target; secondary targets are selected automatically by the device.`,
+At Beginner, Chain Lightning is a crowd-control tool for closely grouped opponents. It will not reliably kill any of its targets, but it can stagger multiple enemies simultaneously, creating openings for follow-up attacks or retreats. The spell requires line of sight to the primary target; secondary targets are selected automatically by the device.`,
             apprentice: `The chain extends to five targets with a maximum jump distance of five meters between each. The device now models the electrical properties of all potential targets in real time, selecting the chain path that maximizes damage to hostiles while avoiding registered allies. Voltage at the primary target reaches lethal levels against unarmored humans; successive targets receive shocks sufficient to cause full neuromuscular disruption lasting ten to fifteen seconds.
 
 The cast time drops as the device pre-computes likely chain paths based on battlefield positioning. The mage can now designate a preferred chain sequence—targeting specific enemies in order—though the device will override this if the designated path is electrically impractical. A mid-rank reactor can sustain five to six chained casts per mana cycle.
 
-At Apprentice, Cascade Arc becomes a legitimate anti-group weapon. A single cast can disable an entire fire team, and the selective targeting prevents the common beginner problem of arcing into allies. The spell remains limited by the requirement for conductive proximity—widely dispersed opponents cannot be chained.`,
+At Apprentice, Chain Lightning becomes a legitimate anti-group weapon. A single cast can disable an entire fire team, and the selective targeting prevents the common beginner problem of arcing into allies. The spell remains limited by the requirement for conductive proximity—widely dispersed opponents cannot be chained.`,
             adept: `The chain reaches eight targets with a jump distance of eight meters, and the device can now split the initial discharge into two independent chains that track separate target groups. Each chain maintains full voltage through the first four targets before degrading, effectively giving the mage two simultaneous Lightning Bolts that each chain to four opponents. The cast time is functionally instantaneous as the device runs continuous path calculations in the background.
 
 The electrical discharge carries an electromagnetic pulse component that disables unshielded electronics within five meters of any target in the chain. This makes the spell devastating against technologically equipped forces—a single cast can disable a squad's communications, optics, and vehicle electronics while also incapacitating the soldiers themselves.
 
-At Adept, Cascade Arc is a force-multiplying engagement opener. The mage can neutralize two separate groups of opponents simultaneously, crippling both their combat capability and their technological support. The mana cost is significant but well within the budget of a high-rank reactor.`,
+At Adept, Chain Lightning is a force-multiplying engagement opener. The mage can neutralize two separate groups of opponents simultaneously, crippling both their combat capability and their technological support. The mana cost is significant but well within the budget of a high-rank reactor.`,
             expert: `The chain reaches twelve targets per discharge with a jump distance of twelve meters, and the device can split into three independent chains. The voltage at every target in the chain is now standardized—the degradation effect has been engineered out, meaning the last target in the chain receives the same lethal discharge as the first. The EMP radius expands to fifteen meters from any point in the chain, blacking out a substantial area of electronic infrastructure with a single cast.
 
 The device achieves real-time bioelectric targeting. The chain preferentially arcs to living targets based on their bioelectric signatures, allowing the mage to fire into a mixed environment of friendlies, hostiles, and inanimate objects with high confidence that the chain will find enemy combatants rather than allied ones. Pre-computed chain paths are generated and updated continuously, so the discharge fires the instant the mage forms intent.
 
-At Expert, Cascade Arc is a tactical weapon of extraordinary flexibility. A single cast can disable a platoon, fry an entire vehicle column's electronics, and create a zone of electromagnetic chaos that disrupts enemy coordination for minutes afterward.`,
-            master: `The spell operates at the theoretical optimum of chained electrical discharge for a Tier 2 spell. Up to fifteen targets can be chained with a jump distance of fifteen meters, split into up to four independent chains. Every target in the chain receives a discharge equivalent to a focused Arc Discharge—no degradation, no energy loss between arcs. The device computes the optimal chain geometry in milliseconds, factoring in target conductivity, atmospheric conditions, and ally positions to deliver maximum destructive output with zero friendly fire risk.
+At Expert, Chain Lightning is a tactical weapon of extraordinary flexibility. A single cast can disable a platoon, fry an entire vehicle column's electronics, and create a zone of electromagnetic chaos that disrupts enemy coordination for minutes afterward.`,
+            master: `The spell operates at the theoretical optimum of chained electrical discharge for a Tier 2 spell. Up to fifteen targets can be chained with a jump distance of fifteen meters, split into up to four independent chains. Every target in the chain receives a discharge equivalent to a focused Lightning Bolt—no degradation, no energy loss between arcs. The device computes the optimal chain geometry in milliseconds, factoring in target conductivity, atmospheric conditions, and ally positions to deliver maximum destructive output with zero friendly fire risk.
 
 The EMP component is refined to a directed pulse that can be configured for maximum electronic disruption or minimal collateral damage, depending on the tactical requirement. The mana cost per target in the chain is optimized to the theoretical minimum for Tier 2 electrical discharge, making sustained chaining practical for extended engagements.
 
-This is the ceiling of Cascade Arc as a Tier 2 spell. The mage cannot chain a discharge through non-conductive vacuum, cannot arc through targets beyond the device's ionization range, and cannot generate electrical output that exceeds Tier 2 voltage limits regardless of how many targets are chained. Master means the spell has been refined to the absolute limit of chained electrical weaponology within its designed tier.`
+This is the ceiling of Chain Lightning as a Tier 2 spell. The mage cannot chain a discharge through non-conductive vacuum, cannot arc through targets beyond the device's ionization range, and cannot generate electrical output that exceeds Tier 2 voltage limits regardless of how many targets are chained. Master means the spell has been refined to the absolute limit of chained electrical weaponology within its designed tier.`
         }
     },
     {
-        id: 'pyroclastic_vent',
-        name: 'Pyroclastic Vent',
+        id: 'magma_surge',
+        name: 'Magma Surge',
         tier: 2,
         cost: 10,
         proficiency: {
@@ -346,32 +346,32 @@ This is the ceiling of Cascade Arc as a Tier 2 spell. The mage cannot chain a di
 
 The magma is genuine molten stone—hot enough to cause severe burns from radiant heat alone at close range, and fatal on direct contact. However, the volume is small: roughly enough to fill a bathtub. The eruption is slow by combat standards, taking nearly three seconds from pulse to emergence, giving alert opponents time to clear the area.
 
-At Beginner, Pyroclastic Vent is a denial and obstruction tool. The magma fountain creates a hazardous zone that opponents must avoid, and the resulting igneous mound permanently alters the terrain. The spell requires a rocky or earthen substrate—it cannot function on metal decking, deep water, or magically reinforced surfaces.`,
+At Beginner, Magma Surge is a denial and obstruction tool. The magma fountain creates a hazardous zone that opponents must avoid, and the resulting igneous mound permanently alters the terrain. The spell requires a rocky or earthen substrate—it cannot function on metal decking, deep water, or magically reinforced surfaces.`,
             apprentice: `The magma reservoir grows larger, producing a geyser roughly two meters wide and three meters tall that persists for up to two minutes. The device can now shape the eruption—directing the flow into a spreading pool that covers a wider area, a narrow stream that acts as a burning wall, or a concentrated pillar that reaches four meters. Temperature increases to approximately twelve hundred degrees Celsius, hot enough to soften steel given sustained proximity.
 
 Multiple reservoirs can be created and maintained simultaneously. The device can manage up to three magma sources at once, though each requires a separate seismic pulse and injection cycle. The mage can use this to create overlapping zones of molten rock that funnel opponents through narrow gaps or cut off retreat routes with walls of radiant heat.
 
-At Apprentice, Pyroclastic Vent becomes a battlefield-shaping tool with lethal potential. The sustained magma flows create persistent hazards that cannot be ignored, and the ability to shape the eruption gives the mage fine control over how the terrain is modified. The mana cost per reservoir is moderate but cumulative—a mid-rank reactor can maintain three reservoirs through a typical engagement.`,
+At Apprentice, Magma Surge becomes a battlefield-shaping tool with lethal potential. The sustained magma flows create persistent hazards that cannot be ignored, and the ability to shape the eruption gives the mage fine control over how the terrain is modified. The mana cost per reservoir is moderate but cumulative—a mid-rank reactor can maintain three reservoirs through a typical engagement.`,
             adept: `The device achieves near-instantaneous eruption—the seismic pulse, fracture, injection, and extrusion occur in a single computational cycle taking under half a second. Temperature reaches approximately eighteen hundred degrees Celsius, sufficient to melt common metals and ignite most organic materials from radiant heat alone at close range. The magma can be erupted in any shape the mage conceives: walls, domes, trenches, or sprays of molten droplets that function as a short-range area weapon.
 
 Subsurface magma manipulation becomes available. The device can maintain a reservoir of molten rock beneath the surface, heating and pressurizing it without eruption, then trigger a sudden release when opponents pass overhead. This creates the potential for devastating trap deployment—openings that suddenly become fountains of molten stone, corridors that flood with magma, fortifications that erupt from beneath enemy positions.
 
-At Adept, Pyroclastic Vent is both a weapon and an engineering tool. The mage can reshape the battlefield with molten stone, creating fortifications that cool into permanent structures, traps that lie dormant until triggered, and zone-denial hazards that render entire areas impassable to unprotected personnel.`,
+At Adept, Magma Surge is both a weapon and an engineering tool. The mage can reshape the battlefield with molten stone, creating fortifications that cool into permanent structures, traps that lie dormant until triggered, and zone-denial hazards that render entire areas impassable to unprotected personnel.`,
             expert: `The magma temperature reaches approximately twenty-five hundred degrees Celsius—approaching the melting point of steel—and the device can create eruptions of substantial volume, producing flows large enough to fill a small room. The mage can direct magma underground through subterranean channels, causing it to emerge at any point within fifty meters where the substrate allows. The seismic pulse can fracture rock at greater depth, creating larger reservoirs that sustain more voluminous and longer-lasting eruptions.
 
 Obsidian shaping becomes a standard capability. The device can control the cooling rate of erupted magma with precision, producing volcanic glass in any form the mage requires—razor-sharp blades, reflective surfaces, or transparent panels. Rapidly cooled magma forms structural walls of exceptional hardness; slowly cooled magma forms dense, heat-resistant barriers. The mage can build a fortified position from raw earth in under a minute.
 
-At Expert, Pyroclastic Vent blurs the line between weapon and architecture. The mage carries the capability to reshape terrain with fire and stone, creating obstacles, weapons, and fortifications from nothing but the ground beneath their feet. The mana cost is substantial but manageable for a high-rank reactor.`,
+At Expert, Magma Surge blurs the line between weapon and architecture. The mage carries the capability to reshape terrain with fire and stone, creating obstacles, weapons, and fortifications from nothing but the ground beneath their feet. The mana cost is substantial but manageable for a high-rank reactor.`,
             master: `The spell operates at the theoretical optimum of geological thermal manipulation for a Tier 2 spell. Magma temperature approaches three thousand degrees Celsius—the practical ceiling of what the device's containment fields can sustain before the molten stone's own radiant energy begins destabilizing the injection cycle. Eruption volume, shaping precision, and subsurface channeling all reach the maximum that Tier 2 seismic and thermal computation can deliver.
 
 The device manages all reservoirs, channels, and active flows autonomously, allowing the mage to focus on tactical decisions while the spell handles the engineering. Obsidian and igneous structures are produced with structural integrity comparable to reinforced concrete, and the mage can switch between creating weapons, barriers, and traps with zero conscious overhead.
 
-This is the ceiling of Pyroclastic Vent as a Tier 2 spell. The mage cannot trigger actual volcanic eruptions, cannot melt materials with melting points above approximately three thousand degrees Celsius, and cannot create magma from substrates that lack appropriate mineral composition. The spell transforms what is already present in the ground into a weapon and a tool—nothing more, nothing less—but at Master, it does so with absolute precision and devastating efficiency.`
+This is the ceiling of Magma Surge as a Tier 2 spell. The mage cannot trigger actual volcanic eruptions, cannot melt materials with melting points above approximately three thousand degrees Celsius, and cannot create magma from substrates that lack appropriate mineral composition. The spell transforms what is already present in the ground into a weapon and a tool—nothing more, nothing less—but at Master, it does so with absolute precision and devastating efficiency.`
         }
     },
     {
-        id: 'cyclone_column',
-        name: 'Cyclone Column',
+        id: 'vortex',
+        name: 'Vortex',
         tier: 2,
         cost: 10,
         proficiency: {
@@ -379,32 +379,32 @@ This is the ceiling of Pyroclastic Vent as a Tier 2 spell. The mage cannot trigg
 
 The vortex has limited lifting capacity—roughly ten kilograms of sustained vertical force at its core. It will loft dust, papers, and small objects but cannot lift a person. The noise is significant; the spinning column produces a constant roaring sound that makes stealth impossible within earshot. The device requires several seconds to establish the pressure differential, during which the mage must maintain focus on the target point.
 
-At Beginner, Cyclone Column is a disruption and area-denial tool. It creates a distracting, noisy obstacle that forces opponents to reroute and provides the mage with a moment of chaos to exploit. It will not seriously injure a determined opponent, but it makes their life difficult in the immediate vicinity.`,
+At Beginner, Vortex is a disruption and area-denial tool. It creates a distracting, noisy obstacle that forces opponents to reroute and provides the mage with a moment of chaos to exploit. It will not seriously injure a determined opponent, but it makes their life difficult in the immediate vicinity.`,
             apprentice: `The vortex expands to roughly four meters across and six meters tall, with sustained wind speeds at the core exceeding one hundred kilometers per hour. Lifting capacity increases to roughly fifty kilograms—enough to loft a person briefly off their feet and tumble them before depositing them several meters away. The device can now sustain the vortex for up to two minutes by continuously maintaining the pressure differential.
 
 Directional control is introduced. The mage can direct the vortex to move slowly across the ground—roughly walking speed—allowing it to be steered toward opponents or positioned as a mobile barrier. The device can also tilt the vortex axis, creating a horizontal spinning column that sweeps across the battlefield like a rotating wall of wind.
 
-At Apprentice, Cyclone Column becomes a genuine battlefield hazard. It can displace personnel, scatter equipment, and force opponents into unfavorable positions. The mana cost is moderate, and a mid-rank reactor can sustain the vortex through a standard engagement.`,
+At Apprentice, Vortex becomes a genuine battlefield hazard. It can displace personnel, scatter equipment, and force opponents into unfavorable positions. The mana cost is moderate, and a mid-rank reactor can sustain the vortex through a standard engagement.`,
             adept: `The vortex reaches eight meters across and twelve meters tall, with core wind speeds exceeding two hundred kilometers per hour—sufficient to lift and throw a grown human dozens of meters. The device can sustain the vortex indefinitely while mana holds, and the column can be moved at running speed. Multiple smaller vortices can be spawned from the main column, creating a field of spinning air columns that shred anything loose within a twenty-meter radius.
 
 The lifting capacity at the core exceeds two hundred kilograms. Vehicles, debris, and entire sections of light structures can be torn from their moorings and hurled. The mage can selectively add a suction component to the vortex, pulling opponents inward toward the core rather than merely pushing them away. This makes the spell a trap as well as a weapon—opponents who get too close find themselves drawn into the spinning column.
 
-At Adept, Cyclone Column is a devastating environmental weapon. The mage deploys a mobile, sustained tornado that can be directed with precision, and anything caught in its path is subjected to forces that exceed what unaugmented humans can withstand.`,
+At Adept, Vortex is a devastating environmental weapon. The mage deploys a mobile, sustained tornado that can be directed with precision, and anything caught in its path is subjected to forces that exceed what unaugmented humans can withstand.`,
             expert: `The vortex expands to fifteen meters across and can extend up to thirty meters tall, with core wind speeds approaching three hundred and fifty kilometers per hour. The device can maintain up to three independent vortices simultaneously, each tracked and steered with independent targeting. The combined lifting capacity of a single expert-level vortex exceeds a thousand kilograms—enough to tear the roof off a small building and deposit it hundreds of meters away.
 
 The pressure differential at the core becomes extreme enough to cause barotrauma in unprotected humans. The rapid pressure changes as the vortex passes can rupture eardrums, damage lungs, and cause disorienting vertigo even in opponents who are not physically lifted. The mage can collapse a vortex on command, creating an implosion that sucks nearby objects toward the point of collapse before releasing the compressed air as a concussive blast.
 
-At Expert, Cyclone Column is a natural disaster in miniature. The mage can deploy tornado-force winds with surgical precision, using them as weapons, barriers, or tools of demolition. The mana cost is high but sustainable for a high-rank reactor through extended engagements.`,
+At Expert, Vortex is a natural disaster in miniature. The mage can deploy tornado-force winds with surgical precision, using them as weapons, barriers, or tools of demolition. The mana cost is high but sustainable for a high-rank reactor through extended engagements.`,
             master: `The spell operates at the theoretical optimum of localized atmospheric pressure manipulation for a Tier 2 spell. A single vortex can reach twenty meters across and forty meters tall with core wind speeds approaching four hundred kilometers per hour—the practical ceiling of what the device's pressure-differential computations can sustain before atmospheric friction and energy dissipation make further acceleration impossible. Up to five independent vortices can be maintained and directed simultaneously.
 
 Each vortex is tracked with millimeter-precision targeting and can be steered, tilted, merged, or collapsed on command with zero conscious overhead. The device handles all atmospheric calculations autonomously. Allies within the mage's operational radius are automatically flagged as protected targets, and the vortices will not draw them in or subject them to harmful pressure changes.
 
-This is the ceiling of Cyclone Column as a Tier 2 spell. The mage cannot create hurricane-scale weather systems, cannot sustain wind speeds beyond what the device's localized pressure differential can generate, and cannot project vortices through environments that lack an atmosphere. Master means the spell has been refined to the absolute limit of Tier 2 aerodynamic manipulation—mobile, precise, devastating, and bounded by the physics of air pressure and computational capacity.`
+This is the ceiling of Vortex as a Tier 2 spell. The mage cannot create hurricane-scale weather systems, cannot sustain wind speeds beyond what the device's localized pressure differential can generate, and cannot project vortices through environments that lack an atmosphere. Master means the spell has been refined to the absolute limit of Tier 2 aerodynamic manipulation—mobile, precise, devastating, and bounded by the physics of air pressure and computational capacity.`
         }
     },
     {
-        id: 'liquefaction_zone',
-        name: 'Liquefaction Zone',
+        id: 'quicksand',
+        name: 'Quicksand',
         tier: 2,
         cost: 10,
         proficiency: {
@@ -412,32 +412,32 @@ This is the ceiling of Cyclone Column as a Tier 2 spell. The mage cannot create 
 
 The quicksand is not bottomless; it extends roughly half a meter below the surface before hitting compacted subsoil that the vibration cannot penetrate. A person caught in it sinks to roughly thigh depth before the compacted layer stops them, at which point they are immobilized but not drowning. Extraction requires significant effort—the suction of the liquefied earth makes pulling free difficult without assistance.
 
-At Beginner, Liquefaction Zone is a trapping spell. It creates a hazard that can immobilize a single opponent and force others to reroute around the affected area. The spell requires earthen ground with some moisture content—it cannot liquefy solid rock, metal flooring, or bone-dry sand.`,
+At Beginner, Quicksand is a trapping spell. It creates a hazard that can immobilize a single opponent and force others to reroute around the affected area. The spell requires earthen ground with some moisture content—it cannot liquefy solid rock, metal flooring, or bone-dry sand.`,
             apprentice: `The quicksand patch expands to roughly five meters across, and the depth of liquefaction reaches one meter—deep enough to submerge a person to the chest. The device can now maintain the vibration indefinitely, keeping the ground liquefied for as long as the mage channels mana. The sinking rate increases to roughly twenty centimeters per second, and the suction force makes self-extraction extremely difficult without enhanced strength or assistance.
 
 Multiple patches can be created and maintained simultaneously—up to three at once with a mid-rank reactor. The device can selectively liquefy and re-solidify patches on command, allowing the mage to trap opponents and then release allies who stumble into the same hazard. The vibration frequency can be adjusted to affect different soil compositions with greater efficiency.
 
-At Apprentice, Liquefaction Zone becomes a tactical terrain-modification tool. The mage can create a field of hidden traps that immobilize opponents while remaining virtually undetectable until triggered—the surface of a quicksand patch looks identical to normal ground until weight is applied.`,
+At Apprentice, Quicksand becomes a tactical terrain-modification tool. The mage can create a field of hidden traps that immobilize opponents while remaining virtually undetectable until triggered—the surface of a quicksand patch looks identical to normal ground until weight is applied.`,
             adept: `The quicksand patch reaches eight meters across with a liquefaction depth of up to two meters. The device can now create quicksand that appears completely stable until a specific trigger condition is met—weight exceeding a threshold, a specific number of footsteps, or a delay timer. This allows the mage to lay traps that opponents walk onto without suspicion, only to have the ground liquefy beneath them without warning.
 
 The suction force increases to the point where even enhanced-strength opponents struggle to extract themselves. The device can selectively liquefy specific sections of ground within the patch, creating channels that guide sinking victims toward or away from specific positions. This allows the mage to control where trapped opponents end up—pulling them toward the mage for capture, or pushing them deeper into the hazard.
 
-At Adept, Liquefaction Zone is a concealable, controllable trap system. The mage can prepare an entire area as a minefield of hidden ground hazards, each triggered on the mage's terms. The mana cost per patch is moderate, and the device can maintain several patches indefinitely with a mid-to-high-rank reactor.`,
+At Adept, Quicksand is a concealable, controllable trap system. The mage can prepare an entire area as a minefield of hidden ground hazards, each triggered on the mage's terms. The mana cost per patch is moderate, and the device can maintain several patches indefinitely with a mid-to-high-rank reactor.`,
             expert: `The quicksand patch reaches fifteen meters across with a liquefaction depth of three meters—deep enough to fully submerge a standing human. The device can create patches that selectively affect targets based on bioelectric signature, weight, or device identification, allowing allies to walk across quicksand without triggering it while enemies sink immediately. The liquefaction can be activated and deactivated in under a second, allowing the mage to trap and release with precision timing.
 
-The vibration frequency can be tuned to affect different materials. Metal-reinforced concrete, compacted gravel, and even wooden flooring can be liquefied if the device finds the correct resonant frequency. This dramatically expands the environments where Liquefaction Zone can be deployed—no longer limited to natural earthen terrain.
+The vibration frequency can be tuned to affect different materials. Metal-reinforced concrete, compacted gravel, and even wooden flooring can be liquefied if the device finds the correct resonant frequency. This dramatically expands the environments where Quicksand can be deployed—no longer limited to natural earthen terrain.
 
-At Expert, Liquefaction Zone is a comprehensive terrain-denial system. The mage can turn virtually any surface into a trap, selectively target hostiles, and control the depth and duration of liquefaction with millimeter precision. The spell becomes a strategic tool for area control and prisoner capture.`,
+At Expert, Quicksand is a comprehensive terrain-denial system. The mage can turn virtually any surface into a trap, selectively target hostiles, and control the depth and duration of liquefaction with millimeter precision. The spell becomes a strategic tool for area control and prisoner capture.`,
             master: `The spell operates at the theoretical optimum of localized seismic liquefaction for a Tier 2 spell. Patches can reach twenty meters across with a liquefaction depth of five meters, and the device can maintain an unlimited number of patches simultaneously within the mage's operational radius. Each patch is a precisely controlled hazard with customizable trigger conditions, selective targeting, and instant activation or deactivation.
 
 The device maps subsurface composition continuously and adjusts vibration parameters in real time to maintain optimal liquefaction regardless of changing moisture content, temperature, or seismic interference. Allies are protected automatically—the device registers their positions and ensures the ground remains solid beneath their feet even when surrounded by patches of active quicksand.
 
-This is the ceiling of Liquefaction Zone as a Tier 2 spell. The mage cannot liquefy bedrock or magically reinforced surfaces, cannot create bottomless pits, and cannot affect substrates that lack particulate structure for the vibrations to disrupt. What Master offers is the most sophisticated, most selective, most lethal ground-based trapping system that Tier 2 seismic manipulation can deliver—turning the very earth beneath an enemy's feet into a weapon.`
+This is the ceiling of Quicksand as a Tier 2 spell. The mage cannot liquefy bedrock or magically reinforced surfaces, cannot create bottomless pits, and cannot affect substrates that lack particulate structure for the vibrations to disrupt. What Master offers is the most sophisticated, most selective, most lethal ground-based trapping system that Tier 2 seismic manipulation can deliver—turning the very earth beneath an enemy's feet into a weapon.`
         }
     },
     {
-        id: 'thermal_extraction',
-        name: 'Thermal Extraction',
+        id: 'flash_freeze',
+        name: 'Flash Freeze',
         tier: 3,
         cost: 15,
         proficiency: {
@@ -445,32 +445,32 @@ This is the ceiling of Liquefaction Zone as a Tier 2 spell. The mage cannot liqu
 
 The spell targets a point in space rather than a specific creature, making it possible to freeze environmental features—door locks, pipes, standing water—or to target an opponent directly. A direct hit on an unarmored human causes immediate frostbite at the contact zone and a painful but temporary nerve-numbing cold that spreads outward from the point of impact. It will not freeze a person solid, but it can lock a joint or disable a hand for the crucial seconds needed to capitalize.
 
-At Beginner, Thermal Extraction is a precision cold weapon. It trades Cryogenic Field's area of effect for focused intensity on a single target, making it useful for disabling specific threats or manipulating the environment. The spell requires atmospheric moisture or a target that contains water—it cannot freeze dry objects in arid conditions.`,
+At Beginner, Flash Freeze is a precision cold weapon. It trades Frost Nova's area of effect for focused intensity on a single target, making it useful for disabling specific threats or manipulating the environment. The spell requires atmospheric moisture or a target that contains water—it cannot freeze dry objects in arid conditions.`,
             apprentice: `The freeze radius expands to two meters, and the temperature drop reaches approximately three hundred degrees Celsius—sufficient to freeze a human limb solid on direct impact if the target lacks thermal protection. The device can now sustain the freeze for up to thirty seconds, keeping the affected zone locked at sub-zero temperatures while the mage takes action. The mana cost is significant but manageable for a mid-rank reactor through a typical engagement.
 
-The spell gains a chain component. On impact, secondary freeze pulses radiate outward from the initial point, each carrying a fraction of the original thermal extraction. Targets within two meters of the primary freeze zone suffer a milder but still painful cold snap that slows movement and numbs extremities. This makes Thermal Extraction effective against closely grouped opponents even though it is nominally a single-target spell.
+The spell gains a chain component. On impact, secondary freeze pulses radiate outward from the initial point, each carrying a fraction of the original thermal extraction. Targets within two meters of the primary freeze zone suffer a milder but still painful cold snap that slows movement and numbs extremities. This makes Flash Freeze effective against closely grouped opponents even though it is nominally a single-target spell.
 
-At Apprentice, Thermal Extraction becomes a precision disable tool. The mage can freeze a weapon arm solid, lock a door by freezing its mechanism, or create a patch of ice on a walkway that sends an opponent tumbling. The sustained freeze component allows the mage to keep a target immobilized while deciding what to do next.`,
+At Apprentice, Flash Freeze becomes a precision disable tool. The mage can freeze a weapon arm solid, lock a door by freezing its mechanism, or create a patch of ice on a walkway that sends an opponent tumbling. The sustained freeze component allows the mage to keep a target immobilized while deciding what to do next.`,
             adept: `The freeze radius reaches three meters with a temperature drop exceeding four hundred degrees Celsius—cold enough to embrittle steel and shatter frozen organic tissue with a firm impact. The device can target a specific region of the body with surgical precision, freezing only the intended area while leaving surrounding tissue functional. This allows the mage to disable without killing: freeze a hand to drop a weapon, freeze a leg to prevent escape, freeze a throat to silence without suffocation.
 
 The sustained freeze becomes indefinite while the device maintains thermal extraction. The mage can hold a target in a state of frozen immobility for as long as mana holds, creating a prison of ice that is painful but not necessarily lethal. The device compensates for the target's body heat, continuously extracting thermal energy faster than metabolism can produce it.
 
-At Adept, Thermal Extraction is a precision weapon and capture tool. The mage can disable opponents with selective, non-lethal freezing or deliver devastating cold injuries to specific body regions. The spell's focused nature makes it more mana-efficient than Cryogenic Field for single-target engagements.`,
+At Adept, Flash Freeze is a precision weapon and capture tool. The mage can disable opponents with selective, non-lethal freezing or deliver devastating cold injuries to specific body regions. The spell's focused nature makes it more mana-efficient than Frost Nova for single-target engagements.`,
             expert: `The freeze radius reaches five meters with a temperature drop approaching five hundred degrees Celsius—sufficient to flash-freeze most organic matter solid in under a second. A direct hit on a human target without thermal protection results in total body freeze: tissue crystallizes, blood solidifies, and the target becomes a frozen statue. The device can selectively thaw specific regions while keeping the rest frozen, allowing the mage to interrogate a frozen prisoner by thawing their head while keeping their body immobilized.
 
 The spell can be channeled into a sustained beam rather than an instantaneous pulse. The beam maintains a continuous thermal extraction along its path, freezing everything it touches. This allows the mage to sweep the beam across a battlefield, creating walls of ice, freezing corridors, and denying movement through specific areas. A high-rank reactor can sustain the beam for over a minute of continuous output.
 
-At Expert, Thermal Extraction is both a lethal weapon and a precision tool. The mage can freeze opponents solid, create ice structures from ambient moisture, and shape the battlefield with walls and barriers of frozen air and water. The spell's versatility makes it one of the most tactically flexible cold-based routines available.`,
+At Expert, Flash Freeze is both a lethal weapon and a precision tool. The mage can freeze opponents solid, create ice structures from ambient moisture, and shape the battlefield with walls and barriers of frozen air and water. The spell's versatility makes it one of the most tactically flexible cold-based routines available.`,
             master: `The spell operates at the theoretical optimum of focused thermal extraction for a Tier 3 spell. The freeze radius reaches eight meters with a temperature drop that approaches six hundred degrees Celsius—the practical ceiling of what Tier 3 thermal-compression architecture can sustain before the extraction cycle destabilizes. The device can freeze virtually any conventional material solid in under a second, and the sustained beam mode can maintain sub-zero temperatures along its entire path indefinitely while mana holds.
 
-Selective thawing and refreezing is instantaneous and requires no conscious direction—the device reads the mage's intent and adjusts thermal output accordingly. A frozen opponent can be kept in a state of suspended animation indefinitely, their biological processes halted at the molecular level by the cold, with zero risk of tissue damage from thaw-related cellular rupture. This makes Thermal Extraction one of the most effective non-lethal containment tools in a mage's arsenal.
+Selective thawing and refreezing is instantaneous and requires no conscious direction—the device reads the mage's intent and adjusts thermal output accordingly. A frozen opponent can be kept in a state of suspended animation indefinitely, their biological processes halted at the molecular level by the cold, with zero risk of tissue damage from thaw-related cellular rupture. This makes Flash Freeze one of the most effective non-lethal containment tools in a mage's arsenal.
 
-This is the ceiling of Thermal Extraction as a Tier 3 spell. The mage cannot reduce temperatures to absolute zero, cannot freeze targets shielded by thermal barriers of equal or higher tier, and cannot freeze matter that lacks thermal energy to extract. The spell provides the most precise, most lethal, and most versatile focused cold weapon that Tier 3 computation can deliver—capable of both surgical disable and devastating area control.`
+This is the ceiling of Flash Freeze as a Tier 3 spell. The mage cannot reduce temperatures to absolute zero, cannot freeze targets shielded by thermal barriers of equal or higher tier, and cannot freeze matter that lacks thermal energy to extract. The spell provides the most precise, most lethal, and most versatile focused cold weapon that Tier 3 computation can deliver—capable of both surgical disable and devastating area control.`
         }
     },
     {
-        id: 'conflagration',
-        name: 'Conflagration',
+        id: 'inferno',
+        name: 'Inferno',
         tier: 3,
         cost: 15,
         proficiency: {
@@ -478,32 +478,32 @@ This is the ceiling of Thermal Extraction as a Tier 3 spell. The mage cannot red
 
 The heat is diffuse rather than focused—this is not a cutting beam or a concentrated plasma projectile but a zone of superheated air that punishes everything within it. Unprotected humans suffer immediate heat exhaustion and superficial burns; armored opponents are insulated but experience dangerous internal temperatures after more than a few seconds of exposure. The device must maintain line of sight to the target point for the duration of the heating cycle.
 
-At Beginner, Conflagration is an area-denial tool that creates a zone of extreme heat opponents must avoid. It will not incinerate a target outright, but it makes an area hostile to unprotected life for the duration. The spell is ineffective against targets with active thermal shielding and cannot function in environments that dissipate heat faster than the device can generate it, such as deep water or vacuum.`,
+At Beginner, Inferno is an area-denial tool that creates a zone of extreme heat opponents must avoid. It will not incinerate a target outright, but it makes an area hostile to unprotected life for the duration. The spell is ineffective against targets with active thermal shielding and cannot function in environments that dissipate heat faster than the device can generate it, such as deep water or vacuum.`,
             apprentice: `The temperature reaches approximately eight hundred degrees Celsius and the radius expands to eight meters. The heat zone persists for up to two minutes, and the device can now shape the inferno—concentrating heat into a narrower column for greater intensity or spreading it across a wider area for broader denial. Sustained exposure causes second-degree burns within seconds and ignites most common materials on contact.
 
 The device introduces oxygen management. By controlling the availability of oxygen within the inferno zone, the mage can prevent the combustion of specific materials or exacerbate it in others. This allows the creation of "clean" infernos that burn hot but produce minimal smoke, or suffocating firestorms that consume oxygen so rapidly that targets within the zone asphyxiate before they burn. The tactical flexibility is significant.
 
-At Apprentice, Conflagration becomes a sustained lethal hazard. A target caught in the zone without thermal protection will die from burn injuries within minutes. The mana cost is substantial but manageable for a mid-rank reactor through a typical engagement.`,
-            adept: `The temperature reaches approximately twelve hundred degrees Celsius—hot enough to melt aluminum and soften steel—with a radius of twelve meters. The inferno can be maintained indefinitely while mana holds, and the device manages all thermal calculations autonomously. The mage can create moving walls of fire, fire tornadoes by combining Conflagration with atmospheric manipulation, and precisely controlled burn zones that advance or retreat on command.
+At Apprentice, Inferno becomes a sustained lethal hazard. A target caught in the zone without thermal protection will die from burn injuries within minutes. The mana cost is substantial but manageable for a mid-rank reactor through a typical engagement.`,
+            adept: `The temperature reaches approximately twelve hundred degrees Celsius—hot enough to melt aluminum and soften steel—with a radius of twelve meters. The inferno can be maintained indefinitely while mana holds, and the device manages all thermal calculations autonomously. The mage can create moving walls of fire, fire tornadoes by combining Inferno with atmospheric manipulation, and precisely controlled burn zones that advance or retreat on command.
 
 The oxygen management system becomes sophisticated enough to support selective combustion. The mage can designate zones within the inferno where specific materials burn while others remain untouched—burning the supports of a structure while leaving its contents intact, or igniting an opponent's equipment while preserving evidence on their person. The inferno can also be made to burn without visible flame, producing an invisible zone of superheated air that kills without warning.
 
-At Adept, Conflagration is a devastating environmental weapon. The mage controls fire with the precision of a pyrotechnic engineer, creating zones of lethal heat that can be shaped, moved, and controlled with tactical flexibility. The spell demands a high-rank reactor for sustained output.`,
+At Adept, Inferno is a devastating environmental weapon. The mage controls fire with the precision of a pyrotechnic engineer, creating zones of lethal heat that can be shaped, moved, and controlled with tactical flexibility. The spell demands a high-rank reactor for sustained output.`,
             expert: `The temperature exceeds two thousand degrees Celsius with a radius of twenty meters. The inferno can melt structural steel on contact and ignite virtually any organic material within seconds. The device achieves near-perfect thermal containment—heat radiates inward rather than outward, allowing the mage to create zones of annihilating heat immediately adjacent to areas of normal temperature. An ally can stand one meter from the edge of an expert-level inferno and feel only warmth.
 
 The spell can be channeled into a sustained beam that projects a line of superheated air up to fifty meters long. Anything caught in the beam's path is subjected to the full thermal output—metal flows, stone cracks from thermal stress, and organic matter carbonizes in seconds. The beam can be swept across a battlefield, carving a burning path through opposition.
 
-At Expert, Conflagration is a weapon of concentrated destruction. The mage wields fire with the precision of a surgeon's scalpel and the force of a blast furnace, creating and controlling infernos that would require fuel and oxygen that the device simply conjures through mana-driven thermal manipulation. The mana cost is extreme but within the budget of a high-rank reactor for combat-duration engagements.`,
+At Expert, Inferno is a weapon of concentrated destruction. The mage wields fire with the precision of a surgeon's scalpel and the force of a blast furnace, creating and controlling infernos that would require fuel and oxygen that the device simply conjures through mana-driven thermal manipulation. The mana cost is extreme but within the budget of a high-rank reactor for combat-duration engagements.`,
             master: `The spell operates at the theoretical optimum of sustained thermal generation for a Tier 3 spell. The inferno reaches temperatures of approximately twenty-five hundred degrees Celsius—the practical ceiling of what the device's mana-to-heat conversion can sustain before the thermal output begins degrading the device's own containment architecture. The radius extends to twenty-five meters, and the device manages all thermal calculations with zero conscious overhead.
 
 The mage can create and control multiple independent infernos simultaneously, each with its own temperature, shape, and movement parameters. The oxygen management system operates at molecular precision, allowing the mage to burn or spare any material within the zone with absolute selectivity. The thermal containment is so precise that the mage can create a corridor of normal temperature through the center of an inferno, walking through their own firestorm unharmed.
 
-This is the ceiling of Conflagration as a Tier 3 spell. The mage cannot generate temperatures that exceed the mana-to-heat conversion limit of Tier 3 computation, cannot create fire in a true vacuum where there is nothing to heat, and cannot burn through thermal barriers of equal or higher tier. What Master provides is the most devastating, most precise, most controlled sustained fire-weapon that Tier 3 thermal manipulation can achieve.`
+This is the ceiling of Inferno as a Tier 3 spell. The mage cannot generate temperatures that exceed the mana-to-heat conversion limit of Tier 3 computation, cannot create fire in a true vacuum where there is nothing to heat, and cannot burn through thermal barriers of equal or higher tier. What Master provides is the most devastating, most precise, most controlled sustained fire-weapon that Tier 3 thermal manipulation can achieve.`
         }
     },
     {
-        id: 'cryo_barrage',
-        name: 'Cryo Barrage',
+        id: 'hailstorm',
+        name: 'Hailstorm',
         tier: 3,
         cost: 15,
         proficiency: {
@@ -524,7 +524,7 @@ The device can now create targeted hail corridors—narrow streams of concentrat
 At Adept, Hailstorm is a devastating area-denial weapon with lethal precision. The mage can blanket a zone in lethal ice or direct focused corridors of hail at specific targets. The spell requires a high-rank reactor for sustained output at this intensity.`,
             expert: `The hail pellets are compressed to maximum density—ice harder than stone, each projectile roughly the size of a baseball and traveling at supersonic speeds. The target area reaches forty meters, and the barrage can be sustained indefinitely while mana holds. Each pellet carries kinetic energy comparable to a rifle round, and the density of fire is sufficient to shred vegetation, damage light vehicles, and make any exposed position suicidal.
 
-The device introduces shrapnel hail—pellets that fragment on impact into a spray of razor-sharp crystalline fragments, each traveling outward at high velocity. This dramatically increases the lethal radius of each impact, creating a secondary zone of fragmentation damage around every strike point. The cumulative effect is a storm of shrapnel that makes even partial cover inadequate.
+The device introduces shrapnel hail—pellets that fragment on impact into a spray of razor-sharp ice shards, each traveling outward at high velocity. This dramatically increases the lethal radius of each impact, creating a secondary zone of fragmentation damage around every strike point. The cumulative effect is a storm of shrapnel that makes even partial cover inadequate.
 
 At Expert, Hailstorm is a weapon of annihilation. The mage calls down a storm of lethal ice that renders a large area impassable to unprotected personnel and dangerous even to armored targets. The mana cost is extreme but within the budget of a high-rank reactor for combat-duration engagements.`,
             master: `The spell operates at the theoretical optimum of atmospheric ice-generation and kinetic acceleration for a Tier 3 spell. The hail pellets are grown with flawless crystalline density—each one a compressed projectile harder than tempered steel, accelerated to the maximum velocity the device's atmospheric manipulation can sustain. The target area reaches fifty meters, and the barrage can be sustained with optimized mana efficiency for extended engagements.
@@ -535,8 +535,8 @@ This is the ceiling of Hailstorm as a Tier 3 spell. The mage cannot call down ha
         }
     },
     {
-        id: 'maelstrom_vortex',
-        name: 'Maelstrom Vortex',
+        id: 'whirlpool',
+        name: 'Whirlpool',
         tier: 3,
         cost: 15,
         proficiency: {
@@ -568,8 +568,8 @@ This is the ceiling of Whirlpool as a Tier 3 spell. The mage cannot create whirl
         }
     },
     {
-        id: 'pressure_void',
-        name: 'Pressure Void',
+        id: 'vacuum_sphere',
+        name: 'Vacuum Sphere',
         tier: 3,
         cost: 15,
         proficiency: {
@@ -601,8 +601,8 @@ This is the ceiling of Vacuum Sphere as a Tier 3 spell. The mage cannot remove a
         }
     },
     {
-        id: 'mineral_matrix',
-        name: 'Mineral Matrix',
+        id: 'crystal_formation',
+        name: 'Crystal Formation',
         tier: 4,
         cost: 20,
         proficiency: {
@@ -643,8 +643,8 @@ if (typeof spellData !== "undefined" && spellData.elemental) {
 
 const elementalSpellsBatch2 = [
     {
-        id: 'phase_flash',
-        name: 'Phase Flash',
+        id: 'steam_burst',
+        name: 'Steam Burst',
         tier: 2,
         cost: 10,
         proficiency: {
@@ -680,8 +680,8 @@ This is the ceiling of Steam Burst as a Tier 2 spell. The mage cannot flash-boil
         }
     },
     {
-        id: 'ionization_beam',
-        name: 'Ionization Beam',
+        id: 'plasma_lance',
+        name: 'Plasma Lance',
         tier: 4,
         cost: 20,
         proficiency: {
@@ -717,8 +717,8 @@ This is the ceiling of Plasma Lance as a Tier 4 spell. The mage cannot generate 
         }
     },
     {
-        id: 'corrosive_stream',
-        name: 'Corrosive Stream',
+        id: 'acid_spray',
+        name: 'Acid Spray',
         tier: 2,
         cost: 10,
         proficiency: {
@@ -754,8 +754,8 @@ This is the ceiling of Acid Spray as a Tier 2 spell. The mage cannot dissolve "a
         }
     },
     {
-        id: 'calcification_hex',
-        name: 'Calcification Hex',
+        id: 'petrification',
+        name: 'Petrification',
         tier: 3,
         cost: 15,
         proficiency: {
@@ -791,8 +791,8 @@ This is the ceiling of Petrification as a Tier 3 spell. The mage cannot turn tar
         }
     },
     {
-        id: 'particulate_storm',
-        name: 'Particulate Storm',
+        id: 'sandstorm',
+        name: 'Sandstorm',
         tier: 3,
         cost: 15,
         proficiency: {
@@ -828,8 +828,8 @@ This is the ceiling of Sandstorm as a Tier 3 spell. The mage cannot summon conti
         }
     },
     {
-        id: 'atmospheric_crucible',
-        name: 'Atmospheric Crucible',
+        id: 'stormcall',
+        name: 'Stormcall',
         tier: 4,
         cost: 20,
         proficiency: {
@@ -865,8 +865,8 @@ This is the ceiling of Stormcall as a Tier 4 spell. The mage cannot summon hurri
         }
     },
     {
-        id: 'mass_anchor',
-        name: 'Mass Anchor',
+        id: 'gravity_well',
+        name: 'Gravity Well',
         tier: 4,
         cost: 20,
         proficiency: {
@@ -902,8 +902,8 @@ This is the ceiling of Gravity Well as a Tier 4 spell. The mage cannot create ev
         }
     },
     {
-        id: 'ferrous_disruption',
-        name: 'Ferrous Disruption',
+        id: 'magnetic_storm',
+        name: 'Magnetic Storm',
         tier: 3,
         cost: 15,
         proficiency: {
@@ -939,8 +939,8 @@ This is the ceiling of Magnetic Storm as a Tier 3 spell. The mage cannot generat
         }
     },
     {
-        id: 'heat_pump',
-        name: 'Heat Pump',
+        id: 'thermal_shift',
+        name: 'Thermal Shift',
         tier: 2,
         cost: 10,
         proficiency: {
@@ -976,8 +976,8 @@ This is the ceiling of Thermal Shift as a Tier 2 spell. The mage cannot achieve 
         }
     },
     {
-        id: 'molecular_decay',
-        name: 'Molecular Decay',
+        id: 'entropic_decay',
+        name: 'Entropic Decay',
         tier: 4,
         cost: 20,
         proficiency: {
@@ -1013,8 +1013,8 @@ This is the ceiling of Entropic Decay as a Tier 4 spell. The mage cannot acceler
         }
     },
     {
-        id: 'acoustic_penetrator',
-        name: 'Acoustic Penetrator',
+        id: 'sonic_lance',
+        name: 'Sonic Lance',
         tier: 2,
         cost: 10,
         proficiency: {
@@ -1050,8 +1050,8 @@ This is the ceiling of Sonic Lance as a Tier 2 spell. The mage cannot generate c
         }
     },
     {
-        id: 'tesla_prison',
-        name: 'Tesla Prison',
+        id: 'voltaic_cage',
+        name: 'Voltaic Cage',
         tier: 3,
         cost: 15,
         proficiency: {
@@ -1089,8 +1089,8 @@ This is the ceiling of Voltaic Cage as a Tier 3 spell. The mage cannot generate 
         }
     },
     {
-        id: 'resonance_shockwave',
-        name: 'Resonance Shockwave',
+        id: 'tectonic_pulse',
+        name: 'Tectonic Pulse',
         tier: 5,
         cost: 25,
         proficiency: {

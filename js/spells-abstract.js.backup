@@ -1,0 +1,556 @@
+﻿// Abstract Category Spells for Mages CYOA
+// All 34 spells of the Abstract Category with 5 proficiency levels each
+
+// Initialize spell data object if it doesn't exist
+if (typeof spellData === 'undefined') {
+    var spellData = {
+        physical: [],
+        elemental: [],
+        abstract: []
+    };
+}
+
+// Base Abstract Spells (1-5)
+const baseAbstractSpells = [
+    {
+        id: 'mind_shield',
+        name: 'Mind Shield',
+        tier: 1,
+        cost: 5,
+        proficiency: {
+            beginner: `During a psychic interrogation in a dimly lit safehouse, the mage activates Mind Shield as the interrogator's eyes lock on. A cool membrane forms behind the eyes, turning direct questions into static. The interrogator probes for the location of a hidden cache and receives only white noise. Surface thoughts about the mission remain protected while the mage maintains eye contact and answers with practiced lies. A stronger probe from the interrogator causes a cold spike behind the temples, warning of the breach attempt. The shield holds for the first two minutes of sustained questioning before the pressure builds and a single memory fragment slips through. The mage reinforces the barrier with focused will, buying another thirty seconds before the interrogator gives up and calls for a stronger psychic. At this level the shield defeats casual scans and delays focused interrogation long enough for backup to arrive or an escape plan to form.`,
+
+            apprentice: `The shield now layers three distinct barriers during an extraction under fire. An outer static shell scrambles the pursuing psychic's initial scan as the team moves through a crowded market. A reactive middle layer intercepts a targeted memory probe aimed at the extraction route and returns a disorienting feedback burst that makes the enemy psychic stumble. The core shield wraps the real plan in cold iron while the mage plants a decoy memory of a different rendezvous point. The decoy fools the pursuer for ninety seconds, long enough for the team to reach the extraction vehicle. Emotional suppression from a rage-inducing curse lands as mild irritation instead of blind fury. The shield extends a thinned version to one nearby ally, letting the mage sense when that ally comes under psychic attack during the chaotic escape. A skilled enemy psychic can breach the outer two layers with sustained effort, but each breach costs them concentration and the mage gains warning time to counter or flee.`,
+
+            adept: `In a high-stakes negotiation with a hostile psychic faction, the shield operates autonomously. The device sorts incoming mental traffic in real time, allowing the negotiator's surface thoughts to pass while blocking passive scans of the mage's true intentions. When an active intrusion attempts to implant a compulsion to reveal classified data, the shield retaliates with a surgical neural shock that disrupts the attacker's focus. The decoy system constructs a full false consciousness layer containing fabricated negotiation concessions and surface secrets. The intruder spends four minutes sifting through the decoy before realizing the deception, giving the mage time to extract concessions and withdraw. Protection extends in a ten-meter radius, granting nearby allies apprentice-level shielding. The device purges a subliminal command implanted earlier in the meeting, restoring the mage's original resolve. Coordinated attacks from two skilled psychics can stress the shield, but the retaliation and decoy system buy critical minutes for the team to complete the objective.`,
+
+            expert: `During a deep-cover infiltration of an enemy psychic network, the shield integrates fully with cognition. All layers of thought receive calibrated protection. When an enemy telepath attempts a full memory extraction, the device maps the link and delivers concentrated feedback that causes immediate psychic burnout in the attacker. Failed probes feed energy back into the shield, strengthening it for the next attempt. The protection radius covers hundreds of meters, granting allies adept-level shielding and passive psychic camouflage that registers the team as empty space to remote viewers. The mage selectively permits a trusted contact through the shield while hostile frequencies are blocked and countered. Within the limits of a Tier 1 spell this represents the practical maximum of personal mental defense against sustained psychic assault.`,
+
+            master: `The shield runs at peak autonomous efficiency during a prolonged siege by multiple enemy psychics. Every attack pattern is logged and countered without conscious input. Trusted allies pass through while hostile contacts trigger calibrated counter-attacks. Allies within proximity receive persistent adept-level protection. The system handles the full range of personal-scale psychic threats with optimized mana use and no exploitable weak points, representing the design ceiling for Mind Shield as a Tier 1 spell.`
+        }
+    },
+    {
+        id: 'teleport',
+        name: 'Teleport',
+        tier: 1,
+        cost: 5,
+        proficiency: {
+            beginner: `In a collapsing warehouse during a raid, the mage needs to cross a fifteen-meter gap between catwalks while under fire. Teleport activates with a three-second device lock on the visible landing point. The jump carries the mage across the gap in an instant, depositing them behind cover with a brief free-fall sensation. The device refuses a second jump because the landing zone is obscured by smoke from the firefight. The mage waits for the smoke to clear, then executes two more short jumps to reach the exit ladder. Each jump drains noticeable mana, limiting the mage to three total before reserves drop below safe levels. The spell works for quick repositioning when the destination is in clear line of sight and the path is unobstructed, but cannot be used for blind jumps or sustained movement.`,
+
+            apprentice: `During an urban extraction with an injured teammate, the mage chains five teleports across fifty-meter segments. The device accepts partial visualization of a courtyard seen thirty seconds earlier, allowing the team to bypass a blocked street. The teammate travels in direct contact, adding to the total mass but still within the one-hundred-kilogram limit. A pursuing drone fires as the mage jumps; the device shifts the emergence point one meter to the side, avoiding the impact. Recovery between jumps takes one second, enabling the team to maintain momentum through the alley network. The spell now supports sustained combat movement and small-team transport when the mage maintains a rough mental map of the area.`,
+
+            adept: `In a multi-level facility assault, the mage uses Teleport as primary movement. Fifty chained jumps cover five hundred meters vertically and horizontally, repositioning the team faster than any conventional route. The device stores ten fixed locations, allowing instant return to the entry point after securing an objective. A teammate is extracted from restraints by teleporting only the bound individual while leaving the restraints behind. Stable three-second portals let two additional squad members pass through without direct contact. Fractional teleportation moves the mage's arm through a reinforced door to trigger an internal lock while the body remains outside. At this level the spell becomes the core of spatial combat tactics.`,
+
+            expert: `During a city-wide operation, the mage teleports across one hundred kilometers to a photographed safehouse using stored coordinates. The device computes the path from abstract data with zero subjective transit time. Fifty allied operatives pass through a sustained portal network linking three fixed points. An enemy teleport attempt is intercepted and rerouted into a prepared kill zone. Local space is compressed around a pursuing vehicle, stretching a straight road into a kilometer-long loop that delays the chase by four critical minutes. Incoming projectiles are redirected through portals back toward their origin. The spell now handles large-scale group movement and battlefield geometry manipulation within urban operational range.`,
+
+            master: `The mage maintains a permanent spatial map of every visited location and established portal. Continental-scale jumps to known coordinates complete with zero error and zero disorientation. Allies within proximity receive limited teleport capability to designated safe points. All advanced functions—group transport, permanent networks, spatial redirection—operate at maximum efficiency with negligible mana overhead. This represents the design ceiling for Teleport as a Tier 1 spell: reliable, accurate relocation at the maximum range and throughput a spell of this tier can sustain.`
+        }
+    },
+    {
+        id: 'time_dilation',
+        name: 'Time Dilation',
+        tier: 1,
+        cost: 5,
+        proficiency: {
+            beginner: `In a tense standoff inside a narrow corridor, the mage deploys a two-meter Time Dilation field across the enemy position. Time inside the field flows ten percent faster, giving the mage's team a measurable reaction advantage. Incoming bullets slow just enough for the lead operative to sidestep the first volley. The field holds for twenty-eight seconds before the device forces a cooldown. The effect applies uniformly, so the mage cannot accelerate allies while decelerating enemies in the same space. At this level the spell provides a brief tactical window for repositioning or landing the first decisive strike.`,
+
+            apprentice: `During a close-quarters breach of a fortified room, the mage expands the field to five meters and sets a thirty-percent differential. The device accelerates the entry team while decelerating the defenders, creating a decisive speed mismatch. An archer teammate fires accelerated arrows that exit the field still at accelerated velocity, striking with accumulated force. The boundary shimmer is suppressed to avoid detection. Duration reaches two minutes, and the mage maintains three smaller overlapping fields to cover multiple breach points. Temporal anchors keep critical objectives at normal speed. The spell now functions as a sustained force multiplier in small-team engagements.`,
+
+            adept: `In a running battle across a warehouse district, the mage maintains a mobile twenty-meter field while personally accelerated. Opponents inside the deceleration zone move at half speed while the mage operates at double. A temporal stutter field oscillates rapidly, leaving three pursuing enemies disoriented and vomiting after forty seconds of exposure. The device accelerates only the healing process on a wounded ally without changing their overall movement speed. Multiple large fields run simultaneously while the mage chains personal acceleration bursts. At this level Time Dilation fundamentally alters the tempo of any engagement the mage enters.`,
+
+            expert: `During a defensive stand against a numerically superior force, the mage sustains a one-hundred-meter field with five-to-one differential. The entire enemy advance moves at one-fifth speed while the mage maintains double baseline speed with brief five-times surges. A specialized stasis field freezes a key enemy commander for the full sixty-minute duration, removing them from the fight. Ten-second temporal reversal undoes a fatal wound on an ally, restoring them to the moment before impact. The device provides intuitive probability readings that manifest as certain knowledge of the next likely threat vector. The spell now delivers battlefield-scale temporal control with meaningful reversal and precognitive support.`,
+
+            master: `The device maintains permanent personal acceleration at double baseline speed with zero ongoing cost and combat spikes to five times. All field types operate at maximum efficiency. Allies within proximity receive passive thirty-percent acceleration with coordinated bursts on demand. Precognitive probability reading runs continuously in the background, delivering perfect timing awareness. This is the design ceiling for Time Dilation as a Tier 1 spell: local time manipulation at the highest throughput and lowest overhead a spell of this tier can sustain.`
+        }
+    },
+    {
+        id: 'soul_bind',
+        name: 'Soul Bind',
+        tier: 1,
+        cost: 5,
+        proficiency: {
+            beginner: `During a night raid on an enemy outpost the mage forms the first Soul Bind with a scout partner. Physical contact and five minutes of meditation etch the link. The mage feels the scout's rising tension as they approach the perimeter and receives an immediate warning pulse when the scout spots a hidden sentry. The bond carries only emotional state and vital condition across one kilometer. No thoughts pass, only the warm presence of another living awareness. The connection severs automatically if the scout moves beyond range for ten minutes. At Beginner level the bond enables silent coordination during infiltration without risking spoken words or comms.`,
+
+            apprentice: `In an urban extraction under pursuit the mage maintains three simultaneous bonds with separated teammates. Range reaches ten kilometers and the link survives brief unconsciousness. Telepathic words and simple images flow naturally when both consent. The mage shares a mental map of the escape route while a bonded ally sends back a flash of pain indicating an injury. Minor mana flows across the bond let the mage lend enough energy for one final defensive spell. Sensory glimpses require active consent and end instantly. The bond resists casual disruption; an enemy psychic must focus effort to sever it and the attempt alerts both ends. At Apprentice level the spell supports small-team tactical coordination with shared awareness and limited resource sharing.`,
+
+            adept: `During a prolonged siege the mage coordinates ten allies across an entire district through the bond network. Distance no longer limits the connection on the same plane and it pierces light dimensional interference. Bonded partners pool reserves so a depleted caster draws twenty percent of an ally's mana per minute for sustained barrier work. When one partner suffers a mortal wound the mage anchors their soul inside the body for eight minutes, buying time for field healing. Full sensory and cognitive sharing occurs with group consent. The network cannot be jammed or eavesdropped by conventional means. At Adept level Soul Bind becomes a resilient spiritual command and support lattice for larger operations.`,
+
+            expert: `In a multi-front operation the mage merges thirty bonded partners into a temporary gestalt awareness field. Each member experiences the combined senses of the network while retaining individual identity and can exit instantly. Coordinated strikes land with perfect timing across three city blocks. The mage prepares soul fragments for key allies, storing backup spiritual copies in the device that can later guide a soul back if the body is destroyed and a compatible vessel exists. The mage senses and can reinforce distant family bonds and sworn oaths outside the direct network. At Expert level the spell delivers comprehensive spiritual coordination and emergency resurrection support within the limits of a Tier 1 effect.`,
+
+            master: `The optimized network sustains fifty simultaneous bonds with negligible mana overhead as a permanent background capability. Gestalt awareness, reserve pooling, sensory sharing, and one-hour death anchoring all function at peak efficiency. Soul fragments remain stable indefinitely with routine maintenance. Allies inside the network gain collective resistance to soul-targeting magic. This represents the design ceiling for Soul Bind as a Tier 1 spell: a robust multi-party spiritual link system for communication, coordination, mana sharing, and emergency soul stabilization. The mage cannot create souls from nothing, judge souls, span universes, or erase spiritual essence.`
+        }
+    },
+    {
+        id: 'dimensional_rift',
+        name: 'Dimensional Rift',
+        tier: 1,
+        cost: 5,
+        proficiency: {
+            beginner: `During a warehouse search for a missing supply cache the mage opens the first fist-sized Dimensional Rift. The device punches through the weakest local spacetime point and the rift glows with shifting non-color light for ten seconds. The mage peers through and spots the cache wedged in a shallow subspace pocket. A quick retrieval spell pulls the crate back into normal space. The rift closes under dimensional pressure before a second attempt. At Beginner level the spell serves as a sensory and utility tool for locating and retrieving small objects from adjacent layers and detecting nearby dimensional anomalies.`,
+
+            apprentice: `In a collapsing tunnel the mage opens a one-meter rift at twenty meters range and maintains it for sixty seconds. The rift pierces two adjacent layers, allowing the team to step through a shallow subspace pocket and emerge fifty meters ahead, bypassing the blocked section. An incoming enemy spell passes through the open rift and vanishes into the dimensional void. The mage senses the thickness of local dimensional barriers and identifies a weak point where a natural tear is forming, then stabilizes it before it expands. At Apprentice level the spell supports short-range transportation, defensive interception, and basic dimensional topography mapping for containing accidents.`,
+
+            adept: `During a facility breach the mage opens a vehicle-sized rift that remains stable for three hours, allowing an entire strike team and their transport to cross into a prepared pocket dimension the size of a large room. Inside the pocket the mage adjusts gravity direction and temperature for tactical advantage. The device tracks extra-dimensional entities moving through hidden layers within several hundred meters and redirects an enemy dimensional escape portal back into a prepared kill zone. At Adept level the spell enables large stable rifts, pocket dimension creation with limited environmental control, and manipulation of existing rifts created by others.`,
+
+            expert: `In a city-scale operation the mage maintains a block-sized rift for two days, linking three fixed points with a permanent gateway network. Multiple small-building-sized pocket dimensions run simultaneously with customized environments. The mage folds partially into an adjacent layer, becoming intangible to normal-space attacks while still casting outward. An enemy combatant is banished through a rift opened inside their position into a hostile near-dimension. The device creates dimensional dead zones where rift magic cannot function and tracks all rift activity across the operational theater. At Expert level the spell delivers city-block rifts, deep-dimensional access, multiple stable pockets, intangibility, and banishment within the constraints of a Tier 1 effect.`,
+
+            master: `The spell operates at design ceiling. Any practical rift size opens and closes with optimized efficiency while the device handles all calculations in the background. The mage maintains five stable building-sized pocket dimensions and a network of twelve permanent gateways. Extra-dimensional entities trigger automatic detection and preemptive sealing of weak points. Permanent portal networks, dimensional intangibility, and banishment all function at maximum reliability. This represents the ceiling of Dimensional Rift as a Tier 1 spell: reliable access to near-dimensions, stable pockets the size of buildings, portal networks, and dimensional defense. The mage is not a multiversal architect who creates or destroys universes or accesses every dimension simultaneously.`,
+
+            master: `The spell operates at design ceiling. Any practical rift size opens and closes with optimized efficiency while the device handles all calculations in the background. The mage maintains five stable building-sized pocket dimensions and a network of twelve permanent gateways. Extra-dimensional entities trigger automatic detection and preemptive sealing of weak points. Permanent portal networks, dimensional intangibility, and banishment all function at maximum reliability. This represents the ceiling of Dimensional Rift as a Tier 1 spell: reliable access to near-dimensions, stable pockets the size of buildings, portal networks, and dimensional defense. The mage is not a multiversal architect who creates or destroys universes or accesses every dimension simultaneously.`
+        }
+    }
+];
+
+// Merge base spells into main spell data structure at the beginning
+if (typeof spellData !== 'undefined' && spellData.abstract) {
+    spellData.abstract = baseAbstractSpells.concat(spellData.abstract);
+}
+
+const additionalAbstractSpells = [
+    {
+        id: 'illusion_casting',
+        name: 'Illusion Casting',
+        tier: 2,
+        cost: 10,
+        proficiency: {
+            beginner: `Illusion Casting at Beginner proficiency projects light-based visual phantasms within roughly ten meters—convincing still images, simple moving shapes, and minor camouflage that deceives casual observation. The device emits shaped mana fields that bend and color ambient light, producing apparent solid visual presence where nothing exists. Illusions are purely visual—no sound, heat, or tactile presence—and vanish when touched. Close inspection within a meter reveals subtle artifacts: edge-shimmer and lighting mismatches that trained mages detect. At this level the spell provides misdirection: false cover, decoy duplicates, disguised doorways. The device handles light-calculation math while the mage focuses on what the illusion depicts.`,
+
+            apprentice: `Range extends to thirty meters with synchronized auditory capability—footsteps, voices, ambient noise—creating phantasms that deceive sight and hearing. Visual quality withstands close inspection at half a meter. Complex moving illusions become possible: a duplicate that walks and gestures, simple disguises overlaid on the mage's appearance that pass casual scrutiny. The device maintains illusions without active concentration. Enemies waste attacks on phantoms, hesitate before illusory walls, and lose track of the mage's true position among decoys. Limitations remain: no mass, no heat signature, no withstanding physical contact.`,
+
+            adept: `All five senses are deceived within roughly one hundred meters—visual, auditory, olfactory, tactile, and thermal components. An illusory fire casts heat; an illusory wall feels solid when punched. Psychosomatic effects emerge: targets who believe in an illusion experience real physical responses to stimuli the device feeds their nervous system. Multiple independent illusions can be maintained simultaneously. The mage creates entire illusory environments—rooms that do not exist, populated with phantom furniture and phantom people—sustained for hours. The computational load is enormous, demanding a high-rank reactor.`,
+
+            expert: `Kilometer-range illusions with sensory fidelity indistinguishable from reality. The device models weight, temperature, texture, acoustics, and subconsciously perceived details like air displacement. Targets with truth-sight can pierce the illusion, but for anyone without countermeasures, the illusion IS reality for all practical purposes. Illusions persist independently with behavioral scripts—a phantom guard patrols for hours—while the device manages sensory deception for dozens of simultaneous targets. Memory manipulation through immersive illusory experiences becomes possible: overwriting short-term memories with fabricated events indistinguishable from real ones to the target.`,
+
+            master: `Perfect sensory illusions deployable across an entire city district simultaneously. The device handles all generation, modeling, and scripting as background processes. Mass deployment affects hundreds of targets with individually tailored experiences. Permanent illusory environments function as installations—a building forever appearing abandoned, a street passersby never notice. This is the ceiling of Illusion Casting as a Tier 2 spell: perfect sensory deception at district scale, but still bounded by what a Tier 2 spell can manifest.`
+        }
+    },
+    {
+        id: 'prophecy',
+        name: 'Prophecy',
+        tier: 4,
+        cost: 20,
+        proficiency: {
+            beginner: `Prophecy grants fragmented glimpses of probable futures through vivid but symbolic visions during meditation or intrusive flashes during danger. The device runs divinatory simulations processing environmental data, historical patterns, and probabilistic models—projecting likely outcomes of current trajectories. Visions are symbolic: a broken crown sinking into dark water, not a specific death at a specific date. Accuracy is roughly fifty to sixty percent for personal events within a week, dropping sharply beyond that. Each vision drains significant mana. At this level the spell is a warning system, not a planning tool—enough forewarning to avoid personal catastrophes, not to interrogate the future for tactical intelligence.`,
+
+            apprentice: `Clearer visions with improved temporal precision. The device generates multiple probable futures as a branching tree with varying likelihoods based on chosen actions. Accuracy reaches seventy to eighty percent for personal events within a week. Symbolism shifts toward literal imagery—a broken sword now means a broken sword. Timing resolves to 'tomorrow afternoon' rather than 'soon.' Visions can be shared through physical contact, though recipients experience them with reduced clarity. At this level the mage can productively use Prophecy for tactical planning: identifying the most dangerous decision points and their likely consequences before a mission.`,
+
+            adept: `High-resolution visions at roughly ninety percent accuracy for personal-scale events within a month. The device cross-references predictions against observed outcomes, continuously refining models. Causal-chain tracing reveals not just that an event will happen, but the specific sequence of causes—and which interventions can alter that chain. Continuous prophetic awareness runs as a low-level background scan, flagging significant probability shifts without conscious seeking. The mage feels when the probability landscape shifts dangerously as an intuitive warning. Prophecy transforms from a passive warning system into an active strategic planning tool.`,
+
+            expert: `Near-perfect probabilistic modeling for personal and local events up to several months out, exceeding ninety-five percent accuracy within the mage's direct sphere of influence. The mage perceives all significant probable futures simultaneously, navigating the probability landscape as terrain. Prophecy extends to civilizational-scale events—government collapses, war outbreaks, magical catastrophes—less precise at scale but providing actionable strategic intelligence. The spell detects futures deliberately hidden or manipulated by other diviners, flagging interference and modeling around it. The mage perceives the general shape of a hidden future even when its details are obscured.`,
+
+            master: `Personal and local events predicted with near-certainty for weeks; regional events at roughly ninety percent accuracy for months. Continuous prophetic awareness runs as automatic background function. The mage shares visions with any number of allies and provides directed prophecies about specific individuals or locations. Strategic interventions based on prophetic intelligence become routine—identifying threats before they coalesce, steering events through minimal, precisely targeted actions. This is the ceiling of Prophecy as a Tier 4 spell: highly accurate probabilistic forecasting for personal, local, and regional events—not all possible futures across all of existence.`
+        }
+    },
+    {
+        id: 'astral_projection',
+        name: 'Astral Projection',
+        tier: 3,
+        cost: 15,
+        proficiency: {
+            beginner: `The mage separates consciousness from physical body, projecting an intangible, invisible astral form within roughly one hundred meters. The device maintains a silver mana tether anchoring consciousness to the body and routing sensory data back. The experience is disorienting at first—perceiving from a floating perspective outside one's skull takes practice. The astral form passes through walls and floors, observing any location within range undetected by conventional means. Magical wards blocking spiritual intrusion stop the form, and beings with true sight can see the tether and track it to the vulnerable, unconscious physical body. At this level, Astral Projection is purely reconnaissance: scouting through walls, observing enemy positions, spying on conversations without physical risk.`,
+
+            apprentice: `Range extends to roughly one kilometer. The astral form perceives spiritual echoes—strong emotions, recent violence, concentrated magic—as residue revealing an area's recent history. Communication with spirits and other projected consciousnesses becomes possible. Basic physical interaction manifests: pushing small objects with will, creating faint ghostly whispers. The tether resists casual disruption with a secondary mana strand. The physical body is protected by a basic alarm ward. At this level the spell gains investigative utility: walking crime scenes after the fact to perceive astral impressions, or tracking spirits that fled their anchor points.`,
+
+            adept: `Range becomes effectively unlimited on the same plane—the device maintains the tether across continental distances through nested dimensional routing. The astral form affects the physical world with roughly ten percent of the mage's physical force. Selective visibility targets specific individuals. The astral plane appears as a dark-mirror world overlaid with spiritual impressions and luminous magical threads. Movement is at the speed of thought. The mage carries allies' consciousnesses as passengers. The physical body rests in stasis with active defensive wards. Up to three projections operate independently.`,
+
+            expert: `Full physical manifestation with roughly thirty percent combat capability—enough to delay an attacker or neutralize a mundane threat—though mana drain limits duration to minutes. Dimensional travel through the astral plane becomes possible: projecting into elemental planes and subspace by following their astral reflections. The device maintains multiple tethers across dimensional boundaries. The mage projects others independently, directing allies' astral forms via secondary tethers. Up to five fully functional projections operate simultaneously while the physical body rests under heavy ward protection.`,
+
+            master: `Planetary-range projection, physical manifestation at roughly forty percent combat capability, and multiple simultaneous forms. The device manages all tether maintenance, routing, and stasis protection automatically. A permanent low-level astral awareness runs constantly—sensing spirits, dimensional disturbances, and strong emotional residues without requiring full projection. This is the ceiling of Astral Projection as a Tier 3 spell: planetary-range travel, limited physical manifestation, multi-form operation, and dimensional reconnaissance—bounded by what a Tier 3 consciousness-projection spell can achieve.`
+        }
+    },
+    {
+        id: 'soul_sight',
+        name: 'Soul Sight',
+        tier: 2,
+        cost: 10,
+        proficiency: {
+            beginner: `Soul Sight overlays normal vision with a spectral layer revealing spiritual essence of living beings within roughly ten meters. The device analyzes the unique mana-signature every ensouled being emits—their spiritual fingerprint—rendering it as a luminous aura whose color, intensity, and texture reflect emotional state, spiritual health, and approximate magical capability. The overlay passes through most physical barriers but not magical concealment wards. The mage perceives anxiety without knowing its cause, detects spiritual corruption without diagnosing its source, and distinguishes mages from mundanes instantly. At this level Soul Sight provides threat assessment and social intelligence—identifying magically active individuals, spotting disguised spirits, and revealing spiritual truth that physical appearances conceal.`,
+
+            apprentice: `Range extends to roughly thirty meters with improved spectral resolution. The device performs deep analysis revealing personality traits (compassionate, ruthless, diligent, deceitful), significant life experiences that left spiritual marks (trauma, triumph, betrayal), and active magical effects on the soul—curses, blessings, bonds, ongoing manipulations. Spiritual disguises and basic concealment become transparent. Possession manifests as a misaligned aura; active telepathic influence appears as intrusive tendrils in the target's spiritual signature. The spell becomes a genuine investigative and counter-intelligence tool: conducting spiritual background checks, identifying subtle magical tampering, and tracking residual spiritual footprints.`,
+
+            adept: `Range reaches one hundred meters with temporal depth—reading major spiritual events from a being's past (initiations, corruptions, redemptions) and detecting past-life impressions as ghostly underlayers in the aura. The overlay pierces all but the most sophisticated spiritual concealment, cross-references signatures against known pacts and magical traditions, and reveals spiritual connections between beings as luminous threads stretching across space. Inanimate objects gain spiritual readability: murder weapons glow with dark residue, family heirlooms radiate accumulated love, battlefield artifacts thrum with violence echoes. The spell becomes invaluable for crime scene work, artifact identification, and spiritual archaeology.`,
+
+            expert: `Line-of-sight range across kilometers—if the mage can see a location through any means, the overlay applies. Spectral resolution distinguishes nearly identical spiritual signatures, tracks a specific individual's spiritual trail, and detects disturbances from decades past. The overlay reveals spiritual architecture: ley lines as rivers of light beneath the earth, consecrated ground as elevated terrain, ambient spiritual energy flowing through cities like weather patterns. The mage becomes an exceptional geomancer—identifying optimal ritual locations, detecting spiritual pollution in areas, and tracking the slow spiritual decay of neighborhoods.`,
+
+            master: `Permanently active with negligible mana cost, providing continuous spiritual awareness at maximum resolution. The device cross-references all observed data against accumulated catalogues of known signatures, flagging anomalies automatically. Spiritual trails can be followed days after the target passed through an area. Allies receive shared Soul Sight at Apprentice-level resolution for operation duration. The overlay integrates with the device's full sensory suite: physical, magical, and spiritual sight overlaid into coherent awareness. This is the ceiling of a Tier 2 spiritual perception spell.`
+        }
+    },
+    {
+        id: 'reality_anchor',
+        name: 'Reality Anchor',
+        tier: 4,
+        cost: 20,
+        proficiency: {
+            beginner: `During a midnight warehouse raid the mage plants a two meter Reality Anchor around the entry breach. An enemy illusion of solid floor dissolves after nine seconds revealing the real tripwire beneath. A low grade probability nudge intended to cause a fall has no effect inside the zone. The anchor remains active for thirty five seconds before the device signals mana depletion and deactivates. The mage cannot move the anchor once placed and it provides no defense against physical projectiles or elemental spells.`,
+
+            apprentice: `The anchor follows the mage at a five meter radius during a narrow alley pursuit. Two teleport attempts by pursuers collapse at the boundary depositing them off balance five meters short. A transmuted lock reverts to its original state after twenty five seconds of exposure. The mage stabilizes a small spatial ripple in a side street stopping objects from phasing through stacked crates. Movement doubles the mana cost limiting continuous runtime to one minute forty seconds. Two minor curses are suppressed simultaneously if they qualify as low grade.`,
+
+            adept: `Inside a twenty meter laboratory perimeter the anchor prevents all illusion formation and forces any teleport attempt to fail at the edge. The mage configures exceptions so allied speed enhancements continue while enemy probability fields are blocked. A reality tear from a failed experiment is repaired over ninety seconds restoring normal physics to the room. Permanent anchors left behind last up to ten days when extra mana is invested during placement.`,
+
+            expert: `At one hundred meter scale the anchor intercepts three incoming spatial fold attacks canceling them before they reach the defended position. Domination effects on two team members inside the field are purged within four seconds. A remote projection one kilometer distant stabilizes a collapsing breach in a distant test chamber allowing safe evacuation. The reference frame now counters advanced abstract loopholes the mage has catalogued from prior encounters.`,
+
+            master: `Two hundred meter district enforcement supports multiple anchors with separate exception profiles running at the same time. Automatic detection neutralizes any reality violation within the zone without requiring mage input. Keyed allies retain full access to their magic while unkeyed enemies are fully suppressed. Permanent seeds can be placed forming an overlapping network that persists for months. All systems operate with background mana optimization representing the practical upper limit for this tier four spell.`
+        }
+    },
+    {
+        id: 'memory_manipulation',
+        name: 'Memory Manipulation',
+        tier: 3,
+        cost: 15,
+        proficiency: {
+            beginner: `In a safehouse interrogation the mage touches the bound captive's wrist and reads the last four hours as broken sensory flashes: a warehouse layout, a voice saying coordinates, the taste of fear. The mage softens the captive's memory of the mage's face making it blurrier and less useful for later description. No new memories can be created and real ones cannot be removed, only made less sharp or slightly clearer. The captive must remain still and cooperative or the interface fails. The effect lasts only minutes before the memory regains its original clarity.`,
+
+            apprentice: `Contactless operation at five meters allows the mage to review an entire day of a target's life in seconds. Specific details are changed: a guard's remembered face becomes someone else, a password heard is altered by one digit. A simple false memory of having already searched a room is planted and accepted as real. Emotional weight attached to the memory adjusts automatically so the target feels the new version is natural. Complex edits require two minutes of sustained focus. The spell bypasses interrogation entirely by extracting operational details directly.`,
+
+            adept: `Entire life stories are rewritten over thirty minutes of work. A captured enemy operative receives a new childhood in a different city with different parents and different training. The operative now genuinely believes they have always been loyal to the mage's side. Skills are copied at eighty percent fidelity: watching the operative's memory of marksmanship training allows the mage to implant similar patterns in an ally who then shoots at that reduced level. Full archival copies are kept so any edit can be reversed later.`,
+
+            expert: `Fifty meter range supports simultaneous editing of ten targets at once. A group of witnesses all receive the same altered memory of an incident so their stories match perfectly. Residual impressions on a bloodstained knife let the mage experience the victim's last three minutes. A town's collective memory of its founding charter is rewritten so the official history now supports a new political claim. Environmental memory on objects and locations becomes readable for investigative work.`,
+
+            master: `Two hundred meter radius allows any number of targets to be read, edited, and implanted with surgical accuracy in a single pass. Skill transfer reaches ninety percent fidelity. Every extracted, altered, or implanted memory is stored in a complete archive that supports instant reversal. Collective memories of organizations or bloodlines can be adjusted with equal precision. Edited memories never change what actually occurred, only what the affected people remember. This is the upper limit for a tier three memory spell.`
+        }
+    },
+    {
+        id: 'curse_casting',
+        name: 'Curse Casting',
+        tier: 3,
+        cost: 15,
+        proficiency: {
+            beginner: `From across a crowded tavern the mage places a line of sight curse on a target causing keys to be misplaced three times and a persistent dull headache for the next four days. The device attaches a small hostile mana construct to the target's spiritual signature that siphons minor energy and creates low level interference. The curse fades after three to seven days or can be removed by any competent mage. Only one curse can be maintained at a time and the effect produces inconvenience rather than injury.`,
+
+            apprentice: `Conditional curses activate only when the target performs a chosen action such as drawing a weapon against an ally. Physical signs appear as faint marks on the skin and a noticeable local temperature drop. Two curses can run simultaneously and resist casual removal requiring a dedicated counter ritual. Curses can be delivered through prepared objects allowing indirect application. Layered effects cause the initial inconvenience to worsen after forty eight hours if not addressed.`,
+
+            adept: `Death curses activate under specific conditions such as speaking a true name under a full moon. Ability removal causes a swordsman's grip to tremble uncontrollably during combat. These effects develop over hours or days giving time for countermeasures. Up to five active curses are tracked automatically. Permanent curses can descend through bloodlines for three generations unless dispelled. The mage can chain multiple effects so one curse triggers another.`,
+
+            expert: `Existential curses cause targets to be forgotten within hours by everyone who interacted with them. A curse of obscurity makes spoken words go unheard and achievements attributed to others. Conceptual targets such as an organization's luck can be affected without cursing each member individually. Curses can bind a soul to a location after death or prevent a traitor's spirit from finding rest. Breaking expert curses requires the caster's cooperation or a specialist of comparable skill.`,
+
+            master: `Up to twenty curses run simultaneously with real time tracking of each target's condition. Complex conditional logic chains are handled autonomously by the device. Bloodline curses persist across unlimited generations. Conceptual curses affect organizations, bloodlines, and abstract entities with precision. Full monitoring and updating occur without mage input. This represents the upper bound of what a tier three malefic spell can sustain.`
+        }
+    }
+];
+// Append to additionalAbstractSpells
+additionalAbstractSpells.push(
+    {
+        id: 'blessing_bestowal',
+        name: 'Blessing Bestowal',
+        tier: 3,
+        cost: 15,
+        proficiency: {
+            beginner: `During a quiet evening in a border village the mage places a hand on a weary scout's arm. The blessing settles as a steady warmth that lasts four days. The scout sleeps soundly, minor cuts close overnight, and a routine patrol uncovers useful tracks by chance. The device reinforces natural recovery without creating new abilities. Only one blessing runs at a time and the effect fades after the duration.`,
+            apprentice: `During a tense supply run the mage bestows a conditional blessing on a driver. The blessing activates when the driver protects a civilian convoy and grants clearer judgment for two weeks. Two such blessings run simultaneously and can be passed via a token amulet. A second blessing on a healer speeds patient recovery by noticeable margins without miracles.`,
+            adept: `During a siege relief the mage bestows a transformative blessing on a field medic. The medic gains steady hands that never tremble in surgery and patients heal from chronic joint pain over months. The blessing becomes permanent unless the mage revokes it. Five blessings track simultaneously and bloodline layering affects direct children.`,
+            expert: `During a city reconstruction the mage bestows an existential blessing on the lead engineer. The engineer's designs gain lasting recognition across generations and violence never erupts inside the new district hall. Abstract subjects such as a community's morale receive similar treatment. The effects form foundational properties that require major magic to undo.`,
+            master: `During a multi-year campaign the mage maintains twenty blessings across allied units with the device handling tracking. Conditional logic activates reserves when units defend key positions and bloodline blessings persist through generations. Organizations receive moral weight that deters corruption. Full archives allow instant revocation. This reaches the ceiling for a tier three benefic spell.`
+        }
+    },
+    {
+        id: 'summoning',
+        name: 'Summoning',
+        tier: 3,
+        cost: 15,
+        proficiency: {
+            beginner: `During a night watch in a ruined outpost the mage opens a calibrated pathway and calls a minor elemental wisp. The wisp appears as a floating orb of light, follows the command to illuminate a corridor for eight minutes, then returns to its plane. The device broadcasts a voluntary call that lesser spirits answer. Only one entity maintains at a time and the creatures provide light or minor distraction without combat capability.`,
+            apprentice: `During a skirmish the mage summons a combat-capable spirit equivalent to a trained soldier. The spirit holds a line for fifty minutes while the mage maintains three simultaneous entities. Binding contracts establish service terms that prevent betrayal. Entities answer from greater distances across the astral plane but deeper layers remain closed. The spell now supplies genuine allied combat power and utility support.`,
+            adept: `During a siege the mage summons an elemental guardian from an adjacent plane. The guardian serves permanently once sufficient mana invests and obeys contractual terms enforced by the device. The mage calls entities by true name and maintains ten simultaneous beings. The device assembles unique servant constructs not found in existing dimensions.`,
+            expert: `During a campaign the mage negotiates with a spirit king. The being is intelligent and powerful; the device establishes fair terms but the entity's cooperation comes through respect rather than coercion. Aspects of concepts take temporary form such as accumulated battlefield courage shaped into a being. The mage reaches dimensional layers most conjurers cannot access.`,
+            master: `During extended operations the mage maintains twenty entities with the device handling contracts and pathways in the background. Standing pacts allow instant deployment without negotiation. Contract violations trigger automatic banishment and penalty extraction. Summoned beings operate independently for days on extended missions. This reaches the ceiling for a tier three conjuration spell.`
+        }
+    },
+    {
+        id: 'banishment',
+        name: 'Banishment',
+        tier: 3,
+        cost: 15,
+        proficiency: {
+            beginner: `During a ritual in a warded chamber the mage severs a minor extra-planar wisp from the current plane. The device analyzes the entity's signature, calculates the return pathway, and applies repulsive force that ejects the wisp back to its origin. Line-of-sight is required and the spell works only on beings that do not belong here. Stronger entities resist through spiritual mass and the effect either succeeds or fails.`,
+            apprentice: `During an incursion the mage banishes a stronger entity to a sealed pocket prison rather than its home plane. The device maintains persistent banishment wards around a location that automatically reject specified types. Partially manifested or possessing entities are fully ejected while the host remains intact. Banished entities receive a return prohibition lasting days to months.`,
+            adept: `During a corruption event the mage banishes any extra-planar being regardless of power. The ejection field scales force to the entity's mass. Even native beings can be sent to other dimensions at higher mana cost. Permanent banishment severs the entity's pathway to this plane at the root. Aspects such as a possessing spirit's control over specific limbs can be removed without dispelling the whole entity.`,
+            expert: `During a district-wide incursion the mage banishes all demons from the area in one casting. Concepts and forces become targets: the influence of a dark presence ejects from consecrated ground and accumulated despair clears from a trauma site. Banishment dead zones form where specified entity types cannot exist. Entities can be held in dimensional suspension for months before release.`,
+            master: `During a theater-scale operation the mage banishes any sensed entity instantly with the device handling analysis and force autonomously. Category-level banishment affects entire classes across the operational area. Permanent dead zones cover districts with minimal overhead. Complex rules such as ejecting all beings aligned with a specific entity from a continent for a century enforce automatically. This reaches the ceiling for a tier three abjuration spell.`
+        }
+    },
+    {
+        id: 'contract_magic',
+        name: 'Contract Magic',
+        tier: 3,
+        cost: 15,
+        proficiency: {
+            beginner: `The mage creates magically binding agreements between two willing parties, with the device forming a metaphysical contract construct that monitors compliance and enforces specified penalties for violation. Simple terms can be enforced: 'Party A will deliver the artifact by sunset; failure triggers a mild compulsion to return the payment.' Both parties must understand the terms and consent freely. Coerced agreements are magically void. The device detects intentional contract violations through direct reading of the parties' actions and intent; genuine accidents or impossible circumstances do not trigger penalties. The mana cost is moderate per contract, and up to three active contracts can be maintained.`,
+
+            apprentice: `More complex agreements are possible, with multiple parties, conditional terms, escalating penalties, and specified beneficial outcomes alongside punitive ones. 'If Party A secures the eastern pass before the army arrives, they receive a month of enhanced physical capability; if they fail through negligence, they suffer equivalent weakness for the same duration.' The device performs automatic interpretation of ambiguous terms based on the parties' stated intent at signing. Contracts can extend to heirs if all parties explicitly acknowledge the clause at signing. At this level, the device maintains up to ten active contracts.`,
+
+            adept: `Reality-enforced agreements that become physically difficult to violate. A contracted bodyguard finds spatial manipulation by the device makes straying more than ten meters from their charge increasingly difficult. A contracted courier finds routes to their destination unusually clear while others are blocked. Penalties manifest as automatic magical effects: a promise-breaker loses access to their mana reserves until restitution is made; a contract violator finds their own spells turn against them. These effects are the device actively enforcing terms. Organizations and bloodlines can be bound as collective entities, making every member individually subject to the contract's terms.`,
+
+            expert: `Agreements that bind supernatural entities through their willing participation in the contract framework. A contract with a winter spirit, negotiated through its manifestation, can specify the severity and duration of the season in a region. A contract with a city's guardian spirit can bind it to protect specific individuals within its borders. Terms can make improbable outcomes more likely through probability manipulation channeled through the contract construct, such as guaranteeing that the next arrow fired will find its mark.`,
+
+            master: `The spell runs at its design ceiling. Up to fifty active contracts can be maintained simultaneously, with the device handling all monitoring, interpretation, and enforcement autonomously. Contract terms can incorporate complex logic chains and conditional clauses that reference external events. The device maintains a perfect archive of all contracts, their terms, and their enforcement history. Standing contracts with allies, organizations, and allied supernatural entities are managed as routine background processes. This is the ceiling of Contract Magic as a Tier 3 spell: a comprehensive magical legal framework bounded by what a Tier 3 binding spell can enforce.`
+        }
+    },
+    {
+        id: 'life_drain',
+        name: 'Life Drain',
+        tier: 4,
+        cost: 20,
+        proficiency: {
+            beginner: `The mage siphons vitality from a living target through touch, creating a one-way mana conduit that extracts life force—the ambient biological and spiritual energy that sustains living beings—and channels it into the mage's own reserves. At this level, the drain is equivalent to the energy of a full night's sleep: the target feels suddenly exhausted, the mage feels refreshed and slightly healed. The effect cannot kill and the drained energy does not cure serious injuries; it provides temporary revitalization and closes minor wounds. The spell requires physical contact and a willing or incapacitated target. Mana cost is low since energy is taken rather than spent, but the device must carefully regulate the flow to avoid spiritual damage to the target.`,
+
+            apprentice: `Range extends to roughly ten meters and the drain scales significantly. The mage can extract enough vitality to cause genuine debilitation—the target collapses from exhaustion, ages slightly as cellular repair processes are drained, or sustains damage equivalent to prolonged illness. Multiple targets can be drained simultaneously, with the device managing up to three separate conduits. Drained energy can be stored in the device's buffer for later use, functioning as an emergency mana reserve independent of the mage's reactor. The mage can drain through thin barriers (clothing, simple cover) and transfer drained life energy to allies through touch—serving as a conduit rather than the beneficiary.`,
+
+            adept: `Roughly fifty-meter range with the ability to drain to the point of death. The device can now extract specific qualities alongside raw life force—youth, causing the target to age decades in seconds; strength, leaving the target physically debilitated for weeks; or specific biological functions like sight or hearing, temporarily disabling them. The mage gains drained qualities partially: aging a twenty-year-old target by ten years gives the mage a few days of youth; draining a weightlifter's strength provides a few hours of enhanced power. Massive amounts of life force can be absorbed safely through the device's energy buffer, and the mage can drain from environmental sources—siphoning vitality from a forest to heal, or draining ambient life energy from a crowded room for a subtle passive buff.`,
+
+            expert: `City-block-scale draining—hundreds of meters—with the ability to drain entire populations simultaneously. Absorbed life force can grant temporary functional immortality: the mage's body stops aging and regenerates from otherwise fatal damage as long as the drain is maintained. The device can target abstract vitality: draining the vitality from an organization by siphoning the collective energy of its members, draining the vitality of an ecosystem to collapse it, or draining the spiritual momentum of a movement to sap its energy. At this level, the mage crosses ethical lines that most societies consider unforgivable, and the spell's use is regulated by international magical treaty.`,
+
+            master: `The spell runs at its design ceiling. Draining radius covers roughly five hundred meters—multi-block scale—with the device managing hundreds of simultaneous conduits while regulating outflow for optimal conversion. The energy buffer can store enough life force to fully heal the mage and twenty allies from near-death multiple times. Quality extraction is precise and discriminating: drain a target's disease while leaving their health intact, extract poison from a bloodstream, or drain the magical contamination from a curse victim without touching their soul. This is the ceiling of Life Drain as a Tier 4 spell: mass-scale vitality manipulation bounded by what a Tier 4 spell can achieve.`
+        }
+    },
+    {
+        id: 'necromancy',
+        name: 'Necromancy',
+        tier: 4,
+        cost: 20,
+        proficiency: {
+            beginner: `The mage animates corpses as simple undead servants—slow, clumsy constructs that follow basic verbal commands and possess roughly the physical capability of their living bodies minus coordination and initiative. The device achieves animation by embedding a mana construct in the corpse's nervous system, using the residual biological framework as a puppet rather than truly resurrecting the deceased. The original soul is not involved; these are meat machines powered by magic. Up to three undead can be maintained simultaneously, and they degrade over roughly one week as the host tissue breaks down. The mage can also communicate with the recently deceased (within one day) by briefly stabilizing their departing soul for questioning.`,
+
+            apprentice: `More sophisticated undead become possible: skeletons cleaned and reinforced for longevity, ghouls with enhanced physical capability and autonomous hunting instincts, and intelligent undead that retain fragments of their living memories and can make simple tactical decisions. The original soul is still not involved—this is necromantic animation, not resurrection—but the device can now interface with the residual neural patterns in the brain to access the corpse's muscle memory and learned skills. Up to ten undead can be maintained, and preservation spells prevent tissue degradation for months. The mage can communicate with spirits of any era by reaching across the boundary between life and death to contact souls that have not yet fully dissipated.`,
+
+            adept: `Armies of undead—dozens to hundreds—operating under the device's tactical coordination. The mage creates permanent undead: vampires, liches, death knights—beings animated by a fragment of the mage's own spiritual essence embedded in a prepared vessel, granting them genuine intelligence and autonomy. These lieutenants can command lesser undead independently. The mage can delay or temporarily reverse death: stabilizing a fatally wounded ally's soul within their body for hours, or briefly restoring life to a corpse for interrogation. The boundary between life and death becomes manipulable within the mage's immediate sphere—a localized power over mortality that makes the mage feared and respected in equal measure.`,
+
+            expert: `The mage grants permanent undeath as a transformation rather than a temporary animation—creating immortal beings that persist indefinitely, bound to the mage's service by spiritual contract. True resurrection becomes possible: restoring a deceased individual to full life by retrieving their soul and anchoring it to a repaired or replacement body. This requires the soul to be intact, willing, and not yet reincarnated elsewhere. The mage can create and govern afterlife spaces—pocket realms where bound souls persist in states of the mage's design, serving as reservoirs of spiritual power and knowledge. At this level, the mage is a death-god in miniature, with dominion over a small but genuine spiritual kingdom.`,
+
+            master: `The spell runs at its design ceiling. The device manages up to a thousand undead simultaneously with autonomous tactical coordination through the spiritual-lieutenant network. Permanent undead can be created at scale—an immortal legion bound to eternal service. Resurrection success rate exceeds ninety percent for souls retrieved within a year of death. Pocket afterlife realms housing hundreds of souls are maintained as stable dimensions with full spiritual ecosystem management. This is the ceiling of Necromancy as a Tier 4 spell: genuine dominion over death and undeath at personal-to-regimental scale—not 'ending death itself' or 'creating new forms of afterlife for all existence,' bounded by what a Tier 4 spell can achieve.`
+        }
+    },
+    {
+        id: 'possession',
+        name: 'Possession',
+        tier: 4,
+        cost: 20,
+        proficiency: {
+            beginner: `The mage channels awareness through the device into a willing ally ten meters away during a tense standoff. They inhabit the host's body, directing a hand to draw a hidden blade while feeling the ally's heartbeat and hearing through their ears. The mage's own form slumps in a nearby chair, defenseless until the link ends after twenty minutes of strain. The host stays fully aware and cooperative; any hint of resistance ejects the connection immediately.`,
+            apprentice: `Stronger spiritual pressure lets the mage override a weaker unwilling target in a dark corridor. The device suppresses the host's soul reflex, granting motor control for nearly an hour while the original mind goes dark. The mage's body rests under a basic ward that deters casual threats. Memories surface as flashes during the possession, readable but unchangeable. Movements feel smoother as the device stores the host's walking patterns. Range reaches twenty-five meters.`,
+            adept: `The mage manages two hosts at once in a nighttime infiltration. One body scouts ahead while the second stands guard, with the device splitting focus across both. The original form stays in stasis. A captured animal serves as temporary vessel after several minutes of sensory recalibration. Consciousness parks briefly in an enchanted locket between switches. Sessions last hours before cumulative fatigue demands release.`,
+            expert: `Prepared vessels enable rapid switches. From a collapsing soldier's form the mage jumps to a reinforced construct across the street in under a second, keeping combat edge. Three hosts coordinate through device background handling. Loss of one vessel pulls awareness to the nearest backup without gap. Coordinated attacks on every vessel leave only moments to locate a replacement anchor before the consciousness has nowhere to attach.`,
+            master: `The spell operates at its intended maximum. Transfers between prepared vessels happen with no awareness loss. Four simultaneous hosts function across a skirmish line under device management. Multiple backups protect against isolated losses. Total destruction of every prepared vessel ends the mage with no remaining options. This marks the ceiling of Possession as a Tier 4 spell: dependable switching among limited vessels, not endless life.`
+        }
+    },
+    {
+        id: 'empathy',
+        name: 'Empathy',
+        tier: 2,
+        cost: 10,
+        proficiency: {
+            beginner: `The mage detects strong emotions from people within ten meters as colored impressions in awareness. Red registers as anger, blue as sorrow, gold as sudden joy. The device translates mana fluctuations into these intuitive signals. A liar shows anxiety spikes that stand out; someone building toward violence shows clear aggression buildup. Gentle nudges become possible, such as easing tension in a nervous ally or increasing focus in a distracted guard. Mana cost stays low for passive reading.`,
+            apprentice: `Range reaches thirty meters with layered emotional detail. The mage senses that a person's current anger rests on fresh grief or that their calm hides terror. Specific states can be dialed up or down: rage cools to irritation, hesitation grows into resolve. Temporary trust forms between strangers during a negotiation. Emotions can be projected across a small group to shift the overall mood. Residue from past intense feelings lingers in rooms and can be read.`,
+            adept: `At one hundred meters the mage imposes any emotional state. A soldier facing death feels calm resolve. A long-trusted partner experiences sudden hatred. Repeated sessions rewire habits, turning cowardice into steady nerve or aggression into restraint. Courage drawn from a veteran transfers to a frightened civilian through the device buffer. Non-human minds receive equivalent emotional stimulation matched to their species. This level grants direct emotional dominance.`,
+            expert: `City-district scale emotional influence becomes possible. Calm spreads across a rioting street. Hope broadcasts through a disaster zone. Despair saturates an enemy line and breaks their will to advance. Collective grief condenses into a visible cold mist. Rage forms a heat shimmer. Emotional states can be anchored to a location so that anyone entering later feels the same overwhelming sorrow or protective warmth.`,
+            master: `The spell reaches its design ceiling. The device tracks millions of emotional signatures across the operational area simultaneously. Specific moods can be sustained indefinitely in large populations. A city genuinely feels hopeful for decades. A fortress never experiences fear among its defenders. Precision allows exact calibration: just enough doubt in a commander to cause hesitation at the critical moment, or measured confidence to carry an ally through exhaustion without recklessness. This is the limit of Empathy as a Tier 2 spell.`
+        }
+    }
+);
+additionalAbstractSpells.push(
+    {
+        id: 'true_sight',
+        name: 'True Sight',
+        tier: 3,
+        cost: 15,
+        proficiency: {
+            beginner: `The mage sees through active illusions and disguises within ten meters. The device compares visual input against physical and magical analysis, highlighting mismatches as visual artifacts. An illusory wall shows shimmering edges. An invisible figure registers as a faint heat outline. A magical disguise shows overlay distortions where the false appearance fails to match the true form. Stronger illusions may appear warped rather than fully transparent. Mana cost supports sustained viewing for minutes at a time.`,
+            apprentice: `Range extends to thirty meters. Shapeshifters appear in their base form regardless of current shape. Possessing entities register as misaligned spiritual layers on their hosts. Transformed objects display both current and original states at once. Physical barriers up to four meters thick become partially transparent to the sight. Lies create visible distortions around the speaker as the device registers cognitive dissonance. The spell functions as a reliable personal-scale truth tool.`,
+            adept: `At one hundred meters the mage perceives deeper layers. A carved wooden object reveals the tree it came from, the hands that shaped it, and decades of wear as spiritual residue. Complex magical effects display every mana thread and routing path. Divine concealment is pierced enough to confirm a god's presence even when full details stay hidden. History and intent become visible on objects and people.`,
+            expert: `Line-of-sight extends across kilometers whenever the mage can perceive a location through any sense. All illusions and disguises fail within that range. A fresh wound reveals the blade, the hand that swung it, and the intent behind the strike. Accumulated evidence reconstructs recent past events directly. The mage functions as a living fact-checker whose observations hold weight in magical courts.`,
+            master: `The spell runs at its design ceiling. True Sight stays active across the mage's full perceptual range with negligible mana. The device automatically flags deceptions and inconsistencies against its database of known truths. The mage experiences truth as naturally as color. Nearby allies receive a weaker shared version through device processing. This marks the limit of True Sight as a Tier 3 spell: comprehensive perception at personal range, not universal knowledge.`
+        }
+    },
+    {
+        id: 'fate_manipulation',
+        name: 'Fate Manipulation',
+        tier: 5,
+        cost: 25,
+        proficiency: {
+            beginner: `During a tense standoff at a border checkpoint the mage uses Fate Manipulation on a coin toss to decide whether the guard searches the vehicle. The device visualizes faint luminous threads around the guard and the decision point. A gentle tug increases the chance the coin lands heads by about ten percent. The coin comes up heads and the guard waves them through without inspection. The mage feels the slight mana drain but the effect is indistinguishable from ordinary luck. At this level the spell offers only marginal statistical edges on single events.`,
+            apprentice: `In a covert extraction the mage severs the fate-thread connecting a pursuing patrol to the extraction route. The device shows the patrol's thread as a thin glowing line that the mage snips with focused will. The patrol turns down a side street instead of continuing the chase. The mage also weaves a new thread to guarantee the courier reaches the safehouse by dawn despite a storm. This single guaranteed outcome costs significant mana and makes other paths slightly less likely. The device models the target's fate-web weeks ahead to find the minimal intervention point.`,
+            adept: `During a prolonged military campaign the mage targets the fate-web of a key supply officer whose decisions influence the entire front. Over three weeks the mage severs threads leading to a critical ammunition shortage and weaves new ones toward timely resupply. The officer experiences a string of small fortunate coincidences that keep the supply line intact. The campaign shifts from stalemate to breakthrough without any single dramatic event. The mage identifies pivotal individuals and applies sustained low-level pressure across multiple fate-threads.`,
+            expert: `The mage weaves persistent fate-threads around a small strike team during an infiltration. Each member is bound to a course that makes them likely to encounter useful intelligence and avoid detection. One operative finds a forgotten access code in a drawer. Another draws the attention of a sympathetic informant. The influence is strong but not absolute; an enemy fate-mage or determined resistance can still disrupt the pattern. The mage maintains fate-wards on the team that deflect hostile fate interference.`,
+            master: `Over months the mage maintains fate-webs around a resistance cell operating across a province. The cell experiences consistent favorable coincidences that allow them to grow and strike effectively. Fate-wards protect against enemy manipulation and the mage can trace hostile fate magic back to its source. Personal fate-webs become self-reinforcing. However every outcome remains a strong tendency rather than certainty; extraordinary effort or counter-magic can still avert even the most heavily weighted fate. This is the design ceiling for Fate Manipulation as a Tier 5 spell.`
+        }
+    },
+    {
+        id: 'conceptual_magic',
+        name: 'Conceptual Magic',
+        tier: 5,
+        cost: 25,
+        proficiency: {
+            beginner: `During a weapons inspection the mage reinforces the concept of sharpness in a confiscated blade. The device shows the platonic quality of 'sharp' as a faint overlay on the metal. A slight emphasis makes the edge cut through a practice target ten percent more cleanly than before. The effect is real but modest and costs noticeable mana. At this level Conceptual Magic provides fine adjustments to existing qualities.`,
+            apprentice: `In a stealth operation the mage temporarily removes the concept of visibility from their own body for three minutes. The device maintains the conceptual alteration against reality's pressure. The mage becomes functionally invisible to normal sight while the effect lasts. They also apply the concept of 'finding' to a lost data crystal so it drifts toward the search target. Both alterations require continuous device reinforcement and end when the mage stops concentrating.`,
+            adept: `During a siege the mage suppresses the concept of gravity in a fifty-meter room. The device weakens the underlying quality of downward pull across the entire space. Enemy troops inside the zone must exert enormous effort to move or aim. The mage also permanently imbues a sword with the concept of 'seeking' so it finds gaps in armor on its own. Living targets can receive the concept of honesty as a persistent compulsion they can resist but never fully escape. The changes are local and limited by device power.`,
+            expert: `The mage applies the concept of impregnable across an entire fortress wall section. The device strengthens the quality of resistance so the section requires sustained high-tier assault to breach. A new temporary concept is invented and imposed on a corridor: any footsteps within it produce echoing warnings that alert the defenders. The conceptual framework decays if the device stops maintaining it. Abstract systems such as organizational corruption can be pressured but require ongoing investment.`,
+            master: `Over weeks the mage maintains district-scale conceptual influence. Physical targets receive persistent imbuements such as weapons that remain extremely effective within their conceptual scope. New concepts created by the mage persist only while the device actively maintains them. Physical laws cannot be rewritten. Nothing becomes literally indestructible. This is the design ceiling for Conceptual Magic as a Tier 5 spell.`
+        }
+    },
+    {
+        id: 'name_magic',
+        name: 'Name Magic',
+        tier: 4,
+        cost: 20,
+        proficiency: {
+            beginner: `During an interrogation the mage spends twenty minutes of device analysis on a captured spy and learns the spy's true name. The device deduces the unique spiritual signature from surface thoughts and emotional residue. Knowing the name gives the mage a minor bonus when casting truth-detection spells against the spy. The mage can also sense the spy's general location within the building. Simple objects take only minutes to name; complex beings require hours. At this level the spell provides magical leverage on single targets.`,
+            apprentice: `In a duel the mage speaks the opponent's true name while casting a binding spell. The device uses the name as a targeting key that bypasses the opponent's spiritual defenses, doubling the spell's effectiveness. The mage also erects a name-cipher ward that masks their own true name from enemy name-mages. Changing a true name is possible but leaves the target disoriented for days. The device protects the mage and nearby allies against hostile name magic.`,
+            adept: `During a negotiation the mage speaks the name of a hostile spirit and issues a command to stand down. The device creates a magical compulsion the spirit must actively resist with willpower. The spirit remains aware and can fight the pressure but sustained commands exhaust it within minutes. The mage also names a newly constructed golem into existence, giving it a true name that grants it independent identity and vulnerability to name magic. The device maintains a protected library of all known true names.`,
+            expert: `The mage spends weeks studying a powerful elemental entity through indirect exposure and finally learns its true name. With the name the mage can summon the entity, issue binding commands, or erect wards that specifically target it. The mage also gives true names to several custom magical constructs, investing them with genuine independent existence. Learning resistant entities requires extended study and direct or indirect device analysis.`,
+            master: `Over months the device builds and maintains a comprehensively warded name-library of every true name the mage has learned. True-name command magic operates at peak efficiency and named creations function as autonomous agents. The mage can learn the true names of entities that actively resist naming, though the process may take weeks. The library automatically defends against hostile name-magic targeting the mage or allies. This is the design ceiling for Name Magic as a Tier 4 spell.`
+        }
+    },
+    {
+        id: 'dream_walking',
+        name: 'Dream Walking',
+        tier: 3,
+        cost: 15,
+        proficiency: {
+            beginner: `In a safehouse thirty kilometers from the target, the mage prepares Dream Walking on a captured enemy officer sleeping in a holding cell one floor below. The device interfaces with the target's neural patterns through the building's mana lattice, pulling the mage into the officer's dream of a routine patrol briefing. The mage appears as a fellow lieutenant reviewing maps. With focused intent the mage adjusts the dream lighting to highlight a supply route the officer had previously overlooked in waking reports. The target accepts the change without suspicion. Before exiting the mage leaves a simple symbol of crossed swords in the corner of the map, which the officer will recall upon waking as a subconscious warning. The entire session lasts four minutes and costs moderate mana.`,
+            apprentice: `During a hostage negotiation the mage enters the dream of a high-value target held in a distant facility. The device shapes the entire dream into a reconstruction of the hostage's childhood home where the target feels safe. The mage appears as a trusted childhood friend and guides the target through a therapeutic scenario in which the hostage taker is revealed as a manipulated pawn rather than a willing enemy. The target processes suppressed guilt and agrees in the dream to provide the location of the remaining captives. The mage also brings a second dreamer, a trauma counselor, into the shared space so the target receives immediate waking support upon exit. The shared dream lasts twenty minutes and leaves the target with renewed resolve.`,
+            adept: `In a forward operating base under siege the mage creates a persistent dream-realm anchored to the device. The realm functions as a training ground where a squad practices breaching maneuvers without physical risk. The mage grants access to six operatives who enter the realm each night for four hours of accelerated drills. One operative who experienced a traumatic ambush in the previous mission revisits the event in the realm; because they believe the dream-resolution in which they successfully extract their teammate, the waking psychological burden lessens measurably. When an enemy scout attempts to infiltrate the base through dream-projection, the mage traps the scout in a layered loop that replays the same hallway indefinitely while the mage coordinates the real defense.`,
+            expert: `From a command post in the capital the mage reaches the dreams of a known enemy general stationed on another continent. The device navigates the collective dreamscape and locates the general's mind within seconds. Inside the dream the mage constructs a fully realized interrogation chamber indistinguishable from reality. The general experiences three subjective days of questioning while only six hours pass in waking time. The mage extracts the locations of three hidden supply caches and the timetable for an upcoming offensive. At the end the mage seals the general inside a pocket dream-prison where the body remains in medical stasis on a cot while the mind continues in the constructed reality. The prison is maintained with minimal ongoing mana.`,
+            master: `The device maintains twelve persistent dream-realms simultaneously, each configured for different operational needs: one serves as a neutral meeting space for diplomats, another as an accelerated combat simulator for strike teams, and a third as a long-term therapeutic environment for recovering agents. Global dream access operates continuously in the background; the mage can locate and enter any known target's dreams within four seconds of intent. Dream prisons holding high-value prisoners run indefinitely with automated maintenance scripts that adjust environmental parameters to prevent psychological collapse. The mage splits consciousness to operate inside one dream-realm while simultaneously directing waking operations through the device link. This represents the design ceiling for Dream Walking as a Tier 3 spell.`
+        }
+    },
+    {
+        id: 'spatial_lock',
+        name: 'Spatial Lock',
+        tier: 4,
+        cost: 20,
+        proficiency: {
+            beginner: `In a forward command post the mage establishes a five-meter Spatial Lock around the communications room. The device projects a continuous reinforcement field that thickens local spacetime, rendering dimensional routing impossible for standard teleportation protocols. When an enemy scout attempts to teleport directly into the room, the device detects the incoming signature and the jump fails with a sharp spatial feedback pulse that disorients the scout on the origin side. The lock remains stationary and requires steady mana draw. At this level the spell denies basic teleportation and portal creation within small secured areas.`,
+            apprentice: `During an extraction operation the mage expands the lock to twenty meters and configures it to block all forms of dimensional transit including plane-shifting and spiritual movement. The device keys the lock to permit two specific allied operatives to teleport through while denying all others. When an enemy teleporter attempts entry, the device logs the attempted destination coordinates and the attacker's magical signature for later tracking. The mage also activates a mobile variant centered on their own position during the retreat, maintaining the lock while moving through contested streets. At this level the spell provides reliable spatial security for small operational zones.`,
+            adept: `In a contested urban district the mage creates a fifty-meter permanent Spatial Lock anchored by a mana reservoir invested into a structural pillar. The reinforcement makes space itself rigid; even the minor dimensional fluctuations that accompany electrical storms are suppressed within the zone. No translocation of any kind functions inside the lock regardless of the teleporter's power level. The lock serves as a prison cell for a captured enemy teleporter whose device cannot breach the reinforced boundary. The permanent fixture maintains itself for months with only routine recharging. At this level the spell enables building-scale containment and long-term secure facilities.`,
+            expert: `During a city-wide containment operation the mage projects a two-hundred-meter Spatial Lock onto a distant enemy safehouse from three kilometers away. Inside the locked zone all spatial manipulation fails: warping, compression, expansion, and dimensional folding are impossible. The device registers the locked area as blank space to enemy sensors, so teleporters attempting to jump into the zone receive no valid target coordinates. The mage configures a non-standard geometry inside one corridor so that any attempt to bypass it spatially loops the intruder back to the entrance. At this level the spell delivers city-block denial with remote projection and defensive geometry.`,
+            master: `The device sustains a five-hundred-meter district-scale Spatial Lock as a permanent background capability. Multiple independent locks operate simultaneously across the operational theater, each with distinct exception lists and configurations. Authorized personnel pass through without restriction while all unauthorized transit attempts are logged with full signature and destination data. At-range projection reaches targets up to ten kilometers distant, and mobile locks centered on the mage or allied units function at full strength. Permanent anchor networks maintain district-wide containment with negligible ongoing cost. This represents the design ceiling for Spatial Lock as a Tier 4 spell.`
+        }
+    },
+    {
+        id: 'power_nullification',
+        name: 'Power Nullification',
+        tier: 4,
+        cost: 20,
+        proficiency: {
+            beginner: `In a contested warehouse the mage projects a five-meter Power Nullification zone centered on an enemy mage who is attempting to raise a barrier. The device broadcasts an interference field that introduces static into mana-flow patterns, halving the effectiveness of any spell within the zone. The enemy's barrier spell forms as a thin, flickering membrane that collapses under the first kinetic impact. A fireball cast from outside the zone arrives as a brief spark that extinguishes on contact. The mage maintains the zone at high mana cost while advancing; the enemy mage continues casting but every effect is noticeably weakened. At this level the spell functions as an active countermeasure that weakens rather than fully nullifies hostile magic.`,
+            apprentice: `During a raid on an enemy ritual site the mage expands the nullification field to twenty meters. Most spellcasting fails entirely inside the zone because the interference disrupts mana modulation so thoroughly that spells dissipate before completion. The mage configures the field to permit allied healing magic while suppressing enemy offensive spells. Two magical constructs sustaining themselves through active mana, a pair of animated statues, lose cohesion and collapse into rubble once the field covers them. The device tracks the nullification as a mobile zone centered on the mage during room clearing. At this level the spell makes the mage a credible anti-mage asset capable of shutting down most conventional spellcasting.`,
+            adept: `In a fortified compound the mage establishes a fifty-meter permanent nullification zone anchored by a mana reservoir in the central courtyard. All supernatural powers fail inside the zone regardless of the caster's strength. A dragon's breath weapon becomes a harmless warm gust, a spirit's telekinesis loses all force, and a vampire's mesmerism produces only mild confusion. Permanent enchantments on items are suspended: a flaming sword burns out to ordinary steel and a teleportation ring functions as inert jewelry. The mage also projects a directed nullification beam at a distant enemy caster, shutting down that individual's magic for four minutes without affecting the surrounding area. At this level the spell enables building-scale magic suppression and targeted power removal.`,
+            expert: `During a district-scale engagement the mage projects a two-hundred-meter nullification field that suppresses all known forms of mortal spellcasting within the zone. Innate abilities are disrupted rather than completely extinguished: a dragon's fire sputters to a pilot light and a vampire's mental influence fails to take hold. The mage performs a sustained ritual that permanently severs one captured enemy's connection to their primary offensive magic while leaving their defensive wards intact. The ethical weight of permanent power removal is acknowledged in operational briefings. At this level the spell delivers block-scale suppression with surgical precision on individual targets.`,
+            master: `The device sustains a five-hundred-meter district-scale Power Nullification field as a permanent fixture across the operational theater. Multiple zones operate simultaneously with configurable exception lists that allow allied magic while denying hostile effects. Directed at-range nullification reaches targets up to eight kilometers distant. The mage can surgically remove specific abilities from a target, for example stripping necromantic powers while preserving the target's healing magic, with full archival backup allowing later reversal if circumstances change. Permanent nullification zones function as long-term fixtures with routine maintenance. This represents the design ceiling for Power Nullification as a Tier 4 spell.`
+        }
+    },
+    {
+        id: 'mana_transfer',
+        name: 'Mana Transfer',
+        tier: 2,
+        cost: 10,
+        proficiency: {
+            beginner: `During a night raid the mage touches an exhausted ally and channels mana through direct contact. The conduit forms after ten seconds of focus. The ally's reserves climb from near empty to thirty percent while the mage feels the drain. Feedback is managed by the device so neither reactor spikes. The transfer sustains the ally through two more defensive spells before the link severs naturally. At this level Mana Transfer provides emergency field support when reserves run low.`,
+            apprentice: `During an urban chase the mage extends the conduit to ten meters and links five teammates into a shared pool. The device draws from a nearby ley line to supplement the transfer. One teammate pulls extra mana to finish a barrier while the pool redistributes automatically to prevent any member from dropping below critical. The mage creates a small mana battery from a spare focus crystal that holds twenty percent reserves for later use. At this level the spell supports sustained team logistics.`,
+            adept: `In a prolonged siege the mage forces a conduit into an enemy caster and extracts mana despite resistance. The extraction rate is slower than willing transfer but still drains the target noticeably over thirty seconds. An overcharged ally receives fifty percent extra reserves for a decisive strike then suffers temporary reactor fatigue. The device converts excess kinetic energy from a collapsing wall into mana for emergency barrier reinforcement. Permanent mana wells are anchored at two strong ley points for later use.`,
+            expert: `During a district operation the mage taps multiple ley lines and redistributes energy from hostile territory to allied positions. Natural mana storms in the area are harvested to refill reserves at rates that make personal mana effectively unlimited for short periods. Artificial ley lines are established between two fixed points creating persistent magical infrastructure. The mage drains an enemy ritual site and channels the energy to power a large allied barrier network.`,
+            master: `The spell operates at design ceiling. Regional mana management across the operational theater runs as background function with ley line tapping energy redistribution and team pool handling automatic. Permanent mana wells and artificial ley lines persist with routine oversight. Energy conversion handles heat light and kinetic forms. Effective reserves during sustained operations exceed normal reactor limits through continuous environmental harvesting. This is the ceiling of Mana Transfer as a Tier 2 spell: logistical scale magical energy management not infinite mana or control of all magical energy everywhere.`
+        }
+    },
+    {
+        id: 'probability_manipulation',
+        name: 'Probability Manipulation',
+        tier: 5,
+        cost: 25,
+        proficiency: {
+            beginner: `During a tense standoff the mage nudges local probability so coin flips favor the team and close calls trend positive. A ricocheting bullet misses by centimeters instead of striking. The device adjusts quantum distributions within a five meter sphere making generally lucky outcomes twenty percent more likely without creating impossible results. Mana cost is moderate for the sustained edge. At this level the spell provides a reliable minor advantage the mage is noticeably luckier than baseline but truly improbable events remain improbable.`,
+            apprentice: `In a multi day pursuit the mage curses an enemy scout with bad luck causing equipment failures and wrong turns at double the normal rate. An ally receives a blessing that turns one in ten chances into reliable outcomes. The device models exact probability distributions telling the mage the mana investment needed for a desired result. Probability zones are established in key areas making specified outcomes artificially likely or unlikely. At this level genuinely unlikely events become reliable tactical options.`,
+            adept: `During a collapsing building fight the mage makes a one in a thousand structural failure certain so a support beam gives way exactly when needed. A falling debris field is shifted to miss the team and strike pursuers instead. Cascading coincidences are chained to produce outcomes no single event could achieve. Failure conditions are blocked so all probability flows into favorable channels. At this level near impossible but physically possible events occur reliably through sufficient mana investment.`,
+            expert: `In a district scale ambush the mage turns a one percent ambush success rate into an eighty percent likelihood while making an eighty percent escape route near certain. A bullet is made to ricochet perfectly into an enemy weapon. A target's heart is made likely to falter under stress. Sustained luck fields bias events across a block for hours but require continuous device computation. Impossible outcomes remain impossible. At this level probability shifts are dramatic but bounded by physical possibility.`,
+            master: `The spell operates at design ceiling. Wide area probability distributions across the operational range make desired outcomes highly likely and undesirable ones correspondingly improbable. Sustained fields maintain favorable conditions for extended periods with continuous device management. Probability cannot override physics impossible things remain impossible. The device guarantees only likelihood not certainty. This is the ceiling of Probability Manipulation as a Tier 5 spell powerful wide area luck manipulation a strategic force multiplier not the ability to dictate reality or make the physically impossible occur.`
+        }
+    }
+);
+// Merge additional spells into main spell data structure
+if (typeof spellData !== 'undefined' && spellData.abstract) {
+    spellData.abstract = spellData.abstract.concat(additionalAbstractSpells);
+}
+// Next batch continues below
+const additionalAbstractSpells2 = [
+    {
+        id: 'causality_manipulation',
+        name: 'Causality Manipulation',
+        tier: 5,
+        cost: 25,
+        proficiency: {
+            beginner: `During an embassy meeting the mage perceives the causal threads linking the ambassador's hostility to an insult three weeks earlier. The device traces forward to show how a minor policy shift will cause economic disruption months later. Subtle adjustments delay an effect by minutes or weaken a minor causal link. Major links cannot be severed or redirected. At this level perception and small tweaks are the primary functions.`,
+            apprentice: `In a guard post breach the mage severs the causal link between a noise and the guard's investigation so the guard forgets to check. An apparent bridge collapse is reassigned to material fatigue instead of sabotage. The device prevents paradox through local stabilization. Short non standard cause effect chains are created within the immediate area. At this level the mage manipulates the why of events creating tactical misdirection.`,
+            adept: `During a collapsing structure the mage makes a window break before the rock is thrown and healing occur before the spell is cast. Causal loops are formed such as a spell that powers itself from its own output but require continuous device stabilization or they collapse under paradox pressure. Any cause can lead to any effect within the sphere at this level with active management.`,
+            expert: `In a defensive stand the mage establishes conditional relationships such as when a barrier is struck the attacker's weapon shatters from recoil. Cascading trigger chains are built where one event predictably causes the next. All relationships remain forward causal with the cause preceding the effect. True retrocausality remains beyond capability.`,
+            master: `The spell operates at design ceiling. Complex causal architectures of enforced cause effect relationships are maintained across the operational range. Conditional triggers with logic are embedded in locations objects and organizations creating reliable patterns. These function as magical contracts between events but always within forward causality causes precede effects. The spell cannot reverse causation create paradoxes or embed permanent violating loops. This is the ceiling of Causality Manipulation as a Tier 5 spell: sophisticated forward causal architecture at regional scale not retrocausality temporal paradox or redefinition of cause and effect.`
+        }
+    },
+    {
+        id: 'existence_erasure',
+        name: 'Existence Erasure',
+        tier: 5,
+        cost: 25,
+        proficiency: {
+            beginner: `The mage removes small, simple objects from local existence by isolating their existential signature and inverting it through the device. A pebble, sheet of paper, or cup of water ceases to register in spacetime; the surrounding reality adjusts without trace or debris. This is a precise, high-mana-cost operation suited for controlled removal rather than combat. The device enforces strict safety limits to prevent unintended erasures.`,
+
+            apprentice: `Larger objects such as furniture, vehicles, or small structures can be targeted. Partial erasures allow removal of specific properties like color from a surface, sound from an object, or weight from an item while leaving the rest intact. The device can store a signature backup before erasure, enabling later restoration at equivalent mana cost. Automatic safeguards protect the mage and critical environmental elements.`,
+
+            adept: `Physical objects and beings of any size within perception can be erased, with mana cost scaling according to the target's complexity and magical resistance. Erasure can be made permanent by discarding the backup signature. Properties may be stripped from physical entities, but conceptual or abstract elements remain unaffected. The spell functions as a targeted removal tool with increasing tactical flexibility.`,
+
+            expert: `Targets up to building scale, including heavily protected entities, can be erased with sustained focus and high mana expenditure. Temporary removal of properties such as sharpness from a blade or integrity from a structure is possible, with permanence requiring dedicated mana investment. The device logs all erasure events and supports full restoration from backups.`,
+
+            master: `The spell operates at its design ceiling. Any physical target the device can isolate—objects, beings, or constructs—can be erased with mana cost optimized for complexity and resistance. Properties can be permanently removed from physical entities. Comprehensive logging and restoration from backup are maintained, along with safety protocols against cascade effects. This represents the limit of Existence Erasure as a Tier 5 spell: targeted physical removal with full support features, not conceptual erasure or existence-scale operations.`
+        }
+    },
+    {
+        id: 'information_synthesis',
+        name: 'Information Synthesis',
+        tier: 5,
+        cost: 25,
+        proficiency: {
+            beginner: `The mage receives factual information through the device's broad-spectrum analysis and cross-referencing of accessible magical and mundane data sources. Concentration on a subject yields relevant details such as the contents of a sealed document, the identity of an unknown person, or the layout of an unfamiliar building. Information is drawn only from existing records or reasonable inference; the spell does not create new knowledge. Each query requires several seconds and significant mana.`,
+
+            apprentice: `Access expands to comprehensive, reliable retrieval. Any question with an answer in available sources returns accurate results from environmental sensors, magical archives, surface-level memories of nearby individuals (with consent protocols), and historical records. Hidden details become perceivable, such as the contents of a locked container or recent events at a location. Multiple sources are cross-checked for consistency. The mage functions as a mobile intelligence asset.`,
+
+            adept: `Full synthesis of information on any chosen subject occurs through integration of all accessible sources and gap-filling via probabilistic modeling. The mage obtains complete details on a target's recorded history, tracked movements, and inferred intentions. Future events within modeled parameters can be anticipated with high reliability. The device maintains an internal database of all prior investigations, updating continuously against new data. Concealment within the operational area becomes difficult.`,
+
+            expert: `Near-complete information coverage is achieved across the operational theater at continental scale for digital and magical records. Simultaneous queries to every accessible source are processed through advanced algorithms, delivering comprehensive answers to questions about observable reality. Recorded secrets—including documents, reconstructed conversations, and accessible memories—are retrievable when protocols permit. The mage accesses everything that has been recorded, observed, or inferred by reachable sources.`,
+
+            master: `The spell operates at its design ceiling. A continuously updated knowledge base covers the entire operational theater, returning instant answers with full source citations. Tactical awareness reaches near-omniscient levels within the sphere: enemy positions, movements, hidden assets, and derived strategic intentions are all available. This represents the limit of Information Synthesis as a Tier 5 spell: comprehensive synthesis of accessible, observable data at continental scale, not absolute knowledge of unrecorded or nonexistent information.`
+        }
+    },
+    {
+        id: 'direct_manifestation',
+        name: 'Direct Manifestation',
+        tier: 5,
+        cost: 25,
+        proficiency: {
+            beginner: `The mage converts intent into localized reality adjustment through a generalized protocol that bypasses specialized spell forms. The device calculates the minimal change required and applies it directly. Effects are small and confined to immediate proximity, such as levitating a cup, igniting a candle without flame, or briefly reinforcing a door. Generalized manipulation costs more mana than equivalent specialized spells, making this level a utility option rather than a primary casting method.`,
+
+            apprentice: `The protocol becomes more efficient and can replicate low-to-mid-tier specialized spell effects. Within roughly twenty meters, the mage's will produces telekinetic movement, ambient mana barriers, and adjustments to local temperature, light, or sound. Multiple effects can be sustained and coordinated simultaneously. Direct Manifestation trades the efficiency of specialized casting for flexibility in producing any device-calculable effect without a dedicated spell form.`,
+
+            adept: `Full local reality control extends to roughly fifty meters. Effects equivalent to high-tier spells become available, including building-scale transmutation, mass telekinesis, localized gravity changes, and moderate matter creation or destruction. The device manages computational load at efficiency comparable to specialized casting. Physical parameters can be temporarily altered, such as reversing gravity in a room or accelerating time for a specific object.`,
+
+            expert: `A roughly two-hundred-meter radius of direct will-based manipulation is achieved. Any physical effect the device can model is possible, from transmutation of large masses to creation of complex constructs or localized force alterations. Generalized manipulation reaches parity with specialized efficiency for most effects. The mage can reshape the immediate environment at will, limited by mana reserves and processing capacity for intricate calculations.`,
+
+            master: `The spell operates at its design ceiling with a roughly five-hundred-meter (district-scale) radius of comprehensive reality manipulation at optimized efficiency. Intent translates to effect with minimal mana overhead while the device handles calculations in the background. Any physically coherent outcome—construction, destruction, transmutation, force manipulation, or environmental control—is achievable through direct will. This represents the limit of Direct Manifestation as a Tier 5 spell: district-scale generalized manipulation bounded by scale, mana, device power, and physical coherence requirements.`
+        }
+    },
+    {
+        id: 'transcendent_enhancement',
+        name: 'Transcendent Enhancement',
+        tier: 5,
+        cost: 25,
+        proficiency: {
+            beginner: `During a multi-day reconnaissance patrol through hostile wilderness, the mage activates Transcendent Enhancement for the first time. The device begins rewriting cellular structures during rest periods. By the third day the mage notices aging symptoms reversing and a minor toxin from a venomous bite produces no symptoms. Physical endurance improves enough to maintain pace without fatigue. Mana efficiency rises by twenty percent, letting the mage sustain a low-level barrier longer than expected. The changes feel gradual and natural, like the body optimizing itself under device guidance. At this level Transcendent Enhancement is comprehensive self-optimization toward peak mortal limits, not transcendence.`,
+            apprentice: `During a nighttime extraction through an enemy checkpoint the mage's enhanced reflexes allow a split-second dodge of a sniper round that should have been impossible. Wounds from shrapnel close within minutes instead of hours. The mage perceives the mana flow of nearby enemy casters as visible threads and sidesteps a prepared ambush. A secondary mana core activates, letting the mage cast an extra high-cost spell without draining the primary reactor. The transformation now pushes physical metrics fifty percent past normal human maxima while regeneration handles field injuries. At this level the mage operates as a recognizably post-human operative.`,
+            adept: `In the middle of a three-hour urban siege the mage's body restructures on the fly. Dense bone and reinforced muscle let the mage smash through a reinforced door that previously required breaching charges. Neural transmission speeds allow tracking of incoming projectiles and precise counter-moves. The parallel mana network doubles throughput, sustaining a city-block barrier while simultaneously healing three wounded allies. The enhancement maintains itself as the new baseline, requiring mana only during combat spikes. At this level Transcendent Enhancement produces a being transcendent by mundane standards though still within advanced magical self-enhancement.`,
+            expert: `During a pitched battle against a superior force the mage projects a passive enhancement field that grants nearby squad members apprentice-level strength and speed. Physical capabilities reach five times normal maxima, allowing the mage to intercept and redirect a collapsing support beam single-handed. The permanent enhancement substrate woven through body, magic, and spirit resists a direct dispel attempt and continues operating. The device maintains the architecture without degradation under sustained fire. At this level the mage stands among the most individually capable operatives in the setting, the pinnacle of magical self-enhancement for a Tier 5 spell.`,
+            master: `The spell operates at design ceiling during a final defensive stand. The enhancement architecture is permanent and self-optimizing within the mage's biological substrate. Physical metrics stabilize at five to six times normal human maxima with regeneration that closes near-fatal trauma in hours. The allied enhancement field extends Adept-level benefits to an entire squad within proximity. All functions run at peak efficiency with minimal overhead. This is the ceiling of Transcendent Enhancement as a Tier 5 spell: comprehensive post-human transformation with squad-scale projection, the ultimate expression of magical self-enhancement.`
+        }
+    }
+];
+
+// Add second batch of abstract spells
+if (typeof spellData !== 'undefined' && spellData.abstract) {
+    spellData.abstract = spellData.abstract.concat(additionalAbstractSpells2);
+}

@@ -48,13 +48,13 @@
     --elemental-bg: rgba(0, 180, 216, 0.08);
     --elemental-border: rgba(0, 180, 216, 0.5);
 
-    /* Category Colors - Esoteric (violet/magenta) */
-    --esoteric-accent: #a855f7;
-    --esoteric-accent-light: #c084fc;
-    --esoteric-accent-dark: #7e22ce;
-    --esoteric-accent-rgb: 168, 85, 247;
-    --esoteric-bg: rgba(168, 85, 247, 0.08);
-    --esoteric-border: rgba(168, 85, 247, 0.5);
+    /* Category Colors - Abstract (violet/magenta) */
+    --abstract-accent: #a855f7;
+    --abstract-accent-light: #c084fc;
+    --abstract-accent-dark: #7e22ce;
+    --abstract-accent-rgb: 168, 85, 247;
+    --abstract-bg: rgba(168, 85, 247, 0.08);
+    --abstract-border: rgba(168, 85, 247, 0.5);
 
     /* Difficulty Colors */
     --easy-accent: #22c55e;
@@ -1490,8 +1490,17 @@ select.enhanced {
     box-shadow: 0 0 16px rgba(var(--elemental-accent-rgb), 0.4);
 }
 
-.tab-btn[data-category="esoteric"] {
-    border-color: var(--esoteric-border);
+.tab-btn[data-category="abstract"] {
+    border-color: var(--abstract-border);
+}
+.tab-btn[data-category="abstract"]:hover {
+    border-color: var(--abstract-accent);
+    background: var(--abstract-bg);
+}
+.tab-btn[data-category="abstract"].active {
+    background: var(--abstract-accent);
+    border-color: var(--abstract-accent);
+    box-shadow: 0 0 16px rgba(var(--abstract-accent-rgb), 0.4);
 }
 .tab-btn[data-category="esoteric"]:hover {
     border-color: var(--esoteric-accent);
@@ -1582,11 +1591,11 @@ select.enhanced {
     box-shadow: 0 4px 16px rgba(var(--elemental-accent-rgb), 0.2);
 }
 
-.spell-card[data-spell-category="esoteric"] { border-color: var(--esoteric-border); }
-.spell-card[data-spell-category="esoteric"]::before { background: var(--esoteric-accent); }
-.spell-card[data-spell-category="esoteric"]:hover {
-    border-color: var(--esoteric-accent);
-    box-shadow: 0 4px 16px rgba(var(--esoteric-accent-rgb), 0.2);
+.spell-card[data-spell-category="abstract"] { border-color: var(--abstract-border); }
+.spell-card[data-spell-category="abstract"]::before { background: var(--abstract-accent); }
+.spell-card[data-spell-category="abstract"]:hover {
+    border-color: var(--abstract-accent);
+    box-shadow: 0 4px 16px rgba(var(--abstract-accent-rgb), 0.2);
 }
 
 .spell-card:hover {
@@ -1609,10 +1618,10 @@ select.enhanced {
     box-shadow: 0 0 20px rgba(var(--elemental-accent-rgb), 0.4);
 }
 
-.spell-card[data-spell-category="esoteric"].selected {
-    background: var(--esoteric-accent);
-    border-color: var(--esoteric-accent);
-    box-shadow: 0 0 20px rgba(var(--esoteric-accent-rgb), 0.4);
+.spell-card[data-spell-category="abstract"].selected {
+    background: var(--abstract-accent);
+    border-color: var(--abstract-accent);
+    box-shadow: 0 0 20px rgba(var(--abstract-accent-rgb), 0.4);
 }
 
 .spell-card h4 {
@@ -1624,7 +1633,7 @@ select.enhanced {
 
 .spell-card[data-spell-category="physical"] h4 { color: var(--physical-accent); }
 .spell-card[data-spell-category="elemental"] h4 { color: var(--elemental-accent); }
-.spell-card[data-spell-category="esoteric"] h4 { color: var(--esoteric-accent); }
+.spell-card[data-spell-category="abstract"] h4 { color: var(--abstract-accent); }
 
 .spell-card.selected h4,
 .spell-card.selected .spell-info,
@@ -1674,9 +1683,9 @@ select.enhanced {
     color: var(--elemental-accent-light);
 }
 
-.spell-card[data-spell-category="esoteric"] .spell-proficiency-badge {
-    background: rgba(var(--esoteric-accent-rgb), 0.2);
-    color: var(--esoteric-accent-light);
+.spell-card[data-spell-category="abstract"] .spell-proficiency-badge {
+    background: rgba(var(--abstract-accent-rgb), 0.2);
+    color: var(--abstract-accent-light);
 }
 
 .spell-card.selected .spell-proficiency-badge {
@@ -1862,9 +1871,9 @@ select.enhanced {
     color: var(--elemental-accent-light);
 }
 
-.summary-spell-esoteric {
-    background: rgba(var(--esoteric-accent-rgb), 0.15);
-    color: var(--esoteric-accent-light);
+.summary-spell-abstract {
+    background: rgba(var(--abstract-accent-rgb), 0.15);
+    color: var(--abstract-accent-light);
 }
 
 .summary-point-bar {

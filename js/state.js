@@ -331,7 +331,7 @@ const saveSystem = {
         report.push('SPELL ROUTINES');
         report.push('───────────────────────────────────────────────────────────────');
         if (gameState.learnedSpells.length > 0) {
-            const categories = { physical: [], elemental: [], esoteric: [] };
+            const categories = { physical: [], elemental: [], abstract: [] };
             gameState.learnedSpells.forEach(spell => {
                 if (categories[spell.category]) {
                     categories[spell.category].push(spell);
