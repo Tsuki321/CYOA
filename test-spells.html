@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Spell Count Test</title>
+</head>
+<body>
+    <h1>Testing Spell Counts</h1>
+    <div id="results"></div>
+
+    <script src="js/data.js"></script>
+    <script src="js/device-shapes.js"></script>
+    <script src="js/state.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/spells-physical.js"></script>
+    <script src="js/spells-elemental.js"></script>
+    <script src="js/spells-abstract.js"></script>
+    <script src="js/class-adaptations.js"></script>
+
+    <script>
+        const results = document.getElementById('results');
+
+        // Check spell counts
+        const physicalCount = spellData.physical ? spellData.physical.length : 0;
+        const elementalCount = spellData.elemental ? spellData.elemental.length : 0;
+        const abstractCount = spellData.abstract ? spellData.abstract.length : 0;
+        const totalCount = physicalCount + elementalCount + abstractCount;
+
+        results.innerHTML = `
+            <h2>Spell Counts</h2>
+            <ul>
+                <li>Physical: ${physicalCount} spells</li>
+                <li>Elemental: ${elementalCount} spells</li>
+                <li>Abstract: ${abstractCount} spells</li>
+                <li><strong>Total: ${totalCount} spells</strong></li>
+            </ul>
+
+            <h2>Last 5 Physical Spells</h2>
+            <ul>
+                ${spellData.physical.slice(-5).map(s => `<li>${s.id} - ${s.name} (Tier ${s.tier})</li>`).join('')}
+            </ul>
+
+            <h2>Last 5 Elemental Spells</h2>
+            <ul>
+                ${spellData.elemental.slice(-5).map(s => `<li>${s.id} - ${s.name} (Tier ${s.tier})</li>`).join('')}
+            </ul>
+
+            <h2>Last 5 Abstract Spells</h2>
+            <ul>
+                ${spellData.abstract.slice(-5).map(s => `<li>${s.id} - ${s.name} (Tier ${s.tier})</li>`).join('')}
+            </ul>
+
+            <h2>Sample Class Renames (Knight)</h2>
+            <ul>
+                <li>cellular_regeneration: ${classAdaptations.knight.spellRenames.cellular_regeneration || 'NOT FOUND'}</li>
+                <li>toxic_vapor: ${classAdaptations.knight.spellRenames.toxic_vapor || 'NOT FOUND'}</li>
+                <li>probability_tilt: ${classAdaptations.knight.spellRenames.probability_tilt || 'NOT FOUND'}</li>
+            </ul>
+        `;
+    </script>
+</body>
+</html>
