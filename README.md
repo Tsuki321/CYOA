@@ -22,15 +22,15 @@ You're given two point budgets — **Aether Points (AP)** for core attributes an
 
 ### The Build Process
 
-1. **Intro** — Read the lore, understand the world of the Star Light Project.
+1. **Intro** — Read the lore: Project Zero Dawn, the Numerals, the corporations, and the Decemvirate that governs it all.
 2. **Character** — Pick your difficulty, mana reactor rank, device generation, class, and barrier jacket style.
    - Your reactor rank grants **free body perk tiers** and a **free device generation** based on your class
    - Your device generation grants **free device perk tiers**
-3. **Spells** — Choose from 95 spells across three categories:
-   - **Physical** (30) — Body reinforcement, combat techniques, melee augmentation
-   - **Elemental** (31) — Fire, ice, lightning, wind, earth, water, and more
-   - **Esoteric** (34) — Mind, space, time, soul, dimension, and reality manipulation
-   - Each spell has 5 proficiency levels (Beginner → Master) that increase AP cost
+3. **Spells** — Choose from 155 spells across three categories:
+   - **Physical** (50) — Body reinforcement, combat techniques, melee augmentation
+   - **Elemental** (51) — Fire, ice, lightning, wind, earth, water, and more
+   - **Abstract** (54) — Mind, space, time, soul, dimension, and reality manipulation
+   - Each spell has 5 proficiency levels (Beginner → Master) — written distinctly for each class — that increase AP cost
 4. **Device** — Customize your Intelligent Device:
    - **Shape** — 20 class-specific forms with descriptions (Knight gets blades, Bombardment gets cannons/staves, Thaumaturge gets books/orbs/reliefs)
    - **Material** — Basic through Legendary, affects device performance

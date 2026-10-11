@@ -70,7 +70,7 @@ There is no test runner, no linter config, no package.json. "Tests" means openin
 │       ├── REVIEW_REPORT.md           # 2026-06-16 review: 95-spell overhaul declared production-ready
 │       ├── OVERHAUL_COMPLETE.md        # Overhaul completion log
 │       ├── COMPLETION_SUMMARY.md      # Spell-expansion completion log
-│       ├── COUNCIL_IMPLEMENTATION.md  # Lore: 10-seat High Thaumaturgic Council roster (see §11)
+│       ├── COUNCIL_IMPLEMENTATION.md  # Lore (RETIRED): old High Thaumaturgic Council roster — superseded by The Decemvirate, §11
 │       ├── CONTEXT.md                 # STALE pre-CLAUDE.md project context — superseded by this file
 │       ├── FINAL_STATUS.md            # Spell-expansion final-status log
 │       └── SPELL_EXPANSION_COMPLETE.md# Spell-expansion completion log
@@ -404,27 +404,29 @@ Progression: beginner (basic/slow/costly) → apprentice (~2× range) → adept 
 
 ---
 
-## 11. Lore canon (from `index.html` accordion + `docs/archive/COUNCIL_IMPLEMENTATION.md`)
+## 11. Lore canon (canonical source: the `index.html` #page1 lore accordion — rewritten 2026-10-11)
 
-- **Star Light Project** (2012–2015): origin effort. **Discovery of Mana: October 31, 2015.** Mana-reactor awakening mechanism; intelligent devices are a necessity, not an option.
-- **DARPA** managed the project after the discovery; **The Helix Group** is the scientist team.
-- **Five device generations** of intelligent devices (Civilian 1st → cutting-edge 5th).
-- **High Thaumaturgic Council** (formed ~2016 after the DARPA handover; formerly "Council for Dimensional Research and Strategic Applications"). Answerable to the President but can intervene against presidential abuse; **First Seat has final authority** (unanimous vote to override). 10 seats — keep the roster consistent when touching lore:
+- **Atlas Corporation** discovered **Mana** (a higher-dimensional energy). Its scientists' research frenzy led Atlas to the US military via **DARPA**, which approved the joint black program **Project Zero Dawn** (~2015–2016) — where mana-tech was born.
+- Over ~2 years the foundations emerged (Mana Reactor organ, Intelligent Device, Spell Routines, Barrier Jackets). Atlas's research divisions broke off as **The Numerals** — a US research org, now one of the military's research divisions and the top mana-tech authority; it **open-sourced** foundational principles early on.
+- Those principles seeded private **Corporations** that build and flavor Intelligent Devices (hence the five generations, materials, shapes). **Atlas faded and went bankrupt.** Some Corporations went **rogue** over the following decade.
+- Rogue corps + a rising mage population (accidental activations + hereditary born-active cores) drove the founding of the **Mages Association Bureau (MAB)** — registration, corp licensing/audit, device tracking + remote shutdown, Gen-5 restrictions.
+- Governing body: **The Decemvirate** — the US's apex mage authority, **10 Seats** (mapping the Sephirot ranks), answerable to the President and able to check presidential abuse; **First Seat has final authority** (overridable only by a unanimous vote of the other nine). Keep this roster consistent when touching lore:
 
-| Seat | Member | Rank | Specialization | Device |
+| Seat | Member | Rank | Specialization | Device (codename) |
 |---|---|---|---|---|
-| First  | Archmage Seraphine Winslow | Keter   | Abstract / dimensional theory     | 5G grimoire "Akashic Index" |
-| Second | Master Chen Zhao           | Chokhmah | Elemental / battlefield control   | 5G staff "Heaven's Mandate" |
-| Third  | Dr. Yuki Takamura          | Binah    | Healing / cellular manipulation   | 5G hybrid "Caduceus Protocol" |
-| Fourth | Cdr. Victor Reyes          | Chesed   | Law enforcement / anti-mage        | 4G "Justicar's Edge" |
-| Fifth  | Prof. Amara Okonkwo        | Geburah  | Spatial / teleportation            | 5G "Tesseract Engine" |
-| Sixth  | Magister Klaus Reinhardt   | Chesed   | Defensive barriers / diplomacy     | 4G "Aegis Eternal" |
-| Seventh| Archon Dmitri Volkov       | Binah    | Strategic bombardment / WMD         | 5G "Tsar Protocol" |
-| Eighth | Sage Priya Sharma          | Chokhmah | Enhancement / mass awakening        | 4G "Lotus Mandala" |
-| Ninth  | Artificer Kenji Matsumoto  | Geburah  | Magitech engineering / device design| 5G "Forge of Hephaestus" |
-| Tenth  | Oracle Fatima Al-Rashid    | Chesed   | Divination / threat assessment     | 4G "All-Seeing Eye" |
+| First | Alicia Hindelburg | Keter | Higher-dimensional theory; final authority; first & only Keter core | 5G grimoire — KEYSTONE |
+| Second | Daniel Okafor | Chokhmah | Arcaea Division command; overseas suppression | 5G saber — SENTINEL |
+| Third | Vivian Cross | Chokhmah | Aerospace Fleet command; orbital/deep-space ops | 5G command-baton — FLAGSTAFF |
+| Fourth | Soo-jin Park | Binah | Numerals liaison; research policy | 5G analytic-grimoire — LEDGER |
+| Fifth | Marcus Delgado | Chesed | MAB enforcement; registration/containment | 4G sidearm — WARRANT |
+| Sixth | Rajesh Varma | Binah | Device engineering; generation standards | 5G fabrication-gauntlet — TOOLMARK |
+| Seventh | Natalia Brandt | Geburah | Combat doctrine; combined-arms integration | 4G command-standard — CHESSBOARD |
+| Eighth | Yusuf Haddad | Binah | Biomantic medicine; reactor physiology | 5G scalpel-scepter — SUTURE |
+| Ninth | Grace Nakamura | Chesed | Threat assessment; intelligence synthesis | 4G sensor-array — CASSANDRA |
+| Tenth | Owen Mackey | Geburah | Counter-rogue-corporation operations | 4G intrusion — KILLSWITCH |
 
-Geographic diversity across the seats (US, China-defector, Japan×2, Nigeria, Germany, Russia, India, Saudi Arabia).
+- **Mana-tech is US-exclusive**, kept so by the **Arcaea Division** (elite mage corps) and its worldwide **Suppression Teams**. Backed by the **Aerospace Fleet**: space/FTL warships (Leviathan-class battleships → Aerospace Destroyers) on **Artificial Mana Reactors**, armed with **Array Cannons** and **Anti-Matter Torpedoes**; it patrols the solar system and builds secret colonies. **Voyager 4** was the first ship past the Oort Cloud to a neighboring system (data → **NASA**).
+- Reactor ranks stay Kabbalistic (Malkuth→Keter, Keter ≈ 70× Malkuth). The old canon (Star Light Project / Helix Group / High Thaumaturgic Council and its roster) is **retired**; it survives only historically under `docs/archive/`.
 
 ---
 
