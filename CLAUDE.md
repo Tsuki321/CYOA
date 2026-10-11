@@ -70,7 +70,7 @@ There is no test runner, no linter config, no package.json. "Tests" means openin
 │       ├── REVIEW_REPORT.md           # 2026-06-16 review: 95-spell overhaul declared production-ready
 │       ├── OVERHAUL_COMPLETE.md        # Overhaul completion log
 │       ├── COMPLETION_SUMMARY.md      # Spell-expansion completion log
-│       ├── COUNCIL_IMPLEMENTATION.md  # Lore (RETIRED): old High Thaumaturgic Council roster — superseded by The Decemvirate, §11
+│       ├── COUNCIL_IMPLEMENTATION.md  # Lore (RETIRED): old Council roster (Winslow et al.) — current High Thaumaturgic Council roster in §11
 │       ├── CONTEXT.md                 # STALE pre-CLAUDE.md project context — superseded by this file
 │       ├── FINAL_STATUS.md            # Spell-expansion final-status log
 │       └── SPELL_EXPANSION_COMPLETE.md# Spell-expansion completion log
@@ -409,8 +409,8 @@ Progression: beginner (basic/slow/costly) → apprentice (~2× range) → adept 
 - **Atlas Corporation** discovered **Mana** (a higher-dimensional energy). Its scientists' research frenzy led Atlas to the US military via **DARPA**, which approved the joint black program **Project Zero Dawn** (~2015–2016) — where mana-tech was born.
 - Over ~2 years the foundations emerged (Mana Reactor organ, Intelligent Device, Spell Routines, Barrier Jackets). Atlas's research divisions broke off as **The Numerals** — a US research org, now one of the military's research divisions and the top mana-tech authority; it **open-sourced** foundational principles early on.
 - Those principles seeded private **Corporations** that build and flavor Intelligent Devices (hence the five generations, materials, shapes). **Atlas faded and went bankrupt.** Some Corporations went **rogue** over the following decade.
-- Rogue corps + a rising mage population (accidental activations + hereditary born-active cores) drove the founding of the **Mages Association Bureau (MAB)** — registration, corp licensing/audit, device tracking + remote shutdown, Gen-5 restrictions.
-- Governing body: **The Decemvirate** — the US's apex mage authority, **10 Seats** (mapping the Sephirot ranks), answerable to the President and able to check presidential abuse; **First Seat has final authority** (overridable only by a unanimous vote of the other nine). Keep this roster consistent when touching lore:
+- Rogue corps + a rising mage population (accidental activations + hereditary born-active cores) drove the founding of the **Mages Association Bureau (MAB)** — registration, corp licensing/audit, device tracking + remote shutdown, Gen-5 restrictions. **Mana is classified from the public**: mages sign binding NDAs and receive a prepared cover (recruited into a selective federal research/military program) to account for their status to family and employers; disclosure to an uncleared civilian is itself a crime.
+- Governing body: **The High Thaumaturgic Council (HTC)** — the US's apex mage authority, **10 Seats** (mapping the Sephirot ranks). Its founding oath is to safeguard the state and obey the sitting Commander in Chief, and it answers to the President — with one reserved exception: if mana-tech is bent to abusive ends or the state itself goes rogue on this power, the **First Seat may refuse and ignore the order** (invoked sparingly; in practice it complies when given reason and justification). Internally, a First Seat ruling stands unless the other nine override it by unanimous vote. Keep this roster consistent when touching lore:
 
 | Seat | Member | Rank | Specialization | Device (codename) |
 |---|---|---|---|---|
@@ -426,7 +426,7 @@ Progression: beginner (basic/slow/costly) → apprentice (~2× range) → adept 
 | Tenth | Owen Mackey | Geburah | Counter-rogue-corporation operations | 4G intrusion — KILLSWITCH |
 
 - **Mana-tech is US-exclusive**, kept so by the **Arcaea Division** (elite mage corps) and its worldwide **Suppression Teams**. Backed by the **Aerospace Fleet**: space/FTL warships (Leviathan-class battleships → Aerospace Destroyers) on **Artificial Mana Reactors**, armed with **Array Cannons** and **Anti-Matter Torpedoes**; it patrols the solar system and builds secret colonies. **Voyager 4** was the first ship past the Oort Cloud to a neighboring system (data → **NASA**).
-- Reactor ranks stay Kabbalistic (Malkuth→Keter, Keter ≈ 70× Malkuth). The old canon (Star Light Project / Helix Group / High Thaumaturgic Council and its roster) is **retired**; it survives only historically under `docs/archive/`.
+- Reactor ranks stay Kabbalistic (Malkuth→Keter, Keter ≈ 70× Malkuth). The old origin canon (Star Light Project / Helix Group) and the **old Council roster** (Seraphine Winslow, Chen Zhao, et al.) are **retired**; the council *name* "High Thaumaturgic Council" is retained but now seats the roster above (First Seat Alicia Hindelburg). Retired material survives only under `docs/archive/`.
 
 ---
 

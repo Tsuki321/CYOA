@@ -22,7 +22,7 @@ You're given two point budgets — **Aether Points (AP)** for core attributes an
 
 ### The Build Process
 
-1. **Intro** — Read the lore: Project Zero Dawn, the Numerals, the corporations, and the Decemvirate that governs it all.
+1. **Intro** — Read the lore: Project Zero Dawn, the Numerals, the corporations, and the High Thaumaturgic Council that governs it all.
 2. **Character** — Pick your difficulty, mana reactor rank, device generation, class, and barrier jacket style.
    - Your reactor rank grants **free body perk tiers** and a **free device generation** based on your class
    - Your device generation grants **free device perk tiers**
