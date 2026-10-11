@@ -278,17 +278,23 @@
         <!-- Page 2: Character Creation -->
         <section id="page2" class="page">
             <div class="page-content">
+            <div class="page2-main">
                 <header class="page-header">
                     <h1>Character Creation</h1>
                     <p class="subtitle">Define Your Magical Identity</p>
                 </header>
-                
+
                 <p class="flavor-text"><em>Every mage's journey begins with awakening. Your choices here will shape not only your appearance and capabilities, but your very place in the hidden magical world.</em></p>
 
                 <!-- Basic Information -->
-                <div class="creation-section">
+                <div class="creation-section" data-descriptor="Identity &amp; Appearance">
                     <h2>Basic Information</h2>
-                    
+
+                    <div class="form-group">
+                        <label for="charName">Name</label>
+                        <input type="text" id="charName" class="text-input" maxlength="40" placeholder="Name your mage..." autocomplete="off">
+                    </div>
+
                     <div class="form-group">
                         <label>Sex</label>
                         <div class="option-buttons">
@@ -326,18 +332,33 @@
                     </div>
 
                     <div class="form-group">
-                        <label>Skin Color</label>
-                        <input type="color" id="skinColor" value="#f5d0c5" class="color-picker">
-                    </div>
-
-                    <div class="form-group">
-                        <label>Eye Color</label>
-                        <input type="color" id="eyeColor" value="#4a90d9" class="color-picker">
-                    </div>
-
-                    <div class="form-group">
-                        <label>Hair Color</label>
-                        <input type="color" id="hairColor" value="#2c1810" class="color-picker">
+                        <label>Coloring</label>
+                        <div class="color-picker-group">
+                            <div class="color-picker-row">
+                                <input type="color" id="skinColor" value="#f5d0c5" class="color-picker">
+                                <div class="color-picker-info">
+                                    <span class="color-picker-name">Skin</span>
+                                    <span class="color-hex" id="skinColorHex">#F5D0C5</span>
+                                </div>
+                                <span class="color-picker-preview" id="skinColorPreview"></span>
+                            </div>
+                            <div class="color-picker-row">
+                                <input type="color" id="eyeColor" value="#4a90d9" class="color-picker">
+                                <div class="color-picker-info">
+                                    <span class="color-picker-name">Eyes</span>
+                                    <span class="color-hex" id="eyeColorHex">#4A90D9</span>
+                                </div>
+                                <span class="color-picker-preview" id="eyeColorPreview"></span>
+                            </div>
+                            <div class="color-picker-row">
+                                <input type="color" id="hairColor" value="#2c1810" class="color-picker">
+                                <div class="color-picker-info">
+                                    <span class="color-picker-name">Hair</span>
+                                    <span class="color-hex" id="hairColorHex">#2C1810</span>
+                                </div>
+                                <span class="color-picker-preview" id="hairColorPreview"></span>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="form-group">
@@ -354,7 +375,7 @@
                 </div>
 
                 <!-- Core Attributes -->
-                <div class="creation-section">
+                <div class="creation-section" data-descriptor="Power &amp; Role">
                     <h2>Core Attributes <span class="point-cost">(Aether Points)</span></h2>
                     <p class="flavor-text"><em>These attributes define your connection to the magical realm and the power you can wield.</em></p>
 
@@ -374,6 +395,7 @@
                             <option value="chokhmah">Chokhmah (Wisdom) - 90 points</option>
                             <option value="keter">Keter (Crown) - 100 points</option>
                         </select>
+                        <div class="rank-ladder" id="reactorLadder" aria-hidden="true"></div>
                         <div id="manaReactorDescription" class="option-description"></div>
                     </div>
 
@@ -382,22 +404,50 @@
                         <label>Intelligent Device Generation</label>
                         <select id="deviceGeneration" class="select-input">
                             <option value="">Select generation...</option>
-                            <option value="1">1st Generation (Civilian) - 10 points</option>
+                            <option value="1">1st Generation (Service Issue) - 10 points</option>
                             <option value="2">2nd Generation - 20 points</option>
                             <option value="3">3rd Generation - 30 points</option>
                             <option value="4">4th Generation - 40 points</option>
                             <option value="5">5th Generation (Cutting Edge) - 50 points</option>
                         </select>
+                        <div class="rank-ladder device-ladder" id="deviceLadder" aria-hidden="true"></div>
                         <div id="deviceGenerationDescription" class="option-description"></div>
                     </div>
 
                     <!-- Class Selection -->
                     <div class="form-group">
                         <label>Class Selection</label>
-                        <div class="option-buttons">
-                            <button class="option-btn" data-field="class" data-value="knight">Knight</button>
-                            <button class="option-btn" data-field="class" data-value="bombardment">Bombardment</button>
-                            <button class="option-btn" data-field="class" data-value="thaumaturge">Thaumaturge</button>
+                        <div class="option-buttons class-cards">
+                            <button class="option-btn class-card" data-field="class" data-value="knight">
+                                <span class="class-emblem" aria-hidden="true">
+                                    <svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M14.5 3.5 7 11l-1.6-1.6L4 10.8 7.2 14l-3 3 1.8 1.8 3-3 3.2 3.2 1.4-1.4L11 15l7.5-7.5z"/>
+                                        <path d="M14.5 3.5 20.5 3.5 20.5 9.5"/>
+                                        <path d="M4 17l3 3"/>
+                                    </svg>
+                                </span>
+                                <span class="class-name">Knight</span>
+                                <span class="class-role">Melee</span>
+                            </button>
+                            <button class="option-btn class-card" data-field="class" data-value="bombardment">
+                                <span class="class-emblem" aria-hidden="true">
+                                    <svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                                        <circle cx="12" cy="12" r="4"/>
+                                        <path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M19.1 4.9 17 7M7 17l-2.1 2.1"/>
+                                    </svg>
+                                </span>
+                                <span class="class-name">Bombardment</span>
+                                <span class="class-role">Artillery</span>
+                            </button>
+                            <button class="option-btn class-card" data-field="class" data-value="thaumaturge">
+                                <span class="class-emblem" aria-hidden="true">
+                                    <svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M12 3 14 9.2 20.5 9.2 15.2 13 17.2 19 12 15.2 6.8 19 8.8 13 3.5 9.2 10 9.2z"/>
+                                    </svg>
+                                </span>
+                                <span class="class-name">Thaumaturge</span>
+                                <span class="class-role">Support</span>
+                            </button>
                         </div>
                         <div id="classDescription" class="option-description"></div>
                     </div>
@@ -423,9 +473,15 @@
                 </div>
 
                 <!-- General Perks (Body Enhancements) -->
-                <div class="creation-section">
+                <div class="creation-section" data-descriptor="Body Enhancements">
                     <h2>General Perks <span class="point-cost">(Personalization Points)</span></h2>
                     <p class="flavor-text"><em>Through careful training and magical enhancement, your body can transcend human limitations. These perks represent the fusion of physical conditioning and magical power.</em></p>
+
+                    <div class="perk-legend" aria-hidden="true">
+                        <span class="perk-legend-item"><span class="legend-pip free"></span>Free (granted by rank)</span>
+                        <span class="perk-legend-item"><span class="legend-pip filled"></span>Paid tier</span>
+                        <span class="perk-legend-item"><span class="legend-pip high"></span>High tier (7+)</span>
+                    </div>
 
                     <div class="perks-grid">
                         <!-- Speed Tier -->
@@ -559,6 +615,30 @@
                 <div class="page-actions">
                     <button id="page2Next" class="action-btn primary">Proceed to Spell Routines</button>
                 </div>
+            </div><!-- /.page2-main -->
+
+            <aside class="character-summary" id="characterSummary" aria-live="polite">
+                <h3 class="summary-title">Your Mage</h3>
+                <div class="summary-rows">
+                    <div class="summary-row"><span class="summary-label">Name</span><span class="summary-value" id="summaryName">&mdash;</span></div>
+                    <div class="summary-row"><span class="summary-label">Sex</span><span class="summary-value" id="summarySex">&mdash;</span></div>
+                    <div class="summary-row"><span class="summary-label">Age</span><span class="summary-value" id="summaryAge">&mdash;</span></div>
+                    <div class="summary-row"><span class="summary-label">Class</span><span class="summary-value" id="summaryClass">&mdash;</span></div>
+                    <div class="summary-row"><span class="summary-label">Reactor</span><span class="summary-value" id="summaryReactor">&mdash;</span></div>
+                    <div class="summary-row"><span class="summary-label">Device</span><span class="summary-value" id="summaryDevice">&mdash;</span></div>
+                    <div class="summary-row"><span class="summary-label">Jacket</span><span class="summary-value" id="summaryJacket">&mdash;</span></div>
+                </div>
+                <div class="summary-points">
+                    <div class="summary-point">
+                        <span class="summary-point-label">Aether</span>
+                        <span class="summary-point-value" id="summaryAether">0 / 0</span>
+                    </div>
+                    <div class="summary-point">
+                        <span class="summary-point-label">Personalization</span>
+                        <span class="summary-point-value" id="summaryPP">0 / 0</span>
+                    </div>
+                </div>
+            </aside>
             </div>
         </section>
 

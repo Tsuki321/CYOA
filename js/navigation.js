@@ -219,6 +219,9 @@ const navigation = {
     
     loadCharacterData() {
         // Load existing character data into form fields
+        const charNameInput = document.getElementById('charName');
+        if (charNameInput) charNameInput.value = gameState.character.name || '';
+
         if (gameState.character.sex) {
             document.querySelectorAll('[data-field="sex"]').forEach(btn => {
                 btn.classList.toggle('selected', btn.dataset.value === gameState.character.sex);
@@ -310,30 +313,47 @@ const navigation = {
                 if (typeof updateCustomSelect === 'function') updateCustomSelect(tierSelect);
             }
         });
+
+        // Read-only visual mirrors (do not touch native selects or point math)
+        this.updateColorReadouts();
+        this.updateReactorLadder();
+        this.updateDeviceLadder();
+        this.updateCharacterSummary();
     },
     
     setupPage2EventListeners() {
         if (this._listenersSetup.page2) return;
         this._listenersSetup.page2 = true;
-        
+
+        // Character name
+        const charNameInput = document.getElementById('charName');
+        if (charNameInput) {
+            charNameInput.addEventListener('input', () => {
+                gameState.character.name = charNameInput.value;
+                this.updateCharacterSummary();
+            });
+        }
+
         // Sex selection
         document.querySelectorAll('[data-field="sex"]').forEach(btn => {
             btn.addEventListener('click', () => {
                 document.querySelectorAll('[data-field="sex"]').forEach(b => b.classList.remove('selected'));
                 btn.classList.add('selected');
                 gameState.character.sex = btn.dataset.value;
+                this.updateCharacterSummary();
             });
         });
-        
+
         // Age selection
         document.querySelectorAll('[data-field="age"]').forEach(btn => {
             btn.addEventListener('click', () => {
                 document.querySelectorAll('[data-field="age"]').forEach(b => b.classList.remove('selected'));
                 btn.classList.add('selected');
                 gameState.character.age = parseInt(btn.dataset.value);
+                this.updateCharacterSummary();
             });
         });
-        
+
         // Height slider
         const heightSlider = document.getElementById('height');
         const heightValue = document.getElementById('heightValue');
@@ -341,44 +361,50 @@ const navigation = {
             heightSlider.addEventListener('input', () => {
                 gameState.character.height = parseInt(heightSlider.value);
                 heightValue.textContent = `${heightSlider.value} cm`;
+                this.updateCharacterSummary();
             });
         }
-        
+
         // Body shape
         const bodyShapeSelect = document.getElementById('bodyShape');
         if (bodyShapeSelect) {
             bodyShapeSelect.addEventListener('change', () => {
                 gameState.character.bodyShape = bodyShapeSelect.value;
+                this.updateCharacterSummary();
             });
         }
-        
+
         // Color pickers
         const skinColorPicker = document.getElementById('skinColor');
         if (skinColorPicker) {
             skinColorPicker.addEventListener('input', () => {
                 gameState.character.skinColor = skinColorPicker.value;
+                this.updateColorReadouts();
             });
         }
-        
+
         const eyeColorPicker = document.getElementById('eyeColor');
         if (eyeColorPicker) {
             eyeColorPicker.addEventListener('input', () => {
                 gameState.character.eyeColor = eyeColorPicker.value;
+                this.updateColorReadouts();
             });
         }
-        
+
         const hairColorPicker = document.getElementById('hairColor');
         if (hairColorPicker) {
             hairColorPicker.addEventListener('input', () => {
                 gameState.character.hairColor = hairColorPicker.value;
+                this.updateColorReadouts();
             });
         }
-        
+
         // Time known magic
         const timeKnownMagicSelect = document.getElementById('timeKnownMagic');
         if (timeKnownMagicSelect) {
             timeKnownMagicSelect.addEventListener('change', () => {
                 gameState.character.timeKnownMagic = timeKnownMagicSelect.value;
+                this.updateCharacterSummary();
             });
         }
         
@@ -428,6 +454,8 @@ const navigation = {
                     gameState.deviceGeneration = newValue;
                     this.updateDeviceGenerationDescription();
                     this.applyDeviceGenFreebies();
+                    this.updateDeviceLadder();
+                    this.updateCharacterSummary();
                 } else {
                     deviceGenSelect.value = oldValue;
                     if (typeof updateCustomSelect === 'function') updateCustomSelect(deviceGenSelect);
@@ -446,6 +474,7 @@ const navigation = {
                 this.updateClassDescription();
                 if (typeof applyClassAdaptations === 'function') applyClassAdaptations();
                 this.applyReactorRankFreebies();
+                this.updateCharacterSummary();
             });
         });
         
@@ -467,6 +496,7 @@ const navigation = {
                         pointTracker.spendPoints(barrierJacketStyles[newValue].cost, 'personalization');
                         gameState.barrierJacketStyle = newValue;
                         this.updateBarrierJacketDescription();
+                        this.updateCharacterSummary();
                     } else {
                         barrierJacketSelect.value = oldValue;
                         if (typeof updateCustomSelect === 'function') updateCustomSelect(barrierJacketSelect);
@@ -502,6 +532,7 @@ const navigation = {
                         pointTracker.spendPoints(newPaidTiers * tierCost, 'personalization');
                         gameState.bodyPerks[perk] = newTier;
                         this.updatePerkDescription(perk);
+                        this.updateCharacterSummary();
                     } else {
                         tierSelect.value = oldTier;
                         if (typeof updateCustomSelect === 'function') updateCustomSelect(tierSelect);
@@ -626,8 +657,13 @@ const navigation = {
             }
             gameState.freeDeviceGen = null;
         }
-        
+
         this.applyDeviceGenFreebies();
+
+        // Refresh read-only mirrors after freebie recalculation
+        this.updateReactorLadder();
+        this.updateDeviceLadder();
+        this.updateCharacterSummary();
     },
     
     applyDeviceGenFreebies() {
@@ -726,8 +762,155 @@ const navigation = {
                 if (pipTier >= 7) pip.classList.add('high');
             }
         });
+
+        // One-line readout: "Tier 4 · 2 free · 2 paid"
+        var readout = perkCard.querySelector('.perk-readout');
+        if (!readout) {
+            readout = document.createElement('div');
+            readout.className = 'perk-readout';
+            var tierSelectorEl = perkCard.querySelector('.tier-selector');
+            if (tierSelectorEl) tierSelectorEl.appendChild(readout);
+            else perkCard.appendChild(readout);
+        }
+        var paidTiers = Math.max(0, tier - freeTier);
+        var parts = ['Tier ' + tier];
+        if (freeTier > 0) parts.push(freeTier + ' free');
+        if (paidTiers > 0) parts.push(paidTiers + ' paid');
+        readout.textContent = parts.join(' · ');
     },
-    
+
+    // ---- Page 2 read-only visual mirrors (no native select touched, no point math) ----
+    updateColorReadouts() {
+        var map = [
+            { input: 'skinColor', preview: 'skinColorPreview', hex: 'skinColorHex', state: 'skinColor' },
+            { input: 'eyeColor', preview: 'eyeColorPreview', hex: 'eyeColorHex', state: 'eyeColor' },
+            { input: 'hairColor', preview: 'hairColorPreview', hex: 'hairColorHex', state: 'hairColor' }
+        ];
+        map.forEach(function(c) {
+            var input = document.getElementById(c.input);
+            var val = (input && input.value) || gameState.character[c.state] || '#000000';
+            var preview = document.getElementById(c.preview);
+            if (preview) preview.style.background = val;
+            var hex = document.getElementById(c.hex);
+            if (hex) hex.textContent = val.toUpperCase();
+        });
+    },
+
+    updateReactorLadder() {
+        var ladder = document.getElementById('reactorLadder');
+        if (!ladder || typeof manaReactorRanks === 'undefined') return;
+        var ids = Object.keys(manaReactorRanks);
+        if (!ladder.dataset.built) {
+            var caption = document.createElement('div');
+            caption.className = 'ladder-caption';
+            ladder.appendChild(caption);
+            var track = document.createElement('div');
+            track.className = 'ladder-track';
+            ids.forEach(function(id, idx) {
+                var rung = document.createElement('span');
+                rung.className = 'ladder-rung';
+                rung.title = manaReactorRanks[id].name;
+                var dot = document.createElement('span');
+                dot.className = 'ladder-dot';
+                var tick = document.createElement('span');
+                tick.className = 'ladder-tick';
+                tick.textContent = idx + 1;
+                rung.appendChild(dot);
+                rung.appendChild(tick);
+                track.appendChild(rung);
+            });
+            ladder.appendChild(track);
+            ladder.dataset.built = '1';
+        }
+        var selectedIndex = gameState.manaReactorRank ? ids.indexOf(gameState.manaReactorRank) : -1;
+        ladder.querySelectorAll('.ladder-rung').forEach(function(rung, idx) {
+            rung.classList.remove('lit', 'current');
+            if (selectedIndex >= 0 && idx <= selectedIndex) rung.classList.add('lit');
+            if (idx === selectedIndex) rung.classList.add('current');
+        });
+        var cap = ladder.querySelector('.ladder-caption');
+        if (cap) {
+            cap.textContent = selectedIndex >= 0
+                ? manaReactorRanks[ids[selectedIndex]].name + '  ·  Rank ' + (selectedIndex + 1) + ' / ' + ids.length
+                : 'No reactor selected';
+        }
+    },
+    updateDeviceLadder() {
+        var ladder = document.getElementById('deviceLadder');
+        if (!ladder || typeof deviceGenerations === 'undefined') return;
+        var ids = Object.keys(deviceGenerations);
+        if (!ladder.dataset.built) {
+            var caption = document.createElement('div');
+            caption.className = 'ladder-caption';
+            ladder.appendChild(caption);
+            var track = document.createElement('div');
+            track.className = 'ladder-track';
+            ids.forEach(function(id, idx) {
+                var rung = document.createElement('span');
+                rung.className = 'ladder-rung';
+                rung.title = deviceGenerations[id].name;
+                var dot = document.createElement('span');
+                dot.className = 'ladder-dot';
+                var tick = document.createElement('span');
+                tick.className = 'ladder-tick';
+                tick.textContent = 'G' + (idx + 1);
+                rung.appendChild(dot);
+                rung.appendChild(tick);
+                track.appendChild(rung);
+            });
+            ladder.appendChild(track);
+            ladder.dataset.built = '1';
+        }
+        var sel = gameState.deviceGeneration ? ids.indexOf(String(gameState.deviceGeneration)) : -1;
+        ladder.querySelectorAll('.ladder-rung').forEach(function(rung, idx) {
+            rung.classList.remove('lit', 'current');
+            if (sel >= 0 && idx <= sel) rung.classList.add('lit');
+            if (idx === sel) rung.classList.add('current');
+        });
+        var cap = ladder.querySelector('.ladder-caption');
+        if (cap) {
+            if (sel >= 0) {
+                var isFree = gameState.freeDeviceGen && String(gameState.freeDeviceGen) === String(gameState.deviceGeneration);
+                cap.textContent = deviceGenerations[ids[sel]].name + (isFree ? '  ·  granted free' : '');
+            } else {
+                cap.textContent = 'No device generation selected';
+            }
+        }
+    },
+
+    updateCharacterSummary() {
+        var dash = '—';
+        var set = function(id, text) {
+            var el = document.getElementById(id);
+            if (el) el.textContent = text;
+        };
+        var c = gameState.character;
+        set('summaryName', (c.name && c.name.trim()) ? c.name.trim() : dash);
+        set('summarySex', c.sex ? (c.sex.charAt(0).toUpperCase() + c.sex.slice(1)) : dash);
+        set('summaryAge', c.age ? (c.age + ' yrs') : dash);
+
+        var roleMap = { knight: 'Melee', bombardment: 'Artillery', thaumaturge: 'Support' };
+        var classEl = document.getElementById('summaryClass');
+        if (classEl) {
+            if (gameState.selectedClass && typeof classes !== 'undefined' && classes[gameState.selectedClass]) {
+                classEl.textContent = classes[gameState.selectedClass].name + ' · ' + roleMap[gameState.selectedClass];
+                classEl.dataset.value = gameState.selectedClass;
+            } else {
+                classEl.textContent = dash;
+                classEl.removeAttribute('data-value');
+            }
+        }
+
+        set('summaryReactor', (gameState.manaReactorRank && typeof manaReactorRanks !== 'undefined' && manaReactorRanks[gameState.manaReactorRank]) ? manaReactorRanks[gameState.manaReactorRank].name : dash);
+        set('summaryDevice', (gameState.deviceGeneration && typeof deviceGenerations !== 'undefined' && deviceGenerations[gameState.deviceGeneration]) ? deviceGenerations[gameState.deviceGeneration].name : dash);
+        set('summaryJacket', (gameState.barrierJacketStyle && typeof barrierJacketStyles !== 'undefined' && barrierJacketStyles[gameState.barrierJacketStyle]) ? barrierJacketStyles[gameState.barrierJacketStyle].name : dash);
+
+        var aetherRemaining = gameState.aetherPoints - gameState.aetherSpent;
+        var ppRemaining = gameState.personalizationPoints - gameState.personalizationSpent;
+        set('summaryAether', aetherRemaining + ' / ' + gameState.aetherPoints);
+        set('summaryPP', ppRemaining + ' / ' + gameState.personalizationPoints);
+    },
+
     loadSpellCategories() {
         const spellContent = document.getElementById('spellContent');
         if (!spellContent) return;

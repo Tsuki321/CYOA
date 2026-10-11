@@ -13,6 +13,7 @@ const gameState = {
     
     // Character basics
     character: {
+        name: '',
         sex: null,
         age: null,
         height: 170,
@@ -201,7 +202,13 @@ const saveSystem = {
             if (saved) {
                 const parsed = JSON.parse(saved);
                 Object.assign(gameState, parsed);
-                
+
+                if (!gameState.character) {
+                    gameState.character = {};
+                }
+                if (gameState.character.name === undefined) {
+                    gameState.character.name = '';
+                }
                 if (!gameState.freeBodyPerks) {
                     gameState.freeBodyPerks = { speed: 0, strength: 0, sense: 0, dexterity: 0, intelligence: 0, wisdom: 0 };
                 }
@@ -271,6 +278,7 @@ const saveSystem = {
         // Character Overview
         report.push('CHARACTER OVERVIEW');
         report.push('───────────────────────────────────────────────────────────────');
+        report.push(`Name: ${(gameState.character.name && gameState.character.name.trim()) ? gameState.character.name.trim() : 'Unnamed'}`);
         report.push(`Sex: ${gameState.character.sex || 'Not Selected'}`);
         report.push(`Age: ${gameState.character.age ? gameState.character.age + ' years' : 'Not Selected'}`);
         report.push(`Height: ${gameState.character.height} cm`);
