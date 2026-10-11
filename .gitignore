@@ -1,2 +1,7 @@
 test_screenshot_*.png
 plan.md
+
+# Local tooling / work artifacts — not part of the deployed site
+tmp/
+.opencode/
+.claude/

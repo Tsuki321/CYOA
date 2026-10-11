@@ -516,10 +516,6 @@ additionalAbstractSpells.push(
             master: `The device maintains fifty active contracts with autonomous monitoring, interpretation, and enforcement. Contract terms incorporate complex logic chains and conditional clauses referencing external events. Perfect archives track all contracts, terms, and enforcement history. Standing contracts with allies, organizations, and supernatural entities manage as routine background processes. This represents the ceiling for Oath Enforcement as a Tier 3 spell: comprehensive magical legal framework with supernatural binding and probability manipulation, but cannot override free will, exceed fifty simultaneous contracts, or bind divine-tier entities without their willing cooperation.`
         }
     },
-            expert: `During a city reconstruction the mage bestows an existential blessing on the lead engineer. The engineer's designs gain lasting recognition across generations and violence never erupts inside the new district hall. Abstract subjects such as a community's morale receive similar treatment. The effects form foundational properties that require major magic to undo.`,
-            master: `During a multi-year campaign the mage maintains twenty blessings across allied units with the device handling tracking. Conditional logic activates reserves when units defend key positions and bloodline blessings persist through generations. Organizations receive moral weight that deters corruption. Full archives allow instant revocation. This reaches the ceiling for a tier three benefic spell.`
-        }
-    },
     {
         id: 'vitality_siphon',
         name: 'Vitality Siphon',

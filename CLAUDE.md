@@ -297,7 +297,7 @@ totalCost = baseCost + proficiencyCost
 - `getSpellProficiencyText(spellId, category, level)` — used by modal
 - `applyClassAdaptations()` — called on class change; re-renders all perk descriptions + the active spell tab
 
-**Known content gap:** the 95 overhaul spells have full `spellAdaptations` (95 × 5 × 3 = **1,425** entries). The 60 expansion spells have `spellRenames` only — their `spellAdaptations` are **missing** (~60 × 5 × 3 = 900 entries). For those spells, all three classes show the **same base proficiency text** with only the name differing. This is purely a content gap; functionally everything works. Filling it in is a content task, not a code task (see §11).
+**Content status (updated 2026-10-11):** `spellAdaptations` is now **complete for all 155 spells × 3 classes × 5 levels** (155 × 5 × 3 = **2,325** entries). The earlier gap (the 60 expansion spells had `spellRenames` only) has been filled — every spell now shows genuinely class-distinct proficiency text (verified: no level is identical across any two classes). Authored via the `tmp/adapt/` pipeline (self-contained per-spell assignment files → Opus sub-agents → deterministic merge); see the editing note in §12.
 
 ---
 
@@ -469,7 +469,7 @@ Edit `difficultyConfig` in `data.js` and `README.md`'s tables together (keep the
 6. **abstract accent `#a855f7` == global purple accent** in `styles.css` — color collision to be aware of when restyling.
 7. **`classes` has no perk data** — free tiers come from `manaReactorRanks[].freeBodyPerksByClass` × the selected class × `freeBodyPerks{primary,secondary}`. Class description text referencing "free Tier 1 perks in X and Y" is lore only.
 8. **Shallow save merge** — new `gameState` fields need a migration shim in `saveSystem.load()` (see §8) or old saves get `undefined`.
-9. **900 missing `spellAdaptations`** for the 60 expansion spells — see §7. Filling is a content task (no code change); do it in batches and prefer direct edits over bulk workflows.
+9. **`spellAdaptations` is complete** (155 × 3 × 5) as of 2026-10-11 — the former 900-entry gap is filled (see §7). `js/class-adaptations.js` is **CRLF**; any programmatic edit must preserve `\r\n`. The last adaptation key in each class is `transcendent_enhancement` (no trailing comma).
 10. **`_spellsSetup`/`_listenersSetup` guard** — when adding Page-N listeners, wrap them in the `if (this._listenersSetup.pageN) return;` early-return so they bind once.
 11. **Reactor-rank downgrade edge case:** `applyReactorRankFreebies` raises a perk to `max(currentTier, newFreeFloor)` but, when the new floor is *lower* than the old one and the player can't afford the now-paid tiers, it refunds old paid tiers, **skips** the spend, and still commits `bodyPerks[perk]`/`freeBodyPerks[perk]`. Net effect on rare downgrade paths can desync spent PP from displayed tiers. Not user-facing in normal play.
 
@@ -479,7 +479,7 @@ Edit `difficultyConfig` in `data.js` and `README.md`'s tables together (keep the
 
 - **2026-06-16 overhaul** (`docs/archive/REVIEW_REPORT.md`, production-ready, 99.7%): transformed generic-fantasy content into grounded magitech sci-fi across ~3,500 content pieces — 95 spells renamed, 100 perk tiers, 10 reactor ranks, lore (Star Light Project, DARPA, High Thaumaturgic Council).
 - **Spell expansion** (`docs/archive/COMPLETION_SUMMARY.md`, `docs/archive/FINAL_STATUS.md`, `docs/archive/SPELL_EXPANSION_COMPLETE.md`): +60 spells → **155 total** (50/51/54). Class `spellRenames` filled for all 60; `spellAdaptations` intentionally deferred (§7, §13).
-- **Current state:** functional, production-ready, deployable. Open content gap = the 900 missing class `spellAdaptations` (cosmetic content only).
+- **Current state:** functional, production-ready, deployable. The class `spellAdaptations` content gap is **closed** (2026-10-11) — all 155 spells have 3-class-distinct proficiency text.
 
 ---
 

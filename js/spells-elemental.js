@@ -1803,7 +1803,7 @@ Delayed bursts are managed autonomously. The device can maintain up to fifteen i
 
 This is the ceiling of Photonic Burst as a Tier 1 spell. The mage can blind an entire infantry squad, seed a defensive perimeter with autonomous light traps, and maintain continuous flash suppression across a wide area. They cannot produce light beyond the 150-million-candela containment limit, cannot cause photonic explosions that deliver kinetic damage, and cannot overcome opaque barriers or magically darkened zones that absorb light before it reaches targets. The spell manipulates photons with maximum efficiency within Tier 1 constraints—nothing more.`
     }
-}
+},
 {
     id: 'infrasonic_wave',
     name: 'Infrasonic Wave',
