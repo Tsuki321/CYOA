@@ -1017,7 +1017,7 @@ const navigation = {
         }
     },
     
-    toggleSpell(spellId, spellName, category) {
+    toggleSpell(spellId, spellName, category, proficiency) {
         var spellIndex = gameState.learnedSpells.findIndex(function(s) { return s.id === spellId; });
         
         if (spellIndex > -1) {
@@ -1031,7 +1031,8 @@ const navigation = {
                 return;
             }
             
-            var totalCost = getTotalSpellCost(spellDataObj.cost, 'beginner');
+            var prof = proficiency || 'beginner';
+            var totalCost = getTotalSpellCost(spellDataObj.cost, prof);
             if (pointTracker.canAfford(totalCost, 'aether')) {
                 pointTracker.spendPoints(totalCost, 'aether');
                 gameState.learnedSpells.push({
@@ -1039,7 +1040,7 @@ const navigation = {
                     name: (typeof getSpellDisplayName === 'function') ? getSpellDisplayName(spellDataObj.id, category) : spellDataObj.name,
                     category: category,
                     tier: spellDataObj.tier,
-                    proficiency: 'beginner',
+                    proficiency: prof,
                     baseCost: spellDataObj.cost,
                     totalCost: totalCost
                 });

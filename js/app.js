@@ -200,99 +200,102 @@ function showSpellDetails(spellId, category) {
     
     contentHtml += '</div>';
     
-    if (!learnedSpell) {
-        var beginnerCost = getTotalSpellCost(spell.cost, 'beginner');
-        contentHtml += '<div class="modal-actions">' +
-            '<button class="action-btn learn-spell-btn" data-spell-id="' + spell.id + '" data-category="' + category + '">Learn Spell (' + beginnerCost + ' AP)</button>' +
-            '</div>';
-    } else {
-        var nextLevelIdx = proficiencyLevels.indexOf(currentProficiency) + 1;
-        var upgradeBtn = '';
-        if (nextLevelIdx < proficiencyLevels.length) {
-            var nextLevel = proficiencyLevels[nextLevelIdx];
-            var upgradeCost = getProficiencyCost(spell.cost, nextLevel) - getProficiencyCost(spell.cost, currentProficiency);
-            upgradeBtn = '<button class="action-btn upgrade-proficiency-btn" data-spell-id="' + spell.id + '" data-next-proficiency="' + nextLevel + '" data-upgrade-cost="' + upgradeCost + '">Upgrade to ' + nextLevel.charAt(0).toUpperCase() + nextLevel.slice(1) + ' (+' + upgradeCost + ' AP)</button>';
-        }
-        contentHtml += '<div class="modal-actions">' +
-            '<span class="current-prof-label">Current: ' + currentProficiency.charAt(0).toUpperCase() + currentProficiency.slice(1) + ' (' + learnedSpell.totalCost + ' AP)</span>' +
-            upgradeBtn +
-            '<button class="action-btn unlearn-spell-btn" data-spell-id="' + spell.id + '" data-category="' + category + '">Unlearn Spell (refund ' + learnedSpell.totalCost + ' AP)</button>' +
-            '</div>';
-    }
-    
+    contentHtml += '<div class="modal-actions" id="modalSpellActions"></div>';
+
     modalDetails.innerHTML = contentHtml;
-    
+
     var profTabs = modalDetails.querySelectorAll('.proficiency-tab');
     var profPanels = modalDetails.querySelectorAll('.proficiency-panel');
-    
+    var selectedProficiency = currentProficiency;
+
+    function cap(s) { return s.charAt(0).toUpperCase() + s.slice(1); }
+
+    function refreshSpellList() {
+        var activeTab = document.querySelector('.tab-btn.active');
+        if (typeof navigation !== 'undefined' && activeTab) {
+            navigation.displaySpells(activeTab.dataset.category);
+        }
+    }
+
+    function bindActions() {
+        var actions = document.getElementById('modalSpellActions');
+        if (!actions) return;
+
+        var learnBtn = actions.querySelector('.learn-spell-btn');
+        if (learnBtn) {
+            learnBtn.addEventListener('click', function() {
+                if (typeof navigation === 'undefined') return;
+                navigation.toggleSpell(spell.id, spell.name, category, selectedProficiency);
+                refreshSpellList();
+                showSpellDetails(spell.id, category);
+            });
+        }
+
+        var setBtn = actions.querySelector('.set-prof-btn');
+        if (setBtn) {
+            setBtn.addEventListener('click', function() {
+                var learned = gameState.learnedSpells.find(function(s) { return s.id === spell.id; });
+                if (!learned) return;
+                var delta = getProficiencyCost(spell.cost, selectedProficiency) - getProficiencyCost(spell.cost, learned.proficiency);
+                if (delta > 0 && !pointTracker.canAfford(delta, 'aether')) {
+                    alert('Not enough Aether Points! Need ' + delta + ' AP.');
+                    return;
+                }
+                if (delta > 0) pointTracker.spendPoints(delta, 'aether');
+                else if (delta < 0) pointTracker.refundPoints(-delta, 'aether');
+                learned.proficiency = selectedProficiency;
+                learned.totalCost = getTotalSpellCost(spell.cost, selectedProficiency);
+                refreshSpellList();
+                showSpellDetails(spell.id, category);
+            });
+        }
+        var unlearnBtn = actions.querySelector('.unlearn-spell-btn');
+        if (unlearnBtn) {
+            unlearnBtn.addEventListener('click', function() {
+                if (typeof navigation === 'undefined') return;
+                navigation.toggleSpell(spell.id, spell.name, category);
+                modal.classList.remove('active');
+                refreshSpellList();
+            });
+        }
+    }
+
+    function renderActions() {
+        var actions = document.getElementById('modalSpellActions');
+        if (!actions) return;
+        var learned = gameState.learnedSpells.find(function(s) { return s.id === spell.id; });
+        var html = '';
+        if (!learned) {
+            var learnCost = getTotalSpellCost(spell.cost, selectedProficiency);
+            html += '<button class="action-btn learn-spell-btn">Learn at ' + cap(selectedProficiency) + ' (' + learnCost + ' AP)</button>';
+        } else {
+            html += '<span class="current-prof-label">Current: ' + cap(learned.proficiency) + ' (' + learned.totalCost + ' AP)</span>';
+            if (selectedProficiency !== learned.proficiency) {
+                var delta = getProficiencyCost(spell.cost, selectedProficiency) - getProficiencyCost(spell.cost, learned.proficiency);
+                var sign = delta >= 0 ? '+' : '';
+                html += '<button class="action-btn set-prof-btn">Set to ' + cap(selectedProficiency) + ' (' + sign + delta + ' AP)</button>';
+            }
+            html += '<button class="action-btn unlearn-spell-btn">Unlearn Spell (refund ' + learned.totalCost + ' AP)</button>';
+        }
+        actions.innerHTML = html;
+        bindActions();
+    }
+
     profTabs.forEach(function(tab) {
         tab.addEventListener('click', function() {
             var targetProf = tab.dataset.proficiency;
-            
             profTabs.forEach(function(t) { t.classList.remove('active'); });
             profPanels.forEach(function(p) { p.classList.remove('active'); });
-            
             tab.classList.add('active');
             var targetPanel = modalDetails.querySelector('.proficiency-panel[data-proficiency="' + targetProf + '"]');
             if (targetPanel) targetPanel.classList.add('active');
+            selectedProficiency = targetProf;
+            renderActions();
         });
     });
-    
-    var learnBtn = modalDetails.querySelector('.learn-spell-btn');
-    if (learnBtn) {
-        learnBtn.addEventListener('click', function() {
-            if (typeof navigation !== 'undefined') {
-                navigation.toggleSpell(spell.id, spell.name, category);
-                modal.classList.remove('active');
-                var activeTab = document.querySelector('.tab-btn.active');
-                if (activeTab) {
-                    navigation.displaySpells(activeTab.dataset.category);
-                }
-            }
-        });
-    }
-    
-    var unlearnBtn = modalDetails.querySelector('.unlearn-spell-btn');
-    if (unlearnBtn) {
-        unlearnBtn.addEventListener('click', function() {
-            if (typeof navigation !== 'undefined') {
-                navigation.toggleSpell(spell.id, spell.name, category);
-                modal.classList.remove('active');
-                var activeTab = document.querySelector('.tab-btn.active');
-                if (activeTab) {
-                    navigation.displaySpells(activeTab.dataset.category);
-                }
-            }
-        });
-    }
-    
-    var upgradeBtn = modalDetails.querySelector('.upgrade-proficiency-btn');
-    if (upgradeBtn) {
-        upgradeBtn.addEventListener('click', function() {
-            var nextProficiency = upgradeBtn.dataset.nextProficiency;
-            var upgradeCost = parseInt(upgradeBtn.dataset.upgradeCost, 10);
-            var spellIndex = gameState.learnedSpells.findIndex(function(s) { return s.id === spell.id; });
-            
-            if (spellIndex > -1) {
-                if (pointTracker.canAfford(upgradeCost, 'aether')) {
-                    pointTracker.spendPoints(upgradeCost, 'aether');
-                    var newTotalCost = getTotalSpellCost(spell.cost, nextProficiency);
-                    gameState.learnedSpells[spellIndex].proficiency = nextProficiency;
-                    gameState.learnedSpells[spellIndex].totalCost = newTotalCost;
-                    
-                    showSpellDetails(spell.id, category);
-                    
-                    var activeTab = document.querySelector('.tab-btn.active');
-                    if (activeTab) {
-                        navigation.displaySpells(activeTab.dataset.category);
-                    }
-                } else {
-                    alert('Not enough Aether Points to upgrade! Need ' + upgradeCost + ' AP.');
-                }
-            }
-        });
-    }
-    
+
+    renderActions();
+
     modal.classList.add('active');
 }
 
