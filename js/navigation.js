@@ -1396,7 +1396,7 @@ const navigation = {
         
         if (exportBtn) {
             exportBtn.addEventListener('click', () => {
-                saveSystem.exportToText();
+                saveSystem.exportToMarkdown();
             });
         }
         
